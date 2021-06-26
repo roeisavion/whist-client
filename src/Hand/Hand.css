@@ -6,3 +6,9 @@
 }
 
 
+.P2hand {
+  position:absolute;
+  bottom: 110px;
+  display: flex;
+  justify-content: center; 
+}

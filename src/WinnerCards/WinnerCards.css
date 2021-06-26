@@ -1,0 +1,8 @@
+.winnerCards {
+    position:absolute;
+    bottom: 50%;
+    left: 10px;
+    display: flex;
+    justify-content: center; 
+  }
+  
