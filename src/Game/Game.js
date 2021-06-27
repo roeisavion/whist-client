@@ -4,7 +4,7 @@ import '../Hand/Hand.css';
 import '../WinnerCards/WinnerCards.css';
 import './Game.css';
 import { createDeck, shuffleDeck, cardsNumberOrder } from '../deck.jsx'
-import { Hand , P2Hand } from '../Hand/Hand'
+import { Hand, P2Hand } from '../Hand/Hand'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
 import { Card } from '../Card/Card'
@@ -38,9 +38,15 @@ export const Game = (props) => {
 
   }, []);
 
-  const handleCardClick = (clickedCard) => {
-    let newHand = removeCard(clickedCard, firstHand);
-    setHand(newHand);
+  const handleCardClick = (clickedCard, originHand) => {
+    if (originHand === 'hand') {
+      let newHand = removeCard(clickedCard, firstHand);
+      setHand(newHand);
+    }
+    if (originHand === 'P2hand') {
+      let newHand = removeCard(clickedCard, P2hand);
+      setP2Hand(newHand);
+    }
     let newCenter = centerCards.concat(clickedCard)
     setCenter(newCenter);
   }
@@ -78,7 +84,7 @@ export const Game = (props) => {
     <div className="game">
       <Center arrayOfCards={centerCards} className="center" />
       <Hand arrayOfCards={firstHand} onClick={handleCardClick} className="hand" />
-      <P2Hand arrayOfCards={P2hand} onClick={handleCardClick} className="P2hand" />
+      <Hand arrayOfCards={P2hand} onClick={handleCardClick} className="P2hand" />
       {
         winnerCards.length !== 0 ? <WinnerCards arrayOfCards={winnerCards} /> : null
       }
