@@ -1,4 +1,4 @@
-.hand {
+.P1hand {
   position:absolute;
   bottom: 10px;
   display: flex;
@@ -8,7 +8,21 @@
 
 .P2hand {
   position:absolute;
-  bottom: 110px;
+  bottom: 120px;
+  display: flex;
+  justify-content: center; 
+}
+
+.P3hand {
+  position:absolute;
+  bottom: 230px;
+  display: flex;
+  justify-content: center; 
+}
+
+.P4hand {
+  position:absolute;
+  bottom: 340px;
   display: flex;
   justify-content: center; 
 }

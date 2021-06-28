@@ -4,49 +4,67 @@ import '../Hand/Hand.css';
 import '../WinnerCards/WinnerCards.css';
 import './Game.css';
 import { createDeck, shuffleDeck, cardsNumberOrder } from '../deck.jsx'
-import { Hand, P2Hand } from '../Hand/Hand'
+import { Hand } from '../Hand/Hand'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
 import { Card } from '../Card/Card'
 
 //let shuffledDeck = shuffleDeck(createDeck());
+// const pointer = {
+//   P1hand: [P1Hand, setP1Hand], 
+//   P2hand: [P2Hand, setP2Hand], 
+//   P3hand: [P3Hand, setP3Hand], 
+//   P4hand: [P4Hand, setP4Hand], 
+// }
+
 
 
 export const Game = (props) => {
-  const [firstHand, setHand] = useState([]);
-  const [P2hand, setP2Hand] = useState([]);
+  const [P1Hand, setP1Hand] = useState([]);
+  const [P2Hand, setP2Hand] = useState([]);
+  const [P3Hand, setP3Hand] = useState([]);
+  const [P4Hand, setP4Hand] = useState([]);
   const [centerCards, setCenter] = useState([]);
-  const [winnerCards, setWinnerCards] = useState([]);
+  const [P1WinnerCards, setP1WinnerCards] = useState([]);
+  const [P2WinnerCards, setP2WinnerCards] = useState([]);
+  const [P3WinnerCards, setP3WinnerCards] = useState([]);
+  const [P4WinnerCards, setP4WinnerCards] = useState([]);
+
+  const handPointer = {
+    P1hand: [P1Hand, setP1Hand], 
+    P2hand: [P2Hand, setP2Hand], 
+    P3hand: [P3Hand, setP3Hand], 
+    P4hand: [P4Hand, setP4Hand]
+  }
+
+  const winnerCardsPointer = {
+    P1: [P1WinnerCards, setP1WinnerCards], 
+    P2: [P2WinnerCards, setP2WinnerCards], 
+    P3: [P3WinnerCards, setP3WinnerCards], 
+    P4: [P4WinnerCards, setP4WinnerCards], 
+  }
+  
 
 
   useEffect(() => {
-    let tempArry = [];
-    let tempArry2 = [];
-
-    for (let i = 0; i < 13; i++) {
-      let card = props.shuffledDeck.pop();
-      tempArry.push(card)
-    }
-
-    for (let i = 0; i < 13; i++) {
-      let card = props.shuffledDeck.pop();
-      tempArry2.push(card)
-    }
-
-    setHand(tempArry);
-    setP2Hand(tempArry2)
-
+    
+    [setP1Hand,setP2Hand,setP3Hand,setP4Hand].forEach((setHand) => {
+      let tempArry = [];
+      for (let i = 0; i < 13; i++) {
+        let card = props.shuffledDeck.pop();
+        tempArry.push(card)
+      }
+      setHand(tempArry)
+    })
   }, []);
 
   const handleCardClick = (clickedCard, originHand) => {
-    if (originHand === 'hand') {
-      let newHand = removeCard(clickedCard, firstHand);
-      setHand(newHand);
-    }
-    if (originHand === 'P2hand') {
-      let newHand = removeCard(clickedCard, P2hand);
-      setP2Hand(newHand);
-    }
+    
+    let newHand = removeCard(clickedCard, handPointer[originHand][0]);
+    handPointer[originHand][1](newHand);
+    
+    let p = originHand.slice(0,2);
+
     let newCenter = centerCards.concat(clickedCard)
     setCenter(newCenter);
   }
@@ -74,7 +92,8 @@ export const Game = (props) => {
   useEffect(() => {
     if (centerCards.length === 4) {
       let bigCard = caculateRoundWinner(centerCards);
-      setWinnerCards(winnerCards.concat(bigCard));
+
+      setP1WinnerCards(P1WinnerCards.concat(bigCard));
       setCenter([]);
     }
   }, [centerCards]);
@@ -83,10 +102,12 @@ export const Game = (props) => {
   return (
     <div className="game">
       <Center arrayOfCards={centerCards} className="center" />
-      <Hand arrayOfCards={firstHand} onClick={handleCardClick} className="hand" />
-      <Hand arrayOfCards={P2hand} onClick={handleCardClick} className="P2hand" />
+      <Hand arrayOfCards={P1Hand} onClick={handleCardClick} className="P1hand" />
+      <Hand arrayOfCards={P2Hand} onClick={handleCardClick} className="P2hand" />
+      <Hand arrayOfCards={P3Hand} onClick={handleCardClick} className="P3hand" />
+      <Hand arrayOfCards={P4Hand} onClick={handleCardClick} className="P4hand" />
       {
-        winnerCards.length !== 0 ? <WinnerCards arrayOfCards={winnerCards} /> : null
+        P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} /> : null
       }
     </div>
   )
