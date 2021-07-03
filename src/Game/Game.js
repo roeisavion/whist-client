@@ -33,7 +33,8 @@ export const Game = (props) => {
     P4: [P4WinnerCards, setP4WinnerCards], 
   }
   
-
+const getSuit = ((cardString) => cardString.charAt(cardString.length-1));
+const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
 
   useEffect(() => {
     
@@ -63,13 +64,13 @@ export const Game = (props) => {
 
   const caculateRoundWinner = (centerCards) => {
     let firstCard = centerCards[0];
-    let firstSuit = firstCard[0][-1];
+    let firstSuit = getSuit(firstCard[0]);
     let bigCard = firstCard;
     for (let i = 1; i < 4; i++) {
       let card = centerCards[i];
-      //let cardSuit = card[1];
-      if (card[1][1] === firstSuit) {
-        if (cardsNumberOrder.indexOf(card[0][0]) > cardsNumberOrder.indexOf(bigCard[0][0])) {
+      let cardSuit = getSuit(card[0])
+      if (cardSuit === firstSuit) {
+        if (cardsNumberOrder.indexOf(getNumber(card[0])) > cardsNumberOrder.indexOf(getNumber(bigCard[0]))) {
           bigCard = card;
         }
       }
@@ -78,7 +79,6 @@ export const Game = (props) => {
   }
 
   useEffect(() => {
-    console.log('aaaa')
     if (centerCards.length === 4) {
       let bigCard = caculateRoundWinner(centerCards);
 
@@ -90,7 +90,6 @@ export const Game = (props) => {
 
       setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
 
-      //setP1WinnerCards(P1WinnerCards.concat(bigCard[0]));
     }
   });
 
@@ -118,9 +117,3 @@ export const Game = (props) => {
     </div>
   )
 }
-
-
-
-  //<WinnerCards arrayOfCards={winnerCards} />
-  //<div className="winnerCards"><Card cardName={bigCard} key={bigCard}/></div>
-        //setWinnerCards(winnerCards.concat(bigCard))
