@@ -1,6 +1,30 @@
-.winnerCards {
+.P4winnerCards {
     position:absolute;
-    bottom: 50%;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .P3winnerCards {
+    position:absolute;
+    top: 120px;
+    left: 10px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .P2winnerCards {
+    position:absolute;
+    top: 230px;
+    left: 10px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .P1winnerCards {
+    position:absolute;
+    top: 340px;
     left: 10px;
     display: flex;
     justify-content: center; 
