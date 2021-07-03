@@ -85,8 +85,8 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
       setCenter([]);
 
       let winPlayer = bigCard[1].slice(0,2);
-      let setWinPlayerCards =winnerCardsPointer[winPlayer][1];
-      let WinPlayerCardsState =winnerCardsPointer[winPlayer][0];
+      let setWinPlayerCards = winnerCardsPointer[winPlayer][1];
+      let WinPlayerCardsState = winnerCardsPointer[winPlayer][0];
 
       setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
 
@@ -97,7 +97,7 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
 
   return (
     <div className="game">
-      <Center arrayOfCards={centerCards.map(c => c[0])} className="center" />
+      <Center arrayOfCards= {centerCards.map(c => c[0])} className="center" />
       <Hand arrayOfCards={P1Hand} onClick={handleCardClick} className="P1hand" />
       <Hand arrayOfCards={P2Hand} onClick={handleCardClick} className="P2hand" />
       <Hand arrayOfCards={P3Hand} onClick={handleCardClick} className="P3hand" />

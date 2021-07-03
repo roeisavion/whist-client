@@ -1,12 +1,11 @@
-export const Card = (props) =>
+export const UnClickableCard = (props) =>
 (
   <img
     src={`./PNG/${props.cardName}.png`}
     alt='something went wrong'
     className="card"
     originHand = {props.originHand}
-    id={props.cardName}
-    onClick={() => props.onClick(props.cardName, props.originHand)} >
+    id={props.cardName}>
   </img>
 )
 
