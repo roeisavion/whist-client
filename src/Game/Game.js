@@ -8,7 +8,25 @@ import { Hand } from '../Hand/Hand'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
 
-export const Game = (props) => {
+
+
+
+let turns = {
+  P1 : true,
+  P2 : false,
+  P3 : false,
+  P4 : false
+}
+
+  const nextTurn = {
+    P1 : 'P2',
+    P2 : 'P3',
+    P3 : 'P4',
+    P4 : 'P1'
+  }
+  
+  export const Game = (props) => {
+
   const [P1Hand, setP1Hand] = useState([]);
   const [P2Hand, setP2Hand] = useState([]);
   const [P3Hand, setP3Hand] = useState([]);
@@ -56,6 +74,13 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
     copyCenter.push([clickedCard,originHand])
     let newCenter = copyCenter
     setCenter(newCenter);
+    let currentPlayer = originHand.slice(0,2);
+    turns[currentPlayer] = false;
+    turns[nextTurn[currentPlayer]] = true;
+  }
+
+  const notYourTurnCardClick = (clickedCard, originHand) => {
+    alert('not your turn')
   }
 
   const removeCard = (clickedCard, currentHand) => {
@@ -82,13 +107,15 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
     if (centerCards.length === 4) {
       let bigCard = caculateRoundWinner(centerCards);
 
-      setCenter([]);
-
+      
       let winPlayer = bigCard[1].slice(0,2);
       let setWinPlayerCards = winnerCardsPointer[winPlayer][1];
       let WinPlayerCardsState = winnerCardsPointer[winPlayer][0];
-
+      
       setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
+      setCenter([]);
+      
+      turns[winPlayer] = true;
 
     }
   });
@@ -98,10 +125,10 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
   return (
     <div className="game">
       <Center arrayOfCards= {centerCards.map(c => c[0])} className="center" />
-      <Hand arrayOfCards={P1Hand} onClick={handleCardClick} className="P1hand" />
-      <Hand arrayOfCards={P2Hand} onClick={handleCardClick} className="P2hand" />
-      <Hand arrayOfCards={P3Hand} onClick={handleCardClick} className="P3hand" />
-      <Hand arrayOfCards={P4Hand} onClick={handleCardClick} className="P4hand" />
+      <Hand arrayOfCards={P1Hand} onClick={turns["P1"] ? handleCardClick : notYourTurnCardClick} className="P1hand" />
+      <Hand arrayOfCards={P2Hand} onClick={turns["P2"] ? handleCardClick : notYourTurnCardClick} className="P2hand" />
+      <Hand arrayOfCards={P3Hand} onClick={turns["P3"] ? handleCardClick : notYourTurnCardClick} className="P3hand" />
+      <Hand arrayOfCards={P4Hand} onClick={turns["P4"] ? handleCardClick : notYourTurnCardClick} className="P4hand" />
       {
         P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} className='P1winnerCards' /> : null
       }
