@@ -1,28 +1,22 @@
-.P1hand {
+.P1hand,.P2hand,.P3hand,.P4hand {
   position:absolute;
-  bottom: 10px;
   display: flex;
-  justify-content: center; 
+  justify-content: right; 
+  right: 3px;
 }
 
+.P1hand {
+  bottom: 5px;
+}
 
 .P2hand {
-  position:absolute;
-  bottom: 120px;
-  display: flex;
-  justify-content: center; 
+  bottom: 100px;
 }
 
 .P3hand {
-  position:absolute;
-  bottom: 230px;
-  display: flex;
-  justify-content: center; 
+  bottom: 195px;
 }
 
 .P4hand {
-  position:absolute;
-  bottom: 340px;
-  display: flex;
-  justify-content: center; 
+  bottom: 290px;
 }

@@ -3,30 +3,25 @@ import '../index.css';
 import '../Hand/Hand.css';
 import '../WinnerCards/WinnerCards.css';
 import './Game.css';
-import {cardsNumberOrder } from '../deck.jsx'
 import { Hand } from '../Hand/Hand'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
+import {notYourTurnCardClick, removeCard, nextTurn, caculateRoundWinner, compareCards} from './gameFunctions'
 
-
-
-
-let turns = {
-  P1 : true,
-  P2 : false,
-  P3 : false,
-  P4 : false
-}
-
-  const nextTurn = {
-    P1 : 'P2',
-    P2 : 'P3',
-    P3 : 'P4',
-    P4 : 'P1'
-  }
+export const Game = (props) => {
   
-  export const Game = (props) => {
-
+  const [isP1Turn, setP1Turn] = useState(true);
+  const [isP2Turn, setP2Turn] = useState(false);
+  const [isP3Turn, setP3Turn] = useState(false);
+  const [isP4Turn, setP4Turn] = useState(false);
+  
+  let setTurns = {
+    P1 : setP1Turn,
+    P2 : setP2Turn,
+    P3 : setP3Turn,
+    P4 : setP4Turn
+  }
+    
   const [P1Hand, setP1Hand] = useState([]);
   const [P2Hand, setP2Hand] = useState([]);
   const [P3Hand, setP3Hand] = useState([]);
@@ -51,9 +46,6 @@ let turns = {
     P4: [P4WinnerCards, setP4WinnerCards], 
   }
   
-const getSuit = ((cardString) => cardString.charAt(cardString.length-1));
-const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
-
   useEffect(() => {
     
     [setP1Hand,setP2Hand,setP3Hand,setP4Hand].forEach((setHand) => {
@@ -62,6 +54,7 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
         let card = props.shuffledDeck.pop();
         tempArry.push(card)
       }
+      tempArry.sort(compareCards)
       setHand(tempArry)
     })
   }, []);
@@ -75,38 +68,13 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
     let newCenter = copyCenter
     setCenter(newCenter);
     let currentPlayer = originHand.slice(0,2);
-    turns[currentPlayer] = false;
-    turns[nextTurn[currentPlayer]] = true;
-  }
-
-  const notYourTurnCardClick = (clickedCard, originHand) => {
-    alert('not your turn')
-  }
-
-  const removeCard = (clickedCard, currentHand) => {
-    return currentHand.filter(currentCard => currentCard !== clickedCard)
-  }
-
-  const caculateRoundWinner = (centerCards) => {
-    let firstCard = centerCards[0];
-    let firstSuit = getSuit(firstCard[0]);
-    let bigCard = firstCard;
-    for (let i = 1; i < 4; i++) {
-      let card = centerCards[i];
-      let cardSuit = getSuit(card[0])
-      if (cardSuit === firstSuit) {
-        if (cardsNumberOrder.indexOf(getNumber(card[0])) > cardsNumberOrder.indexOf(getNumber(bigCard[0]))) {
-          bigCard = card;
-        }
-      }
-    }
-    return bigCard;
+    setTurns[currentPlayer](false);
+    setTurns[nextTurn[currentPlayer]](true);
   }
 
   useEffect(() => {
     if (centerCards.length === 4) {
       let bigCard = caculateRoundWinner(centerCards);
-
       
       let winPlayer = bigCard[1].slice(0,2);
       let setWinPlayerCards = winnerCardsPointer[winPlayer][1];
@@ -114,21 +82,20 @@ const getNumber = ((cardString) => cardString.slice(0,cardString.length-1));
       
       setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
       setCenter([]);
-      
-      turns[winPlayer] = true;
+      Object.values(setTurns).forEach(st => st(false));
+      setTurns[winPlayer](true);
 
     }
   });
 
-//, [centerCards]
 
   return (
     <div className="game">
       <Center arrayOfCards= {centerCards.map(c => c[0])} className="center" />
-      <Hand arrayOfCards={P1Hand} onClick={turns["P1"] ? handleCardClick : notYourTurnCardClick} className="P1hand" />
-      <Hand arrayOfCards={P2Hand} onClick={turns["P2"] ? handleCardClick : notYourTurnCardClick} className="P2hand" />
-      <Hand arrayOfCards={P3Hand} onClick={turns["P3"] ? handleCardClick : notYourTurnCardClick} className="P3hand" />
-      <Hand arrayOfCards={P4Hand} onClick={turns["P4"] ? handleCardClick : notYourTurnCardClick} className="P4hand" />
+      <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? handleCardClick : notYourTurnCardClick} className="P1hand" />
+      <Hand arrayOfCards={P2Hand} onClick={isP2Turn ? handleCardClick : notYourTurnCardClick} className="P2hand" />
+      <Hand arrayOfCards={P3Hand} onClick={isP3Turn ? handleCardClick : notYourTurnCardClick} className="P3hand" />
+      <Hand arrayOfCards={P4Hand} onClick={isP4Turn ? handleCardClick : notYourTurnCardClick} className="P4hand" />
       {
         P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} className='P1winnerCards' /> : null
       }
