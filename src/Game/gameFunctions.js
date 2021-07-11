@@ -2,9 +2,23 @@ import { getSuit, getNumber } from '../../src/helpers/helpersFunctions'
 import { cardsNumberOrder, suitOrder } from '../deck.jsx'
 
 
-export const notYourTurnCardClick = (clickedCard, originHand) => {
+export const notYourTurnCardClick = () => {
     alert('not your turn')
 }
+
+export const notLegalMove = () => {
+    alert('not a ligal move')
+}
+
+// export const clickRouter = (isTurn,IslegalCard,clickedCard, originHand) =>{
+//     if (!isTurn){
+//         return notYourTurnCardClick
+//     }
+//     if (!IslegalCard){
+//         return notLegalMove
+//     }
+//     return handleCardClick(clickedCard,originHand)
+// }
 
 export const removeCard = (clickedCard, currentHand) => {
     return currentHand.filter(currentCard => currentCard !== clickedCard)
@@ -39,9 +53,14 @@ export const compareCards = (cardA, cardB) => {
     let cardANum = getNumber(cardA);
     let cardBNum = getNumber(cardB);
     if (cardASuit === cardBSuit) {
-        return cardsNumberOrder.indexOf(cardASuit) - cardsNumberOrder.indexOf(cardBSuit)
+        let a = cardsNumberOrder.indexOf(cardANum)
+        let b = cardsNumberOrder.indexOf(cardBNum)
+        return b - a
     }
     else {
-        return suitOrder.indexOf(cardANum) - suitOrder.indexOf(cardBNum)
+        let c = suitOrder.indexOf(cardASuit)
+        let d = suitOrder.indexOf(cardBSuit)
+        return c - d
+        
     }
 }

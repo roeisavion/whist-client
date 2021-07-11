@@ -7,6 +7,7 @@ import { Hand } from '../Hand/Hand'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
 import {notYourTurnCardClick, removeCard, nextTurn, caculateRoundWinner, compareCards} from './gameFunctions'
+import { getSuit } from '../helpers/helpersFunctions';
 
 export const Game = (props) => {
   
@@ -60,8 +61,18 @@ export const Game = (props) => {
   }, []);
 
   const handleCardClick = (clickedCard, originHand) => {
-    
-    let newHand = removeCard(clickedCard, handPointer[originHand][0]);
+    let cardsInHand = handPointer[originHand][0]
+    if (centerCards.length>0){
+      let firstCard = centerCards[0];
+      let firstSuit = getSuit(firstCard[0]); 
+      if (getSuit(clickedCard) !==  firstSuit){
+      let shapeArray = cardsInHand.map(c  => getSuit(c))
+      if (shapeArray.includes(firstSuit)){
+        alert('not good shape');
+        return
+      }
+    }}
+    let newHand = removeCard(clickedCard, cardsInHand);
     handPointer[originHand][1](newHand);
     let copyCenter = centerCards;
     copyCenter.push([clickedCard,originHand])
