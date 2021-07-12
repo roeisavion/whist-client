@@ -1,0 +1,24 @@
+.P1stats, .P2stats, .P3stats ,.P4stats {
+    position:absolute;
+    left: 5px;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .P1stats {
+    bottom: 5px;
+  }
+  
+  .P2stats {
+    bottom: 100px;
+  }
+  
+  .P3stats {
+    bottom: 195px;
+  }
+  
+  .P4stats {
+    bottom: 290px;
+  }
+
+  
