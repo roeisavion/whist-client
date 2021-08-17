@@ -1,13 +1,13 @@
-export const ClickableCard = (props) =>
-(
-  <img
+export const ClickableCard = (props) =>{
+  return <img
     src={`./PNG/${props.cardName}.png`}
     alt='something went wrong'
-    className="card"
+    className={props.className}
+    //className="card"
     originHand = {props.originHand}
     id={props.cardName}
     onClick={() => props.onClick(props.cardName, props.originHand)} >
-  </img>
-)
+  </img>}
+
 
   // onClick={() => props.onClick(props.cardName)}

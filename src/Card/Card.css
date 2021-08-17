@@ -1,5 +1,12 @@
-.card{
+.card,.sideCard{
     width: 60px;
     height: 90px;
+    padding: 3px;
+    display: block;
+  }
+
+
+  .sideCard{
+    -webkit-transform: rotate(90deg);
     padding: 3px;
   }

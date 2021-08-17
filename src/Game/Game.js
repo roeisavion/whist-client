@@ -27,6 +27,18 @@ export const Game = (props) => {
     P4: setP4Turn
   }
 
+  const [P1Bet,setP1Bet] = useState('0');
+  const [P2Bet,setP2Bet] = useState('0');
+  const [P3Bet,setP3Bet] = useState('0');
+  const [P4Bet,setP4Bet] = useState('0');
+
+  let BetPointer = {
+    P1: setP1Bet,
+    P2: setP2Bet,
+    P3: setP3Bet,
+    P4: setP4Bet
+  }
+
   const [P1Hand, setP1Hand] = useState([]);
   const [P2Hand, setP2Hand] = useState([]);
   const [P3Hand, setP3Hand] = useState([]);
@@ -107,15 +119,15 @@ export const Game = (props) => {
   return (
     <div className="game">
       <Center arrayOfCards={centerCards.map(c => c[0])} className="center" />
-      <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? handleCardClick : notYourTurnCardClick} className="P1hand" />
-      <Hand arrayOfCards={P2Hand} onClick={isP2Turn ? handleCardClick : notYourTurnCardClick} className="P2hand" />
-      <Hand arrayOfCards={P3Hand} onClick={isP3Turn ? handleCardClick : notYourTurnCardClick} className="P3hand" />
-      <Hand arrayOfCards={P4Hand} onClick={isP4Turn ? handleCardClick : notYourTurnCardClick} className="P4hand" />
+      <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? handleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
+      <Hand arrayOfCards={P2Hand} onClick={isP2Turn ? handleCardClick : notYourTurnCardClick} className="P2hand" cardClassName='sideCard'/>
+      <Hand arrayOfCards={P3Hand} onClick={isP3Turn ? handleCardClick : notYourTurnCardClick} className="P3hand" cardClassName='card'/>
+      <Hand arrayOfCards={P4Hand} onClick={isP4Turn ? handleCardClick : notYourTurnCardClick} className="P4hand" cardClassName='sideCard'/>
       {/* <playerStats className="P1stats"/> */}
-      <div className="P1stats" >P1 Stats</div>
-      <div className="P2stats" ><Bets/></div>
-      <div className="P3stats" ><Bets/></div>
-      <div className="P4stats" ><Bets/></div>
+      {/* <div className="P1stats" ><Bets player='P1'/></div>
+      <div className="P2stats" ><Bets player='P2'/></div>
+      <div className="P3stats" ><Bets player='P3'/></div>
+      <div className="P4stats" ><Bets player='P4'/></div> */}
       {
         P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} className='P1winnerCards' /> : null
       }
