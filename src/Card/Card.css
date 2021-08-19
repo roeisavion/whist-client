@@ -1,4 +1,4 @@
-.card,.sideCard{
+.card{
     width: 60px;
     height: 90px;
     padding: 3px;
@@ -7,6 +7,8 @@
 
 
   .sideCard{
-    -webkit-transform: rotate(90deg);
-    padding: 3px;
+    width: 70px;
+    height: 45px;
+    padding: 1px;
+    display: block;
   }

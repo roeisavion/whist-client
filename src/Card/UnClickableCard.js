@@ -3,7 +3,7 @@ export const UnClickableCard = (props) =>
   <img
     src={`./PNG/${props.cardName}.png`}
     alt='something went wrong'
-    className="card"
+    className={props.className}
     originHand = {props.originHand}
     id={props.cardName}>
   </img>

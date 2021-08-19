@@ -6,6 +6,7 @@ import '../playerStats/playerStats.css';
 import '../WinnerCards/WinnerCards.css';
 import './Game.css';
 import { Hand } from '../Hand/Hand'
+import { CompetitorsHand } from '../Hand/CompetitorsHand'
 import { playerStats } from '../playerStats/playerStats'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
@@ -40,9 +41,9 @@ export const Game = (props) => {
   }
 
   const [P1Hand, setP1Hand] = useState([]);
-  const [P2Hand, setP2Hand] = useState([]);
-  const [P3Hand, setP3Hand] = useState([]);
-  const [P4Hand, setP4Hand] = useState([]);
+  const [P2Hand, setP2Hand] = useState(13);
+  const [P3Hand, setP3Hand] = useState(13);
+  const [P4Hand, setP4Hand] = useState(13);
   const [centerCards, setCenter] = useState([]);
   const [P1WinnerCards, setP1WinnerCards] = useState([]);
   const [P2WinnerCards, setP2WinnerCards] = useState([]);
@@ -122,10 +123,10 @@ export const Game = (props) => {
     <div className="game">
       <Center arrayOfCards={centerCards.map(c => c[0])} className="center" />
       <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? handleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
-      {/* <Hand arrayOfCards={P2Hand} onClick={isP2Turn ? handleCardClick : notYourTurnCardClick} className="P2hand" cardClassName='sideCard'/>
-      <Hand arrayOfCards={P3Hand} onClick={isP3Turn ? handleCardClick : notYourTurnCardClick} className="P3hand" cardClassName='card'/>
-      <Hand arrayOfCards={P4Hand} onClick={isP4Turn ? handleCardClick : notYourTurnCardClick} className="P4hand" cardClassName='sideCard'/> */}
-      {/* <playerStats className="P1stats"/> */}
+      <CompetitorsHand numOfCards={P2Hand} className="P2hand" cardClassName='sideCard'/>
+      <CompetitorsHand numOfCards={P3Hand} className="P3hand" cardClassName='card'/>
+      <CompetitorsHand numOfCards={P4Hand} className="P4hand" cardClassName='sideCard'/>
+      
       {/* <div className="P1stats" ><Bets player='P1'/></div>
       <div className="P2stats" ><Bets player='P2'/></div>
       <div className="P3stats" ><Bets player='P3'/></div>
