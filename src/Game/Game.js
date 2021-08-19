@@ -65,15 +65,17 @@ export const Game = (props) => {
 
   useEffect(() => {
 
-    [setP1Hand, setP2Hand, setP3Hand, setP4Hand].forEach((setHand) => {
-      let tempArry = [];
-      for (let i = 0; i < 13; i++) {
-        let card = props.shuffledDeck.pop();
-        tempArry.push(card)
-      }
-      tempArry.sort(compareCards)
-      setHand(tempArry)
-    })
+    // [setP1Hand, setP2Hand, setP3Hand, setP4Hand].forEach((setHand) => {
+    //   let tempArry = [];
+    //   for (let i = 0; i < 13; i++) {
+    //     let card = props.shuffledDeck.pop();
+    //     tempArry.push(card)
+    //   }
+    //   tempArry.sort(compareCards)
+    //   setHand(tempArry)
+    // })
+    //setP1Hand(props.playerCards)
+    setP1Hand(props.cardsMap[props.playerNum])
   }, []);
 
   const handleCardClick = (clickedCard, originHand) => {
@@ -120,9 +122,9 @@ export const Game = (props) => {
     <div className="game">
       <Center arrayOfCards={centerCards.map(c => c[0])} className="center" />
       <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? handleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
-      <Hand arrayOfCards={P2Hand} onClick={isP2Turn ? handleCardClick : notYourTurnCardClick} className="P2hand" cardClassName='sideCard'/>
+      {/* <Hand arrayOfCards={P2Hand} onClick={isP2Turn ? handleCardClick : notYourTurnCardClick} className="P2hand" cardClassName='sideCard'/>
       <Hand arrayOfCards={P3Hand} onClick={isP3Turn ? handleCardClick : notYourTurnCardClick} className="P3hand" cardClassName='card'/>
-      <Hand arrayOfCards={P4Hand} onClick={isP4Turn ? handleCardClick : notYourTurnCardClick} className="P4hand" cardClassName='sideCard'/>
+      <Hand arrayOfCards={P4Hand} onClick={isP4Turn ? handleCardClick : notYourTurnCardClick} className="P4hand" cardClassName='sideCard'/> */}
       {/* <playerStats className="P1stats"/> */}
       {/* <div className="P1stats" ><Bets player='P1'/></div>
       <div className="P2stats" ><Bets player='P2'/></div>
