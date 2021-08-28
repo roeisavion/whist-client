@@ -10,35 +10,38 @@ import { CompetitorsHand } from '../Hand/CompetitorsHand'
 import { playerStats } from '../playerStats/playerStats'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
-import { notYourTurnCardClick, removeCard, nextTurn, caculateRoundWinner, compareCards } from './gameFunctions'
+import { notYourTurnCardClick, removeCard, nextTurn, caculateRoundWinner, compareCards, playerShower } from './gameFunctions'
 import { getSuit } from '../helpers/helpersFunctions';
 import { Bets } from '../Bets/Bets';
 
 export const Game = (props) => {
 
-  const [isP1Turn, setP1Turn] = useState(true);
-  const [isP2Turn, setP2Turn] = useState(false);
-  const [isP3Turn, setP3Turn] = useState(false);
-  const [isP4Turn, setP4Turn] = useState(false);
+  const [isP1Turn, setP1Turn] = useState(props.turn === props.playerNum ? true : false);
+  // const [isP2Turn, setP2Turn] = useState(false);
+  // const [isP3Turn, setP3Turn] = useState(false);
+  // const [isP4Turn, setP4Turn] = useState(false);
 
-  let setTurns = {
-    P1: setP1Turn,
-    P2: setP2Turn,
-    P3: setP3Turn,
-    P4: setP4Turn
-  }
+// props.turn === props.playerNum ? setP1Turn(true) : setP1Turn(false)
 
-  const [P1Bet,setP1Bet] = useState('0');
-  const [P2Bet,setP2Bet] = useState('0');
-  const [P3Bet,setP3Bet] = useState('0');
-  const [P4Bet,setP4Bet] = useState('0');
 
-  let BetPointer = {
-    P1: setP1Bet,
-    P2: setP2Bet,
-    P3: setP3Bet,
-    P4: setP4Bet
-  }
+  // let setTurns = {
+  //   P1: setP1Turn,
+  //   P2: setP2Turn,
+  //   P3: setP3Turn,
+  //   P4: setP4Turn
+  // }
+
+  // const [P1Bet,setP1Bet] = useState('0');
+  // const [P2Bet,setP2Bet] = useState('0');
+  // const [P3Bet,setP3Bet] = useState('0');
+  // const [P4Bet,setP4Bet] = useState('0');
+
+  // let BetPointer = {
+  //   P1: setP1Bet,
+  //   P2: setP2Bet,
+  //   P3: setP3Bet,
+  //   P4: setP4Bet
+  // }
 
   const [P1Hand, setP1Hand] = useState([]);
   const [P2Hand, setP2Hand] = useState(13);
@@ -57,6 +60,13 @@ export const Game = (props) => {
     P4hand: [P4Hand, setP4Hand]
   }
 
+  const setHandPointer = {
+    P1: setP1Hand,
+    P2: setP2Hand,
+    P3: setP3Hand,
+    P4: setP4Hand
+  }
+
   const winnerCardsPointer = {
     P1: [P1WinnerCards, setP1WinnerCards],
     P2: [P2WinnerCards, setP2WinnerCards],
@@ -67,19 +77,60 @@ export const Game = (props) => {
   useEffect(() => {
 
     // [setP1Hand, setP2Hand, setP3Hand, setP4Hand].forEach((setHand) => {
-    //   let tempArry = [];
-    //   for (let i = 0; i < 13; i++) {
-    //     let card = props.shuffledDeck.pop();
-    //     tempArry.push(card)
-    //   }
-    //   tempArry.sort(compareCards)
+    //   // tempArry.sort(compareCards)
     //   setHand(tempArry)
     // })
-    //setP1Hand(props.playerCards)
-    setP1Hand(props.cardsMap[props.playerNum])
-  }, []);
+    let i = 1;
+    playerShower[props.playerNum].forEach((p) => {
+      setHandPointer['P'+i](props.cardsMap[p]);
+      console.log(props.cardsMap['P'+i])
+      i++;
+      i===5 ? i=1 : i=i;
 
-  const handleCardClick = (clickedCard, originHand) => {
+      if(props.turn === props.playerNum){
+        setP1Turn(true)
+      }else{
+        setP1Turn(false)
+      }
+      
+    })
+
+
+    //setP1Hand(props.playerCards)
+    //setP1Hand(props.cardsMap[props.playerNum])
+    // setP2Hand(props.cardsMap['P2'])
+    // setP3Hand(props.cardsMap['P3'])
+    // setP4Hand(props.cardsMap['P4'])
+    setCenter(props.cardsMap['center']);
+
+  }, [props]);
+
+  // const handleCardClick = (clickedCard, originHand) => {
+  //   let cardsInHand = handPointer[originHand][0]
+  //   if (centerCards.length > 0) {
+  //     let firstCard = centerCards[0];
+  //     let firstSuit = getSuit(firstCard[0]);
+  //     if (getSuit(clickedCard) !== firstSuit) {
+  //       let shapeArray = cardsInHand.map(c => getSuit(c))
+  //       if (shapeArray.includes(firstSuit)) {
+  //         alert('not good shape');
+  //         return
+  //       }
+  //     }
+  //   }
+     
+  //   let newHand = removeCard(clickedCard, cardsInHand);
+  //   handPointer[originHand][1](newHand);
+  //   let copyCenter = centerCards;
+  //   copyCenter.push([clickedCard, originHand])
+  //   let newCenter = copyCenter
+  //   setCenter(newCenter);
+  //   let currentPlayer = originHand.slice(0, 2);
+  //   setTurns[currentPlayer](false);
+  //   setTurns[nextTurn[currentPlayer]](true);
+  // }
+
+  const newHandleCardClick = (clickedCard, originHand) => {
     let cardsInHand = handPointer[originHand][0]
     if (centerCards.length > 0) {
       let firstCard = centerCards[0];
@@ -92,37 +143,52 @@ export const Game = (props) => {
         }
       }
     }
-    let newHand = removeCard(clickedCard, cardsInHand);
-    handPointer[originHand][1](newHand);
-    let copyCenter = centerCards;
-    copyCenter.push([clickedCard, originHand])
-    let newCenter = copyCenter
-    setCenter(newCenter);
-    let currentPlayer = originHand.slice(0, 2);
-    setTurns[currentPlayer](false);
-    setTurns[nextTurn[currentPlayer]](true);
+    
+    let payLoad = {
+      "method" : "updateCards",
+      "playerPlayed" : props.playerNum,
+      "cardPlayed" : clickedCard
+    }
+    props.client.send(JSON.stringify(payLoad));
+    
+    
+    // let newHand = removeCard(clickedCard, cardsInHand);
+    // handPointer[originHand][1](newHand);
+
+    // let copyCenter = centerCards;
+    // copyCenter.push([clickedCard, originHand])
+    // let newCenter = copyCenter
+    // setCenter(newCenter);
+    // let currentPlayer = originHand.slice(0, 2);
+    // setTurns[currentPlayer](false);
+    // setTurns[nextTurn[currentPlayer]](true);
   }
 
-  useEffect(() => {
-    if (centerCards.length === 4) {
-      let bigCard = caculateRoundWinner(centerCards);
+  
 
-      let winPlayer = bigCard[1].slice(0, 2);
-      let setWinPlayerCards = winnerCardsPointer[winPlayer][1];
-      let WinPlayerCardsState = winnerCardsPointer[winPlayer][0];
+  
 
-      setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
-      setCenter([]);
-      Object.values(setTurns).forEach(st => st(false));
-      setTurns[winPlayer](true);
-    }
-  });
+  // useEffect(() => {
+  //   if (centerCards.length === 4) {
+  //     let bigCard = caculateRoundWinner(centerCards);
+
+  //     let winPlayer = bigCard[1].slice(0, 2);
+  //     let setWinPlayerCards = winnerCardsPointer[winPlayer][1];
+  //     let WinPlayerCardsState = winnerCardsPointer[winPlayer][0];
+
+  //     setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
+  //     setCenter([]);
+  //     Object.values(setTurns).forEach(st => st(false));
+  //     setTurns[winPlayer](true);
+
+  //   }
+  // });
 
 
   return (
     <div className="game">
-      <Center arrayOfCards={centerCards.map(c => c[0])} className="center" />
-      <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? handleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
+      {centerCards !== null ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null }
+      <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? newHandleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
       <CompetitorsHand numOfCards={P2Hand} className="P2hand" cardClassName='sideCard'/>
       <CompetitorsHand numOfCards={P3Hand} className="P3hand" cardClassName='card'/>
       <CompetitorsHand numOfCards={P4Hand} className="P4hand" cardClassName='sideCard'/>

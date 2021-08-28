@@ -31,6 +31,16 @@ export const nextTurn = {
     P4: 'P1'
 }
 
+export const playerShower = {
+    P1: ['P1','P2','P3','P4'],
+    P2: ['P2','P3','P4','P1'],
+    P3: ['P3','P4','P1','P2'],
+    P4: ['P4','P1','P2','P3']
+}
+// export const playerShower = (playerNum) => {
+
+// }
+
 export const caculateRoundWinner = (centerCards) => {
     let firstCard = centerCards[0];
     let firstSuit = getSuit(firstCard[0]);
