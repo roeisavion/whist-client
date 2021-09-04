@@ -1,5 +1,5 @@
 .P1hand,.P2hand,.P3hand,.P4hand {
-  position:absolute; /*to delete */
+  position:absolute; /* to delete */
   display: flex;
 }
 

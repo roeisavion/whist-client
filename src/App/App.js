@@ -12,6 +12,7 @@ const App = () => {
 
   const [turnState,setTurn] = useState('P1')
   const [cardsMapState,setCardsMap] = useState({})
+  const [winnedCardsState,setWinnedCards] = useState({})
   const [isGameStarted, setIsGameStarted] = useState(false);
 
   client.onopen = () => {
@@ -41,7 +42,7 @@ const App = () => {
     if (response.method === "updateCards") {
       setCardsMap(response.cardsMap);
       // playerCards=cardsMap[playerNum]
-      winnedCards = response.winCards;
+      setWinnedCards(response.winnedCards);
       setTurn(response.turn);
 
       setIsGameStarted(true)
@@ -74,7 +75,7 @@ const App = () => {
   return (
     <div className="App" >
       {isGameStarted === false ? <Login client={client} createGame={createGame} joinGame={joinGame} />
-        : <Game client={client} playerNum={playerNum} cardsMap={cardsMapState} winnedCards={winnedCards} turn={turnState} />}
+        : <Game client={client} playerNum={playerNum} cardsMap={cardsMapState} winnedCards={winnedCardsState} turn={turnState} />}
     </div>
   );
 }
