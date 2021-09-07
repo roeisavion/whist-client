@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/login'
+import { createGame, joinGame } from '../login/loginFunctions.js'
 
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -14,6 +15,8 @@ const App = () => {
   const [cardsMapState,setCardsMap] = useState({})
   const [winnedCardsState,setWinnedCards] = useState({})
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isSuitBetting, setIsSuitBetting] = useState(false);
+  const [isNumBetting, setIsNumBetting] = useState(false);
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -41,7 +44,6 @@ const App = () => {
     }
     if (response.method === "updateCards") {
       setCardsMap(response.cardsMap);
-      // playerCards=cardsMap[playerNum]
       setWinnedCards(response.winnedCards);
       setTurn(response.turn);
 
@@ -50,32 +52,38 @@ const App = () => {
 
     if (response.method === "suitBet") {
       turn = response.turn;
+      setIsSuitBetting(true);
     }
   };
 
 
-  const createGame = () => {
-    let payLoad = {
-      "method": "create",
-      "clientId": clientId
-    }
-    client.send(JSON.stringify(payLoad));
+  // const createGame = () => {
+  //   let payLoad = {
+  //     "method": "create",
+  //     "clientId": clientId
+  //   }
+  //   client.send(JSON.stringify(payLoad));
+  // }
+  // const joinGame = () => {
+  //   gameId = document.getElementById("gameIdInput").value;
+  //   let payLoad = {
+  //     "method": "join",
+  //     "clientId": clientId,
+  //     "gameId": gameId
+  //   }
+  //   client.send(JSON.stringify(payLoad));
+  // }
+
+  const SendSuitBet = () => {
+    
   }
-  const joinGame = () => {
-    gameId = document.getElementById("gameIdInput").value;
-    let payLoad = {
-      "method": "join",
-      "clientId": clientId,
-      "gameId": gameId
-    }
-    client.send(JSON.stringify(payLoad));
-  }
+
 
 
   return (
     <div className="App" >
-      {isGameStarted === false ? <Login client={client} createGame={createGame} joinGame={joinGame} />
-        : <Game client={client} playerNum={playerNum} cardsMap={cardsMapState} winnedCards={winnedCardsState} turn={turnState} />}
+      {isGameStarted === false ? <Login client={client} createGame={createGame(client,clientId)} joinGame={joinGame(client,clientId)} />
+        : <Game client={client} playerNum={playerNum} cardsMap={cardsMapState} winnedCards={winnedCardsState} turn={turnState} isSuitBetting={isSuitBetting} />}
     </div>
   );
 }

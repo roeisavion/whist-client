@@ -17,19 +17,6 @@ import { Bets } from '../Bets/Bets';
 export const Game = (props) => {
 
   const [isP1Turn, setP1Turn] = useState(props.turn === props.playerNum ? true : false);
-  // const [isP2Turn, setP2Turn] = useState(false);
-  // const [isP3Turn, setP3Turn] = useState(false);
-  // const [isP4Turn, setP4Turn] = useState(false);
-
-// props.turn === props.playerNum ? setP1Turn(true) : setP1Turn(false)
-
-
-  // let setTurns = {
-  //   P1: setP1Turn,
-  //   P2: setP2Turn,
-  //   P3: setP3Turn,
-  //   P4: setP4Turn
-  // }
 
   // const [P1Bet,setP1Bet] = useState('0');
   // const [P2Bet,setP2Bet] = useState('0');
@@ -83,10 +70,6 @@ export const Game = (props) => {
 
   useEffect(() => {
 
-    // [setP1Hand, setP2Hand, setP3Hand, setP4Hand].forEach((setHand) => {
-    //   // tempArry.sort(compareCards)
-    //   setHand(tempArry)
-    // })
     let i = 1;
     playerShower[props.playerNum].forEach((p) => {
       setHandPointer['P'+i](props.cardsMap[p]);
@@ -106,46 +89,10 @@ export const Game = (props) => {
       
     })
 
-
-    //setP1Hand(props.playerCards)
-    //setP1Hand(props.cardsMap[props.playerNum])
-    // setP2Hand(props.cardsMap['P2'])
-    // setP3Hand(props.cardsMap['P3'])
-    // setP4Hand(props.cardsMap['P4'])
     setCenter(props.cardsMap['center']);
-    // if(props.winnedCards){
-    //   setP1WinnerCards(props.winnedCards['P1'])  
-    //   setP2WinnerCards(props.winnedCards['P2'])
-    //   setP3WinnerCards(props.winnedCards['P3'])
-    //   setP4WinnerCards(props.winnedCards['P4'])
-    // }
 
   }, [props]);
 
-  // const handleCardClick = (clickedCard, originHand) => {
-  //   let cardsInHand = handPointer[originHand][0]
-  //   if (centerCards.length > 0) {
-  //     let firstCard = centerCards[0];
-  //     let firstSuit = getSuit(firstCard[0]);
-  //     if (getSuit(clickedCard) !== firstSuit) {
-  //       let shapeArray = cardsInHand.map(c => getSuit(c))
-  //       if (shapeArray.includes(firstSuit)) {
-  //         alert('not good shape');
-  //         return
-  //       }
-  //     }
-  //   }
-     
-  //   let newHand = removeCard(clickedCard, cardsInHand);
-  //   handPointer[originHand][1](newHand);
-  //   let copyCenter = centerCards;
-  //   copyCenter.push([clickedCard, originHand])
-  //   let newCenter = copyCenter
-  //   setCenter(newCenter);
-  //   let currentPlayer = originHand.slice(0, 2);
-  //   setTurns[currentPlayer](false);
-  //   setTurns[nextTurn[currentPlayer]](true);
-  // }
 
   const newHandleCardClick = (clickedCard, originHand) => {
     let cardsInHand = handPointer[originHand][0]
@@ -168,46 +115,20 @@ export const Game = (props) => {
     }
     props.client.send(JSON.stringify(payLoad));
     
-    
-    // let newHand = removeCard(clickedCard, cardsInHand);
-    // handPointer[originHand][1](newHand);
-
-    // let copyCenter = centerCards;
-    // copyCenter.push([clickedCard, originHand])
-    // let newCenter = copyCenter
-    // setCenter(newCenter);
-    // let currentPlayer = originHand.slice(0, 2);
-    // setTurns[currentPlayer](false);
-    // setTurns[nextTurn[currentPlayer]](true);
   }
-
-  
-
-  
-
-  // useEffect(() => {
-  //   if (centerCards.length === 4) {
-  //     let bigCard = caculateRoundWinner(centerCards);
-
-  //     let winPlayer = bigCard[1].slice(0, 2);
-  //     let setWinPlayerCards = winnerCardsPointer[winPlayer][1];
-  //     let WinPlayerCardsState = winnerCardsPointer[winPlayer][0];
-
-  //     setWinPlayerCards(WinPlayerCardsState.concat(bigCard[0]));
-  //     setCenter([]);
-  //     Object.values(setTurns).forEach(st => st(false));
-  //     setTurns[winPlayer](true);
-
-  //   }
-  // });
 
 
   return (
     <div className="game">
+
+
       {centerCards !== null ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null }
 
+      <div className="P1Box">
+      {props.isSuitBetting ? <Bets></Bets> : null}
       <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? newHandleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
       {P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} className='P1winnerCards' cardClassName='card'/> : null}
+      </div>
       
       <CompetitorsHand numOfCards={P2Hand} className="P2hand" cardClassName='sideCard'/>
       {P2WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P2WinnerCards} className='P2winnerCards' cardClassName='sideCard'/> : null}
