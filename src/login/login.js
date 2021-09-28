@@ -49,8 +49,12 @@ export const Login = (props) => {
 
     return <div className="login">
         <h1>Wolcome!</h1>
-        <button id='joinButton' onClick={props.joinGame} >Join Game</button>
-        <button id='createButton' onClick={props.createGame}>Create Game</button>
+        <button id='joinButton' onClick={props.joinGame}>Join Game</button>
+        <button id='createButton' onClick={props.createGame} >Create Game</button>
         <input id="gameIdInput" placeholder="enter gameId"></input>
+        <input id="nicknameInput" placeholder="enter nickname"></input>
     </div>
 }
+
+//client={props.client} clientId={props.clientId}
+//onClick={props.joinGame(props.client,props.clientId)}

@@ -7,7 +7,7 @@ import { createGame, joinGame } from '../login/loginFunctions.js'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 const client = new W3CWebSocket('ws://127.0.0.1:9090');
-let response, clientId, gameId, cardsMap, playerNum, playerCards, winnedCards, turn;
+let response, clientId, gameId, cardsMap, playerNum, playerCards, winnedCards, turn, suitBet, nickname;
 
 const App = () => {
 
@@ -38,7 +38,9 @@ const App = () => {
       gameId = response.game.id;
       if (response.clientId === clientId) {
         playerNum = response.playerNum;
+        nickname = response.nickname;
         console.log(`player number is ${playerNum}`)
+        console.log(`player nickname is ${nickname}`)
       }
       console.log(`player ${clientId} has entered game ${gameId}`)
     }
@@ -52,38 +54,45 @@ const App = () => {
 
     if (response.method === "suitBet") {
       turn = response.turn;
+      nickname = response.nickname;
       setIsSuitBetting(true);
+      suitBet = response.suitBet
+      // suitBet ? alert(suitBet) : null ///need to parse suit bet, and to add nicknames
+      if(suitBet){
+        alert(`${nickname} has bet ${suitBet[response.playerPlayed]}`)
+      }
+      // need to alert if restart
     }
   };
 
 
-  // const createGame = () => {
-  //   let payLoad = {
-  //     "method": "create",
-  //     "clientId": clientId
-  //   }
-  //   client.send(JSON.stringify(payLoad));
-  // }
-  // const joinGame = () => {
-  //   gameId = document.getElementById("gameIdInput").value;
-  //   let payLoad = {
-  //     "method": "join",
-  //     "clientId": clientId,
-  //     "gameId": gameId
-  //   }
-  //   client.send(JSON.stringify(payLoad));
-  // }
-
-  const SendSuitBet = () => {
-    
+  const createGame = () => {
+    nickname = document.getElementById("nicknameInput").value;
+    let payLoad = {
+      "method": "create",
+      nickname,
+      clientId
+    }
+    client.send(JSON.stringify(payLoad));
+  }
+  const joinGame = () => {
+    gameId = document.getElementById("gameIdInput").value;
+    nickname = document.getElementById("nicknameInput").value;
+    let payLoad = {
+      "method": "join",
+      clientId,
+      nickname,
+      gameId
+    }
+    client.send(JSON.stringify(payLoad));
   }
 
 
 
   return (
     <div className="App" >
-      {isGameStarted === false ? <Login client={client} createGame={createGame(client,clientId)} joinGame={joinGame(client,clientId)} />
-        : <Game client={client} playerNum={playerNum} cardsMap={cardsMapState} winnedCards={winnedCardsState} turn={turnState} isSuitBetting={isSuitBetting} />}
+      {isGameStarted === false ? <Login client={client} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} />
+        : <Game client={client} clientId={clientId} playerNum={playerNum} cardsMap={cardsMapState} winnedCards={winnedCardsState} turn={turnState} isSuitBetting={isSuitBetting} />}
     </div>
   );
 }

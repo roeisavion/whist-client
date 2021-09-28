@@ -1,4 +1,6 @@
 import './Bets.css'
+import { sendSuitBet, sendPass } from './betsFunctions.js'
+
 
 export const Bets = (props) => {
     let client = props.client;
@@ -12,10 +14,10 @@ export const Bets = (props) => {
                 <option value="D">D</option>
                 <option value="S">S</option>
             </select>
-            <button onClick={props.sendSuitBet(client,clientId)}>submit</button>
+            <button onClick={() => sendSuitBet(client,clientId)}>submit</button>
         </div>
         <div>
-            <button onClick={props.sendPass(client,clientId)}>Pass</button>
+            <button onClick={() => sendPass(client,clientId)}>Pass</button>
         </div>
     </div>
 }

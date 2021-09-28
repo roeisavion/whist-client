@@ -125,7 +125,7 @@ export const Game = (props) => {
       {centerCards !== null ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null }
 
       <div className="P1Box">
-      {props.isSuitBetting ? <Bets></Bets> : null}
+      {props.isSuitBetting ? <Bets client={props.client} clientId={props.clientId} /> : null}
       <Hand arrayOfCards={P1Hand} onClick={isP1Turn ? newHandleCardClick : notYourTurnCardClick} className="P1hand" cardClassName='card'/>
       {P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} className='P1winnerCards' cardClassName='card'/> : null}
       </div>
