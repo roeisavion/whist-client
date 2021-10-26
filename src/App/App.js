@@ -3,6 +3,7 @@ import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/login'
 import { createGame, joinGame } from '../login/loginFunctions.js'
+import {errorHandler} from './errorHandler'
 
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -63,28 +64,45 @@ const App = () => {
       }
       // need to alert if restart
     }
+    if (response.method === "error") {
+      // errorHandler(response.massage)
+      alert(response.massage)
+    }
   };
 
 
   const createGame = () => {
     nickname = document.getElementById("nicknameInput").value;
-    let payLoad = {
-      "method": "create",
-      nickname,
-      clientId
+    if(nickname){
+      let payLoad = {
+        "method": "create",
+        nickname,
+        clientId
+      }
+      client.send(JSON.stringify(payLoad));
     }
-    client.send(JSON.stringify(payLoad));
+    else{
+      alert("must send nickName")
+    }
   }
   const joinGame = () => {
     gameId = document.getElementById("gameIdInput").value;
     nickname = document.getElementById("nicknameInput").value;
-    let payLoad = {
-      "method": "join",
-      clientId,
-      nickname,
-      gameId
+    if (!!nickname && !!gameId){
+      let payLoad = {
+        "method": "join",
+        clientId,
+        nickname,
+        gameId
+      }
+      client.send(JSON.stringify(payLoad));
     }
-    client.send(JSON.stringify(payLoad));
+    if(!gameId){
+      alert("must send gameID")
+    }
+    if(!nickname){
+      alert("must send nickName")
+    }
   }
 
 
