@@ -14,3 +14,11 @@ export const joinGame = (client,clientId) => {
     }
     client.send(JSON.stringify(payLoad));
   }
+
+  export const leaveGame = (client,clientId) => {
+    let payLoad = {
+      "method": "leaveGame",
+      "clientId": clientId
+    }
+    client.send(JSON.stringify(payLoad));
+  }

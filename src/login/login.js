@@ -1,17 +1,20 @@
 import React from 'react';
 import { joinButton } from './loginComponents';
-import { joinGame } from './loginFunctions';
+// import { leaveGame } from './loginFunctions';
 
 export const Login = (props) => {
     return <div className="login" >
         <h1> Welcome!</h1>
-        {/* <button onClick={() => joinGame(props.client, props.clientId)} className='button'>Join Game</button> */}
         <button id='joinButton' onClick={props.joinGame} className='button'>Join Game</button>
-        <button id='createButton' onClick={props.createGame} className='button'>Create Game</button> 
-        <input id="gameIdInput" placeholder="enter gameId" ></input> 
+        <button id='createButton' onClick={props.createGame} className='button'>Create Game</button>
+        <button id='leaveButton' onClick={props.leaveGame} className='button'>Leave Game</button>
+        <input id="gameIdInput" placeholder="enter gameId" ></input>
         <input id="nicknameInput" placeholder="enter nickname"></input>
-        </div>
+    </div>
 }
+
+
+
 
 
 // export const Login = (props) => {

@@ -23,11 +23,26 @@
   flex-direction: column;
 }
 
-.P1Box{
+.P1Box,.P2Box,.P3Box,.P4Box{
   position:absolute;
-  bottom: 10px;
-  flex-direction: column;
   justify-content: center; 
-  
 }
 
+.P1Box{
+  bottom: 2%;
+  flex-direction: column;
+}
+
+.P2Box{
+  right: 2%;
+  flex-direction: row;
+}
+.P3Box{
+  top: 2%;
+  flex-direction: column-reverse;
+}
+
+.P4Box{
+  left: 2%;
+  flex-direction: row-reverse;
+}
