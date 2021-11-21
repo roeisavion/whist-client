@@ -15,6 +15,7 @@ import { getSuit } from '../helpers/helpersFunctions';
 import { SuitBets } from '../Bets/SuitBets';
 import { biggestBetSoFar } from '../Bets/suitBetsFunctions';
 import { NumBets } from '../Bets/NumBets';
+import {sortHand} from '../Hand/handFunctions'
 
 let isSuitBetting, isNumBetting;
 export const Game = (props) => {
@@ -22,18 +23,6 @@ export const Game = (props) => {
   isSuitBetting = props.isSuitBetting;
   isNumBetting = props.isNumBetting;
   const [isMyTurn, setMyTurn] = useState(props.turn === props.playerNum ? true : false);
-
-  // const [P1Bet,setP1Bet] = useState('0');
-  // const [P2Bet,setP2Bet] = useState('0');
-  // const [P3Bet,setP3Bet] = useState('0');
-  // const [P4Bet,setP4Bet] = useState('0');
-
-  // let BetPointer = {
-  //   P1: setP1Bet,
-  //   P2: setP2Bet,
-  //   P3: setP3Bet,
-  //   P4: setP4Bet
-  // }
 
   const [P1Hand, setP1Hand] = useState([]);
   const [P2Hand, setP2Hand] = useState(13);
@@ -45,13 +34,15 @@ export const Game = (props) => {
   const [P3WinnerCards, setP3WinnerCards] = useState([]);
   const [P4WinnerCards, setP4WinnerCards] = useState([]);
 
-  const [currentBet, setCurrentBet] = useState("haven't betted yet")
+  let currentBet = "haven't betted yet"
 
-  // if(props.suitBet){
-  //   // if(props.suitBet[props.playerNum]){
-  //     setCurrentBet(props.suitBet[props.playerNum])
-  //   // }
-  // }
+  if(props.isSuitBetting){
+    if(props.suitBet[props.playerNum]){
+      currentBet = props.suitBet[props.playerNum];
+    }
+  }else{
+    currentBet = props.numBets[props.playerNum];
+  }
 
   const handPointer = {
     P1hand: [P1Hand, setP1Hand],
@@ -74,13 +65,6 @@ export const Game = (props) => {
     P4: setP4WinnerCards,
   }
 
-  // const winnerCardsPointer = {
-  //   P1: [P1WinnerCards, setP1WinnerCards],
-  //   P2: [P2WinnerCards, setP2WinnerCards],
-  //   P3: [P3WinnerCards, setP3WinnerCards],
-  //   P4: [P4WinnerCards, setP4WinnerCards],
-  // }
-
   useEffect(() => {
 
     let i = 1;
@@ -101,9 +85,7 @@ export const Game = (props) => {
       }
 
     })
-
     setCenter(props.cardsMap['center']);
-
   }, [props]);
 
 
@@ -139,8 +121,9 @@ export const Game = (props) => {
       <div className="P1Box">
         {isMyTurn ? <div>current turn</div> : null}
         {props.suitBet ? <div>currnt bet:{currentBet}</div> : null}
+        <button onClick={setP1Hand(sortHand(P1Hand))}>sort</button>
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
-        {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet}/> : null}
+        {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum}/> : null}
         <Hand arrayOfCards={P1Hand} onClick={newHandleCardClick} className="P1hand" cardClassName='card' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting} />
         {P1WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P1WinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
       </div>

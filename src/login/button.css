@@ -22,3 +22,8 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
+
+.button:disabled{
+    background-color: #0b0c0b;
+    box-shadow: 0 5px #666;
+}

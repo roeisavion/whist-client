@@ -10,16 +10,23 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 const client = new W3CWebSocket('ws://127.0.0.1:9090');
 let response, clientId, gameId, cardsMap, playerNum, playerCards, winnedCards, turn, suitBet, nickname, numBets;
 let previousTurn = { P1: 'P4', P2: "P1", P3: 'P2', P4: 'P3' }
-let sliceingSuit, minBet;
+// let sliceingSuit, minBet, inGame = false;
 
 const App = () => {
 
   const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState({})
+  const [scoreMapState, setScoreMap] = useState({})
+  const [suitBetState, setsuitBet] = useState(undefined)
+  const [numBetState, setNumBets] = useState(undefined)
   const [winnedCardsState, setWinnedCards] = useState({})
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isSuitBetting, setIsSuitBetting] = useState(false);
   const [isNumBetting, setIsNumBetting] = useState(false);
+  const [minBetState, setminBet] = useState([]);
+  const [sliceingSuitState, setSliceingSuit] = useState("");
+  const [betWinnerState, setBetWinner] = useState("");
+  const [inGame, setInGame] = useState(false);
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -35,10 +42,14 @@ const App = () => {
     if (response.method === "create") {
       gameId = response.gameId;
       playerNum = response.playerNum;
+      setInGame(true);
       alert("Game was created Set successfully " + gameId)
     }
 
     if (response.method === "leftGame") {
+      if (response.clientId === clientId) {
+        setInGame(false);
+      }
       alert(response.nickname + " has left the game")
     }
 
@@ -47,6 +58,7 @@ const App = () => {
       if (response.clientId === clientId) {
         playerNum = response.playerNum;
         nickname = response.nickname;
+        setInGame(true);
         console.log(`player number is ${playerNum}`)
         console.log(`player nickname is ${nickname}`)
       }
@@ -63,7 +75,8 @@ const App = () => {
       setTurn(response.turn);
       nickname = response.nickname;
       setIsSuitBetting(true);
-      suitBet = response.suitBet
+      setsuitBet(response.suitBet)
+      console.log("aaa")
       // suitBet ? alert(suitBet) : null ///need to parse suit bet, and to add nicknames
       // if(suitBet){
       //   alert(`${nickname} has bet ${suitBet[response.playerPlayed]}`)
@@ -78,12 +91,17 @@ const App = () => {
       setTurn(response.turn);
       nickname = response.nickname;
       setIsSuitBetting(false);
-      numBets = response.numBets;
+      setNumBets(response.numBets)
       response.finishBetting ? setIsNumBetting(false) : setIsNumBetting(true);
       if (response.minBet) {
-        minBet = response.minBet;
-        sliceingSuit = response.sliceingSuit;
+        setminBet([response.minBet,response.betWinner]);
+        setSliceingSuit(response.sliceingSuit);
+        // setBetWinner(response.betWinner);
       }
+    }
+    if (response.method === "score") {
+      setScoreMap(response.scoreMap)
+      alert("your score is: " + response.scoreMap[playerNum])
     }
   };
 
@@ -136,7 +154,7 @@ const App = () => {
 
   return (
     <div className="App" >
-      {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} />
+      {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/>
         : <Game
           client={client}
           clientId={clientId}
@@ -146,10 +164,12 @@ const App = () => {
           turn={turnState}
           isSuitBetting={isSuitBetting}
           isNumBetting={isNumBetting}
-          suitBet={suitBet}
-          numBets={numBets}
-          sliceingSuit={sliceingSuit}
-          minBet={minBet} />}
+          suitBet={suitBetState}
+          numBets={numBetState}
+          sliceingSuit={sliceingSuitState}
+          minBet={minBetState}
+          // betWinner={betWinnerState}
+          scoreMap={scoreMapState}/>}
     </div>
   );
 }

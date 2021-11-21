@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export const sendSuitBet = (client, clientId, betNum, betSuit, suitBet) => {
 
-  let previousBet = biggestBetSoFar(suitBet); // need to fix equals bets
+  let previousBet = biggestBetSoFar(suitBet);
   let payLoad = {
     "method": "suitBet",
     clientId,
