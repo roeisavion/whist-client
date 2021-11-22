@@ -1,4 +1,3 @@
-import { indexOf } from "lodash";
 import { getNumber, getSuit, cardsNumberOrder, suitOrder } from "../helpers/helpersFunctions";
 
 

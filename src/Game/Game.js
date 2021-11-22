@@ -112,6 +112,11 @@ export const Game = (props) => {
 
   }
 
+  const handelSort = (setHand,arrayOfCards) =>{
+    let sortedArry = sortHand([...arrayOfCards])
+    setHand(sortedArry)
+  }
+
 
   return (
     <div className="game">
@@ -121,7 +126,7 @@ export const Game = (props) => {
       <div className="P1Box">
         {isMyTurn ? <div>current turn</div> : null}
         {props.suitBet ? <div>currnt bet:{currentBet}</div> : null}
-        <button onClick={setP1Hand(sortHand(P1Hand))}>sort</button>
+        <button onClick={()=>handelSort(setP1Hand,P1Hand)}>sort</button>
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum}/> : null}
         <Hand arrayOfCards={P1Hand} onClick={newHandleCardClick} className="P1hand" cardClassName='card' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting} />
