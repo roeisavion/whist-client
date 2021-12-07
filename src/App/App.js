@@ -8,7 +8,7 @@ import { errorHandler } from './errorHandler'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 // const client = new W3CWebSocket('ws://127.0.0.1:9091');
-const client = new W3CWebSocket('ws://powerful-plains-99715.herokuapp.com');
+const client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
 let response, clientId, gameId, playerNum, nickname;
 const App = () => {
 
