@@ -1,0 +1,11 @@
+.center {
+  /* position:absolute; */
+  display: flex;
+  justify-content: center;
+  left: 50%; 
+  top: 50%; 
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+

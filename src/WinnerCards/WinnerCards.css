@@ -1,0 +1,25 @@
+.P1winnerCards, .P2winnerCards, .P3winnerCards ,.P4winnerCards {
+    position:absolute;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .P1winnerCards {
+    bottom: 115px;
+    left : 50%;
+  }
+  
+  .P2winnerCards {
+    right: 90px;
+    top: 50%;
+  }
+  
+  .P3winnerCards {
+    top: 115px;
+    left : 50%;
+  }
+  
+  .P4winnerCards {
+    left : 90px;
+    top: 50%;
+  }

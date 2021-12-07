@@ -1,0 +1,4 @@
+.bets{
+    display: flex;
+    flex-direction: column;
+}
