@@ -7,8 +7,15 @@ import { errorHandler } from './errorHandler'
 
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
-// const client = new W3CWebSocket('ws://127.0.0.1:9091');
-const client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+const client = new W3CWebSocket('ws://127.0.0.1:9091');
+// let client;
+// try {
+//   client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+// } catch (error) {
+//   setTimeout(() => {
+//     client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+//   }, 1500);
+// }
 let response, clientId, gameId, playerNum, nickname;
 const App = () => {
 
@@ -23,7 +30,6 @@ const App = () => {
   const [isNumBetting, setIsNumBetting] = useState(false);
   const [minBetState, setminBet] = useState([]);
   const [sliceingSuitState, setSliceingSuit] = useState("");
-  const [betWinnerState, setBetWinner] = useState("");
   const [inGame, setInGame] = useState(false);
 
   client.onopen = () => {
@@ -99,7 +105,6 @@ const App = () => {
 
 
   const createGame = () => {
-    // let nicknameElemnt = document.getElementById("nicknameInput");
     nickname = document.getElementById("nicknameInput").value;
     if (nickname) {
       let payLoad = {

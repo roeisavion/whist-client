@@ -1,48 +1,45 @@
 .P1hand,.P2hand,.P3hand,.P4hand {
-  position:absolute;
+  position:relative;
   display: flex;
 }
 
-.P1hand {
-  bottom: 10px;
-  position:static;
-}
+/* .P1hand {
+} */
 
 .P2hand {
-  right: 10px;
   flex-direction: column;
   justify-content:space-around;
 }
 
-.P3hand {
-  top: 10px;
-}
+/* .P3hand {
+} */
 
 .P4hand {
-  left: 10px;
   flex-direction: column;
 }
 
-.P1Box,.P2Box,.P3Box,.P4Box{
+.bottomBox,.rightBox,.topBox,.leftBox{
   position:absolute;
   justify-content: center; 
+  display: flex;
+  align-items: center
 }
 
-.P1Box{
+.bottomBox{
   bottom: 2%;
   flex-direction: column;
 }
 
-.P2Box{
+.rightBox{
   right: 2%;
-  flex-direction: row;
-}
-.P3Box{
-  top: 2%;
-  flex-direction: column-reverse;
-}
-
-.P4Box{
-  left: 2%;
   flex-direction: row-reverse;
+}
+.topBox{
+  top: 2%;
+  flex-direction: column;
+}
+ 
+.leftBox{
+  left: 2%;
+  flex-direction: row;
 }
