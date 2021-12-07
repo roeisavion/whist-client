@@ -7,11 +7,9 @@ import { errorHandler } from './errorHandler'
 
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
-const client = new W3CWebSocket('ws://127.0.0.1:9090');
-let response, clientId, gameId, cardsMap, playerNum, playerCards, winnedCards, turn, suitBet, nickname, numBets;
-let previousTurn = { P1: 'P4', P2: "P1", P3: 'P2', P4: 'P3' }
-// let sliceingSuit, minBet, inGame = false;
-
+// const client = new W3CWebSocket('ws://127.0.0.1:9091');
+const client = new W3CWebSocket('ws://powerful-plains-99715.herokuapp.com');
+let response, clientId, gameId, playerNum, nickname;
 const App = () => {
 
   const [turnState, setTurn] = useState('P1')
@@ -77,14 +75,8 @@ const App = () => {
       setIsSuitBetting(true);
       setsuitBet(response.suitBet)
       console.log("aaa")
-      // suitBet ? alert(suitBet) : null ///need to parse suit bet, and to add nicknames
-      // if(suitBet){
-      //   alert(`${nickname} has bet ${suitBet[response.playerPlayed]}`)
-      // }
-      // need to alert if restart
     }
     if (response.method === "error") {
-      // errorHandler(response.massage)
       alert(response.massage)
     }
     if (response.method === "numBet") {

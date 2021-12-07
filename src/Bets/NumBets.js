@@ -14,7 +14,7 @@ export const NumBets = (props) => {
 
     return <div className = "bets">
         <div>
-        <input type="number" placeholder="write your bet" id="betNum" name="betNum" min={props.minBet[1]===props.playerNum ? props.minBet[0] : "0"}  max="13" onChange={handelNumChange} />
+        <input type="number" placeholder="write your bet" id="betNum" name="betNum" min={props.minBet[1]===props.playerNum ? props.minBet[0] : 0}  max={13} onChange={handelNumChange} />
             <button onClick={() => sendNumBet(client,clientId, myBetNum, props.numBets)} disabled={!props.isMyTurn}>submit</button>
         </div>
     </div>
@@ -31,7 +31,8 @@ const sendNumBet = (client, clientId, myBetNum, numBets) => {
     try {
         realBets = Object.values(numBets);
         realBets = realBets.filter(nb => nb)
-        if(realBets.length === 3 && (_.sum(realBets) + myBetNum)===13){
+        let realBets1 = realBets.map(nb => parseInt(nb))
+        if(realBets.length === 3 && (_.sum(realBets1) + parseInt(myBetNum))===13){
             alert("the sum of bets can't be 13")
         }else{
             client.send(JSON.stringify(payLoad));

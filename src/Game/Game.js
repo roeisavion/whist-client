@@ -39,8 +39,8 @@ export const Game = (props) => {
   if(props.isSuitBetting){
     if(props.suitBet[props.playerNum]){
       currentBet = props.suitBet[props.playerNum];
-    }
-  }else{
+    } // need to fix after finish suit betting
+  }if(props.numBets){
     currentBet = props.numBets[props.playerNum];
   }
 
@@ -106,7 +106,8 @@ export const Game = (props) => {
     let payLoad = {
       "method": "updateCards",
       "playerPlayed": props.playerNum,
-      "cardPlayed": clickedCard
+      "cardPlayed": clickedCard,
+      "clientId" : props.clientId 
     }
     props.client.send(JSON.stringify(payLoad));
 
