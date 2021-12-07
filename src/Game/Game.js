@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet } from "react";
 import '../index.css';
 import '../Hand/Hand.css';
-import '../playerStats/playerStats.css';
 import '../WinnerCards/WinnerCards.css';
 import './Game.css';
 import { Hand } from '../Hand/Hand'
 import { CompetitorsHand } from '../Hand/CompetitorsHand'
-import { playerStats } from '../playerStats/playerStats'
 import { WinnerCards } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
-import { notYourTurnCardClick, removeCard, nextTurn, caculateRoundWinner, compareCards, playerShower } from './gameFunctions'
+import { playerShower } from './gameFunctions'
 import { getSuit } from '../helpers/helpersFunctions';
 import { SuitBets } from '../Bets/SuitBets';
-import { biggestBetSoFar } from '../Bets/suitBetsFunctions';
 import { NumBets } from '../Bets/NumBets';
 import {sortHand} from '../Hand/handFunctions'
 
@@ -73,7 +69,6 @@ export const Game = (props) => {
       if (props.winnedCards) {
         winnerCardsPointer['P' + i](props.winnedCards[p]);
       }
-      // props.winnedCards['P'+i] ? winnerCardsPointer['P'+i](props.winnedCards['P'+i]) : null ;
       console.log(props.cardsMap['P' + i])
       i++;
       i === 5 ? i = 1 : i = i;
@@ -142,12 +137,6 @@ export const Game = (props) => {
 
       <CompetitorsHand numOfCards={P4Hand} className="P4hand" cardClassName='sideCard' />
       {P4WinnerCards.length !== 0 ? <WinnerCards arrayOfCards={P4WinnerCards} className='P4winnerCards' cardClassName='sideCard' /> : null}
-
-
-      {/* <div className="P1stats" ><Bets player='P1'/></div>
-      <div className="P2stats" ><Bets player='P2'/></div>
-      <div className="P3stats" ><Bets player='P3'/></div>
-      <div className="P4stats" ><Bets player='P4'/></div> */}
     </div>
   )
 }
