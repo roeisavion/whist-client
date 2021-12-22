@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
-import { Login } from '../login/login'
+import { Login } from '../login/Login'
 import { createGame, joinGame } from '../login/loginFunctions.js'
-import { errorHandler } from './errorHandler'
-
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
@@ -16,7 +14,7 @@ const client = new W3CWebSocket('ws://127.0.0.1:9091');
 //     client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
 //   }, 1500);
 // }
-let response, clientId, gameId, playerNum, nickname;
+let response, gameId, playerNum, nickname;
 const App = () => {
 
   const [turnState, setTurn] = useState('P1')
@@ -31,6 +29,7 @@ const App = () => {
   const [minBetState, setminBet] = useState([]);
   const [sliceingSuitState, setSliceingSuit] = useState("");
   const [inGame, setInGame] = useState(false);
+  const [clientId, setClientId] = useState(false);
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -39,7 +38,7 @@ const App = () => {
   client.onmessage = (message) => {
     response = JSON.parse(message.data);
     if (response.method === "connect") {
-      clientId = response.clientId;
+      setClientId(response.clientId);
       console.log("Client id Set successfully " + clientId)
     }
     // created game
@@ -63,10 +62,7 @@ const App = () => {
         playerNum = response.playerNum;
         nickname = response.nickname;
         setInGame(true);
-        console.log(`player number is ${playerNum}`)
-        console.log(`player nickname is ${nickname}`)
       }
-      console.log(`player ${clientId} has entered game ${gameId}`)
     }
     if (response.method === "updateCards") {
       setCardsMap(response.cardsMap);
@@ -80,7 +76,6 @@ const App = () => {
       nickname = response.nickname;
       setIsSuitBetting(true);
       setsuitBet(response.suitBet)
-      console.log("aaa")
     }
     if (response.method === "error") {
       alert(response.massage)
@@ -94,7 +89,6 @@ const App = () => {
       if (response.minBet) {
         setminBet([response.minBet,response.betWinner]);
         setSliceingSuit(response.sliceingSuit);
-        // setBetWinner(response.betWinner);
       }
     }
     if (response.method === "score") {
@@ -104,54 +98,55 @@ const App = () => {
   };
 
 
-  const createGame = () => {
-    nickname = document.getElementById("nicknameInput").value;
-    if (nickname) {
-      let payLoad = {
-        "method": "create",
-        nickname,
-        clientId
-      }
-      client.send(JSON.stringify(payLoad));
-    }
-    else {
-      alert("must send a nickName")
-      // nicknameElemnt.setCustomValidity("must send a nickName")
-    }
-  }
-  const joinGame = () => {
-    gameId = document.getElementById("gameIdInput").value;
-    nickname = document.getElementById("nicknameInput").value;
-    if (!!nickname && !!gameId) {
-      let payLoad = {
-        "method": "join",
-        clientId,
-        nickname,
-        gameId
-      }
-      client.send(JSON.stringify(payLoad));
-    }
-    if (!gameId) {
-      alert("must send gameID")
-    }
-    if (!nickname) {
-      alert("must send nickName")
-    }
-  }
+  // const createGame = () => {
+  //   nickname = document.getElementById("nicknameInput").value;
+  //   if (nickname) {
+  //     let payLoad = {
+  //       "method": "create",
+  //       nickname,
+  //       clientId
+  //     }
+  //     client.send(JSON.stringify(payLoad));
+  //   }
+  //   else {
+  //     alert("must send a nickName")
+  //     // nicknameElemnt.setCustomValidity("must send a nickName")
+  //   }
+  // }
+  // const joinGame = () => {
+  //   gameId = document.getElementById("gameIdInput").value;
+  //   nickname = document.getElementById("nicknameInput").value;
+  //   if (!!nickname && !!gameId) {
+  //     let payLoad = {
+  //       "method": "join",
+  //       clientId,
+  //       nickname,
+  //       gameId
+  //     }
+  //     client.send(JSON.stringify(payLoad));
+  //   }
+  //   if (!gameId) {
+  //     alert("must send gameID")
+  //   }
+  //   if (!nickname) {
+  //     alert("must send nickName")
+  //   }
+  // }
 
-  const leaveGame = () => {
-    let payLoad = {
-      "method": "leaveGame",
-      clientId
-    }
-    client.send(JSON.stringify(payLoad));
-  }
+  // const leaveGame = () => {
+  //   let payLoad = {
+  //     "method": "leaveGame",
+  //     clientId
+  //   }
+  //   client.send(JSON.stringify(payLoad));
+  // }
 
 
 
   return (
     <div className="App" >
-      {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/>
+      {/* {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/> */}
+      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame}/>
         : <Game
           client={client}
           clientId={clientId}

@@ -1,0 +1,75 @@
+
+// :export{
+//     $P2L:
+//     $P3L:
+//     $P4L:
+// } 
+
+@mixin cardsFan($count, $angle) {
+    @for $i from 1 through $count {
+      img:nth-child(#{$i}) {
+        transform: rotate(($angle/$count) * $i - $angle/2);
+      }
+    }
+  }
+
+
+.P1hand,.P2hand,.P3hand,.P4hand {
+    position:relative;
+    display: flex;
+  }
+  
+  /* .P1hand {
+  } */
+  
+  .P2hand {
+    flex-direction: column;
+    justify-content:space-around;
+  }
+  
+  .P2hand, .P3hand, .P4hand {
+    // @for $i from 1 through 13 {
+    //     img:nth-child(#{$i}) {
+    //       transform: rotate(10deg * $i - 65deg);
+    //     }
+    //   }
+    @include cardsFan(13, 130deg);
+  } 
+
+  .P2hand img, .P3hand img, .P4hand img {
+    transform-origin: center 140%;
+    position:absolute;
+  }
+  
+  .P4hand {
+    flex-direction: column;
+  }
+  
+  .bottomBox,.rightBox,.topBox,.leftBox{
+    position:absolute;
+    justify-content: center; 
+    display: flex;
+    align-items: center
+  }
+  
+  .bottomBox{
+    bottom: 2%;
+    flex-direction: column;
+  }
+  
+  .rightBox{
+    right: 2%;
+    flex-direction: row-reverse;
+  }
+  .topBox{
+    top: 2%;
+    flex-direction: column;
+  }
+   
+  .leftBox{
+    left: 2%;
+    flex-direction: row;
+  }
+  
+
+

@@ -3,7 +3,9 @@
     height: 90px;
     padding: 3px;
     display: block;
+    position:absolute
   }
+  
 
 
   .sideCard{

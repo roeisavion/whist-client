@@ -1,45 +1,141 @@
-.P1hand,.P2hand,.P3hand,.P4hand {
-  position:relative;
+.P1hand, .P2hand, .P3hand, .P4hand {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 /* .P1hand {
-} */
-
+  } */
 .P2hand {
-  flex-direction: column;
-  justify-content:space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
-/* .P3hand {
-} */
+.P2hand img:nth-child(1), .P3hand img:nth-child(1), .P4hand img:nth-child(1) {
+  -webkit-transform: rotate(-55deg);
+          transform: rotate(-55deg);
+}
+
+.P2hand img:nth-child(2), .P3hand img:nth-child(2), .P4hand img:nth-child(2) {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.P2hand img:nth-child(3), .P3hand img:nth-child(3), .P4hand img:nth-child(3) {
+  -webkit-transform: rotate(-35deg);
+          transform: rotate(-35deg);
+}
+
+.P2hand img:nth-child(4), .P3hand img:nth-child(4), .P4hand img:nth-child(4) {
+  -webkit-transform: rotate(-25deg);
+          transform: rotate(-25deg);
+}
+
+.P2hand img:nth-child(5), .P3hand img:nth-child(5), .P4hand img:nth-child(5) {
+  -webkit-transform: rotate(-15deg);
+          transform: rotate(-15deg);
+}
+
+.P2hand img:nth-child(6), .P3hand img:nth-child(6), .P4hand img:nth-child(6) {
+  -webkit-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+}
+
+.P2hand img:nth-child(7), .P3hand img:nth-child(7), .P4hand img:nth-child(7) {
+  -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+}
+
+.P2hand img:nth-child(8), .P3hand img:nth-child(8), .P4hand img:nth-child(8) {
+  -webkit-transform: rotate(15deg);
+          transform: rotate(15deg);
+}
+
+.P2hand img:nth-child(9), .P3hand img:nth-child(9), .P4hand img:nth-child(9) {
+  -webkit-transform: rotate(25deg);
+          transform: rotate(25deg);
+}
+
+.P2hand img:nth-child(10), .P3hand img:nth-child(10), .P4hand img:nth-child(10) {
+  -webkit-transform: rotate(35deg);
+          transform: rotate(35deg);
+}
+
+.P2hand img:nth-child(11), .P3hand img:nth-child(11), .P4hand img:nth-child(11) {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.P2hand img:nth-child(12), .P3hand img:nth-child(12), .P4hand img:nth-child(12) {
+  -webkit-transform: rotate(55deg);
+          transform: rotate(55deg);
+}
+
+.P2hand img:nth-child(13), .P3hand img:nth-child(13), .P4hand img:nth-child(13) {
+  -webkit-transform: rotate(65deg);
+          transform: rotate(65deg);
+}
+
+.P2hand img, .P3hand img, .P4hand img {
+  -webkit-transform-origin: center 140%;
+          transform-origin: center 140%;
+  position: absolute;
+}
 
 .P4hand {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.bottomBox,.rightBox,.topBox,.leftBox{
-  position:absolute;
-  justify-content: center; 
+.bottomBox, .rightBox, .topBox, .leftBox {
+  position: absolute;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.bottomBox{
+.bottomBox {
   bottom: 2%;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.rightBox{
+.rightBox {
   right: 2%;
-  flex-direction: row-reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
 }
-.topBox{
+
+.topBox {
   top: 2%;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
- 
-.leftBox{
+
+.leftBox {
   left: 2%;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
+/*# sourceMappingURL=hand.css.map */
