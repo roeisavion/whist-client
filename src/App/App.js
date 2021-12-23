@@ -30,6 +30,7 @@ const App = () => {
   const [sliceingSuitState, setSliceingSuit] = useState("");
   const [inGame, setInGame] = useState(false);
   const [clientId, setClientId] = useState(false);
+  const [game, setGame] = useState(null);
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -45,6 +46,7 @@ const App = () => {
     if (response.method === "create") {
       gameId = response.gameId;
       playerNum = response.playerNum;
+      setGame(response.games[gameId]);
       setInGame(true);
       alert("Game was created Set successfully " + gameId)
     }
@@ -61,6 +63,7 @@ const App = () => {
       if (response.clientId === clientId) {
         playerNum = response.playerNum;
         nickname = response.nickname;
+        setGame(response.game);
         setInGame(true);
       }
     }
@@ -146,7 +149,7 @@ const App = () => {
   return (
     <div className="App" >
       {/* {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/> */}
-      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame}/>
+      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/>
         : <Game
           client={client}
           clientId={clientId}

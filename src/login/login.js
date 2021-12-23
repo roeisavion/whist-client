@@ -3,11 +3,11 @@ import { useState } from 'react';
 import './button.css'
 import './login.css'
 import { joinGame, createGame, leaveGame } from './loginFunctions';
-import { NicknameInput } from './Nickname'
 import TextField from '@mui/material/TextField'
 import Input from '@mui/material/TextField'
 import { Button } from '@mui/material';
 import _ from 'lodash';
+import {WaitingRoom} from './WatingRoom';
 
 export const Login = (props) => {
     let client = props.client;
@@ -56,6 +56,14 @@ export const Login = (props) => {
             </button>
         <div 
         className='smallContainer'>
+            <Input 
+            id="gameIdInput" 
+            placeholder="Enter gameId" 
+            label="Enter gameId" 
+            error={gameIdError}
+            helperText={gameIdError ? 'Must enter a gameId' : ' '} 
+            onChange={handelGameIdChange} 
+            />
             <button 
             id='joinButton' 
             onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setGameIdError,setFinelNickName)} 
@@ -63,15 +71,8 @@ export const Login = (props) => {
             disabled={props.inGame}>
                 Join Game
                 </button>
-            <Input 
-            id="gameIdInput" 
-            placeholder="Enter gameId" 
-            label="Enter gameId" 
-            error={gameIdError} 
-            helperText={gameIdError ? 'Must enter a gameId' : ' '} 
-            onChange={handelGameIdChange} 
-            />
         </div>
+        {props.game ? <WaitingRoom game={props.game}/>: null }
         <div className="leaveButton">
             <button 
             id='leaveButton' 
