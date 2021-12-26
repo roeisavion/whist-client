@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
-import { Login } from '../login/Login'
+import { Login } from '../login/login'
 import { createGame, joinGame } from '../login/loginFunctions.js'
+import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
@@ -101,70 +102,27 @@ const App = () => {
   };
 
 
-  // const createGame = () => {
-  //   nickname = document.getElementById("nicknameInput").value;
-  //   if (nickname) {
-  //     let payLoad = {
-  //       "method": "create",
-  //       nickname,
-  //       clientId
-  //     }
-  //     client.send(JSON.stringify(payLoad));
-  //   }
-  //   else {
-  //     alert("must send a nickName")
-  //     // nicknameElemnt.setCustomValidity("must send a nickName")
-  //   }
-  // }
-  // const joinGame = () => {
-  //   gameId = document.getElementById("gameIdInput").value;
-  //   nickname = document.getElementById("nicknameInput").value;
-  //   if (!!nickname && !!gameId) {
-  //     let payLoad = {
-  //       "method": "join",
-  //       clientId,
-  //       nickname,
-  //       gameId
-  //     }
-  //     client.send(JSON.stringify(payLoad));
-  //   }
-  //   if (!gameId) {
-  //     alert("must send gameID")
-  //   }
-  //   if (!nickname) {
-  //     alert("must send nickName")
-  //   }
-  // }
-
-  // const leaveGame = () => {
-  //   let payLoad = {
-  //     "method": "leaveGame",
-  //     clientId
-  //   }
-  //   client.send(JSON.stringify(payLoad));
-  // }
-
-
-
   return (
     <div className="App" >
-      {/* {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/> */}
-      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/>
-        : <Game
+      {/* {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/> */}
+        {/* : <Game */}
+        <Game
           client={client}
           clientId={clientId}
-          playerNum={playerNum}
-          cardsMap={cardsMapState}
-          winnedCards={winnedCardsState}
-          turn={turnState}
-          isSuitBetting={isSuitBetting}
-          isNumBetting={isNumBetting}
-          suitBet={suitBetState}
-          numBets={numBetState}
-          sliceingSuit={sliceingSuitState}
-          minBet={minBetState}
-          // betWinner={betWinnerState}
-          scoreMap={scoreMapState}/>}
+          // playerNum={playerNum}
+          playerNum={mock.playerNum}
+          // cardsMap={cardsMapState}
+          cardsMap={mock.cardsMap}
+          // winnedCards={winnedCardsState}
+          winnedCards={mock.winnedCards}
+          turn={mock.turn}
+          isSuitBetting={mock.isSuitBetting}
+          isNumBetting={mock.isNumBetting}
+          suitBet={mock.suitBet}
+          numBets={mock.numBet}
+          sliceingSuit={mock.sliceingSuit}
+          minBet={mock.minBet}
+          scoreMap={mock.scoreMap}/>
     </div>
   );
 }
