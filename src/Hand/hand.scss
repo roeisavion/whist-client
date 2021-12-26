@@ -1,10 +1,3 @@
-
-// :export{
-//     $P2L:
-//     $P3L:
-//     $P4L:
-// } 
-
 @mixin cardsFan($count, $angle) {
     @for $i from 1 through $count {
       img:nth-child(#{$i}) {
@@ -28,16 +21,11 @@
   }
   
   .P2hand, .P3hand, .P4hand {
-    // @for $i from 1 through 13 {
-    //     img:nth-child(#{$i}) {
-    //       transform: rotate(10deg * $i - 65deg);
-    //     }
-    //   }
     @include cardsFan(13, 130deg);
   } 
 
   .P2hand img, .P3hand img, .P4hand img {
-    transform-origin: center 140%;
+    transform-origin: center -140%;
     position:absolute;
   }
   

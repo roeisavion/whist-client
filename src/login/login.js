@@ -8,6 +8,7 @@ import Input from '@mui/material/TextField'
 import { Button } from '@mui/material';
 import _ from 'lodash';
 import {WaitingRoom} from './WatingRoom';
+import { Link } from "react-router-dom";
 
 export const Login = (props) => {
     let client = props.client;

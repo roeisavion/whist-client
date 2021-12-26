@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/Login'
-import { createGame, joinGame } from '../login/loginFunctions.js'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
 // let client;
@@ -42,7 +47,7 @@ const App = () => {
       setClientId(response.clientId);
       console.log("Client id Set successfully " + clientId)
     }
-    // created game
+
     if (response.method === "create") {
       gameId = response.gameId;
       playerNum = response.playerNum;
@@ -90,7 +95,7 @@ const App = () => {
       setNumBets(response.numBets)
       response.finishBetting ? setIsNumBetting(false) : setIsNumBetting(true);
       if (response.minBet) {
-        setminBet([response.minBet,response.betWinner]);
+        setminBet([response.minBet, response.betWinner]);
         setSliceingSuit(response.sliceingSuit);
       }
     }
@@ -101,71 +106,40 @@ const App = () => {
   };
 
 
-  // const createGame = () => {
-  //   nickname = document.getElementById("nicknameInput").value;
-  //   if (nickname) {
-  //     let payLoad = {
-  //       "method": "create",
-  //       nickname,
-  //       clientId
-  //     }
-  //     client.send(JSON.stringify(payLoad));
-  //   }
-  //   else {
-  //     alert("must send a nickName")
-  //     // nicknameElemnt.setCustomValidity("must send a nickName")
-  //   }
-  // }
-  // const joinGame = () => {
-  //   gameId = document.getElementById("gameIdInput").value;
-  //   nickname = document.getElementById("nicknameInput").value;
-  //   if (!!nickname && !!gameId) {
-  //     let payLoad = {
-  //       "method": "join",
-  //       clientId,
-  //       nickname,
-  //       gameId
-  //     }
-  //     client.send(JSON.stringify(payLoad));
-  //   }
-  //   if (!gameId) {
-  //     alert("must send gameID")
-  //   }
-  //   if (!nickname) {
-  //     alert("must send nickName")
-  //   }
-  // }
-
-  // const leaveGame = () => {
-  //   let payLoad = {
-  //     "method": "leaveGame",
-  //     clientId
-  //   }
-  //   client.send(JSON.stringify(payLoad));
-  // }
-
-
-
   return (
-    <div className="App" >
-      {/* {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/> */}
-      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/>
-        : <Game
-          client={client}
-          clientId={clientId}
-          playerNum={playerNum}
-          cardsMap={cardsMapState}
-          winnedCards={winnedCardsState}
-          turn={turnState}
-          isSuitBetting={isSuitBetting}
-          isNumBetting={isNumBetting}
-          suitBet={suitBetState}
-          numBets={numBetState}
-          sliceingSuit={sliceingSuitState}
-          minBet={minBetState}
-          // betWinner={betWinnerState}
-          scoreMap={scoreMapState}/>}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <div className="App" >
+          {/* {isGameStarted === false ? <Login leaveGame={leaveGame} createGame={createGame} joinGame={joinGame} client={client} clientId={clientId} inGame={inGame}/> */}
+          {isGameStarted === false
+            ? <Route path="/login" element={
+              <Login
+                client={client}
+                clientId={clientId}
+                inGame={inGame}
+                game={game} />
+            } />
+            : <Route path={`/game/${gameId}`} element={
+              <Game
+                client={client}
+                clientId={clientId}
+                playerNum={playerNum}
+                cardsMap={cardsMapState}
+                winnedCards={winnedCardsState}
+                turn={turnState}
+                isSuitBetting={isSuitBetting}
+                isNumBetting={isNumBetting}
+                suitBet={suitBetState}
+                numBets={numBetState}
+                sliceingSuit={sliceingSuitState}
+                minBet={minBetState}
+                // betWinner={betWinnerState}
+                scoreMap={scoreMapState} />
+            } />
+          }
+        </div>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
@@ -175,3 +149,9 @@ export default App;
 
 
 
+{/* <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+      </Routes>
+      <App />
+    </BrowserRouter> */}
