@@ -1,18 +1,24 @@
 .card{
-    width: 60px;
-    height: 90px;
+  width: 12vh;
+  height: 18vh;
     padding: 3px;
     display: block;
     position:absolute
   }
   
-
+.myCard{
+  width: 12vh;
+  height: 18vh;
+  padding: 3px;
+  display: block;
+}
 
   .sideCard{
-    width: 70px;
-    height: 45px;
-    padding: 1px;
+    width: 60px;
+    height: 90px;
+    padding: 3px;
     display: block;
+    transform: rotate(90deg)
   }
 
   /* .sideCard{
