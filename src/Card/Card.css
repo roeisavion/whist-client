@@ -1,14 +1,14 @@
 .card{
-  width: 12vh;
-  height: 18vh;
+  width: 60px;
+  height: 90px;
     padding: 3px;
     display: block;
     position:absolute
   }
   
 .myCard{
-  width: 12vh;
-  height: 18vh;
+  width: 60px;
+  height: 90px;
   padding: 3px;
   display: block;
 }

@@ -11,15 +11,10 @@
   display: flex;
 }
 
-.P2hand {
-  flex-direction: column;
+.P2hand, .P4hand {
+  // flex-direction: column;
   justify-content:space-around;
-}
-
-
-.P4hand {
-  flex-direction: column;
-  width: 100%;
+  bottom: 30vh
 }
 
 .P2hand {
@@ -55,17 +50,17 @@
 }
 
 .rightBox, .leftBox{
-  right: 2%;
-  flex-direction: column;
-  width: 30vh;
+  // flex-direction: column;
+  width: 20vh;
   height: 100vh;
 }
  
 .leftBox{
-  left: 2%;
+  left: 0%;
 }
 .rightBox{
-  right: 2%;
+  flex-direction: row-reverse;
+  right: 0%;
 }
 
 

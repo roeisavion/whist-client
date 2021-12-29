@@ -18,8 +18,8 @@ export const mock = {
         ],
         "center": [],
         "P2": 13,
-        "P3": 4,
-        "P4": 9
+        "P3": 13,
+        "P4": 13
     },
     winnedCards: { P1: [], P2: [], P3: [], P4: [] },
     turn: "P1",

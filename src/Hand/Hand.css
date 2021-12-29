@@ -5,21 +5,10 @@
   display: flex;
 }
 
-.P2hand {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+.P2hand, .P4hand {
   -ms-flex-pack: distribute;
       justify-content: space-around;
-}
-
-.P4hand {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 100%;
+  bottom: 30vh;
 }
 
 .P2hand img:nth-child(1) {
@@ -252,20 +241,19 @@
 }
 
 .rightBox, .leftBox {
-  right: 2%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 30vh;
+  width: 20vh;
   height: 100vh;
 }
 
 .leftBox {
-  left: 2%;
+  left: 0%;
 }
 
 .rightBox {
-  right: 2%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  right: 0%;
 }
 /*# sourceMappingURL=hand.css.map */
