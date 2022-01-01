@@ -6,6 +6,14 @@
   }
 }
 
+@mixin cardsOverlap($numOfCards, $distance) {
+  @for $i from 1 through $numOfCards {
+    img:nth-child(#{$i}) {
+      margin-left: ($i *$distance);
+    }
+  }
+}
+
 .P1hand,.P2hand,.P3hand,.P4hand {
   position:relative;
   display: flex;
@@ -17,8 +25,18 @@
   bottom: 30vh
 }
 
+.P1hand {
+  // @include cardsOverlap(13, -50px);
+  & > * {
+    margin-left: -50px
+  } 
+} 
 .P2hand {
-  @include cardsFan(13, 270deg);
+  // @include cardsFan(13, 270deg);
+  & > * {
+    margin-top : -50px;
+    transform: rotate(90deg)
+  } 
 } 
 .P3hand{
   @include cardsFan(13, 180deg);
@@ -28,9 +46,15 @@
 } 
 
 .P2hand img, .P3hand img, .P4hand img {
-  transform-origin: center 140%;
-  position:absolute;
+  // transform-origin: center 140%;
+  // position:absolute;
 }
+
+.P1hand img{
+  position: relative;
+  // padding: -10px;
+}
+
 
 .bottomBox,.rightBox,.topBox,.leftBox{
   position:absolute;
