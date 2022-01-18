@@ -6,9 +6,10 @@
 }
 
 .P2hand, .P4hand {
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  bottom: 30vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .P1hand > * {
@@ -16,142 +17,22 @@
 }
 
 .P2hand > * {
-  margin-top: -50px;
+  margin-bottom: -80px;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
 
-.P3hand img:nth-child(1) {
-  -webkit-transform: rotate(125deg);
-          transform: rotate(125deg);
+.P3hand > * {
+  margin-right: -50px;
 }
 
-.P3hand img:nth-child(2) {
-  -webkit-transform: rotate(135deg);
-          transform: rotate(135deg);
+.P4hand > * {
+  margin-bottom: -80px;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
-.P3hand img:nth-child(3) {
-  -webkit-transform: rotate(145deg);
-          transform: rotate(145deg);
-}
-
-.P3hand img:nth-child(4) {
-  -webkit-transform: rotate(155deg);
-          transform: rotate(155deg);
-}
-
-.P3hand img:nth-child(5) {
-  -webkit-transform: rotate(165deg);
-          transform: rotate(165deg);
-}
-
-.P3hand img:nth-child(6) {
-  -webkit-transform: rotate(175deg);
-          transform: rotate(175deg);
-}
-
-.P3hand img:nth-child(7) {
-  -webkit-transform: rotate(185deg);
-          transform: rotate(185deg);
-}
-
-.P3hand img:nth-child(8) {
-  -webkit-transform: rotate(195deg);
-          transform: rotate(195deg);
-}
-
-.P3hand img:nth-child(9) {
-  -webkit-transform: rotate(205deg);
-          transform: rotate(205deg);
-}
-
-.P3hand img:nth-child(10) {
-  -webkit-transform: rotate(215deg);
-          transform: rotate(215deg);
-}
-
-.P3hand img:nth-child(11) {
-  -webkit-transform: rotate(225deg);
-          transform: rotate(225deg);
-}
-
-.P3hand img:nth-child(12) {
-  -webkit-transform: rotate(235deg);
-          transform: rotate(235deg);
-}
-
-.P3hand img:nth-child(13) {
-  -webkit-transform: rotate(245deg);
-          transform: rotate(245deg);
-}
-
-.P4hand img:nth-child(1) {
-  -webkit-transform: rotate(35deg);
-          transform: rotate(35deg);
-}
-
-.P4hand img:nth-child(2) {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-.P4hand img:nth-child(3) {
-  -webkit-transform: rotate(55deg);
-          transform: rotate(55deg);
-}
-
-.P4hand img:nth-child(4) {
-  -webkit-transform: rotate(65deg);
-          transform: rotate(65deg);
-}
-
-.P4hand img:nth-child(5) {
-  -webkit-transform: rotate(75deg);
-          transform: rotate(75deg);
-}
-
-.P4hand img:nth-child(6) {
-  -webkit-transform: rotate(85deg);
-          transform: rotate(85deg);
-}
-
-.P4hand img:nth-child(7) {
-  -webkit-transform: rotate(95deg);
-          transform: rotate(95deg);
-}
-
-.P4hand img:nth-child(8) {
-  -webkit-transform: rotate(105deg);
-          transform: rotate(105deg);
-}
-
-.P4hand img:nth-child(9) {
-  -webkit-transform: rotate(115deg);
-          transform: rotate(115deg);
-}
-
-.P4hand img:nth-child(10) {
-  -webkit-transform: rotate(125deg);
-          transform: rotate(125deg);
-}
-
-.P4hand img:nth-child(11) {
-  -webkit-transform: rotate(135deg);
-          transform: rotate(135deg);
-}
-
-.P4hand img:nth-child(12) {
-  -webkit-transform: rotate(145deg);
-          transform: rotate(145deg);
-}
-
-.P4hand img:nth-child(13) {
-  -webkit-transform: rotate(155deg);
-          transform: rotate(155deg);
-}
-
-.P1hand img {
+.P1hand img, .P2hand img, .P3hand img, .P4hand img {
   position: relative;
 }
 
@@ -176,11 +57,11 @@
 }
 
 .topBox {
-  top: -27%;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  top: 2%;
 }
 
 .rightBox, .leftBox {
@@ -189,7 +70,7 @@
 }
 
 .leftBox {
-  left: 0%;
+  left: 2%;
 }
 
 .rightBox {
@@ -197,6 +78,6 @@
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
-  right: 0%;
+  right: 2%;
 }
 /*# sourceMappingURL=hand.css.map */

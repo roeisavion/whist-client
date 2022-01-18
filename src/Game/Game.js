@@ -173,19 +173,19 @@ export const Game = (props) => {
         <div className="rightBox">
           <CompetitorsHand numOfCards={rightHand} className="P2hand" cardClassName='card' />
           {rightWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='card' /> : null}
-          {/* <div>
+          <div>
             {props.suitBet ? <div>currnt bet:{rightBet}</div> : null}
             {isRightTurn ? <div>current turn</div> : null}
-          </div> */}
+          </div>
         </div>
 
         <div className="leftBox">
           <CompetitorsHand numOfCards={leftHand} className="P4hand" cardClassName='card' />
           {leftWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='card' /> : null}
-          {/* <div>
+          <div>
             {props.suitBet ? <div>currnt bet:{leftBet}</div> : null}
             {isLeftTurn ? <div>current turn</div> : null}
-          </div> */}
+          </div>
         </div>
         
       {/* </div> */}

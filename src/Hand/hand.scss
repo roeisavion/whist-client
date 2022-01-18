@@ -1,11 +1,3 @@
-@mixin cardsFan($numOfCards, $angle) {
-  @for $i from 1 through $numOfCards {
-    img:nth-child(#{$i}) {
-      transform: rotate(10*$i - 10*$numOfCards/2 + $angle);
-    }
-  }
-}
-
 @mixin cardsOverlap($numOfCards, $distance) {
   @for $i from 1 through $numOfCards {
     img:nth-child(#{$i}) {
@@ -20,39 +12,34 @@
 }
 
 .P2hand, .P4hand {
-  // flex-direction: column;
-  justify-content:space-around;
-  bottom: 30vh
+  flex-direction: column;
 }
 
 .P1hand {
-  // @include cardsOverlap(13, -50px);
   & > * {
     margin-left: -50px
   } 
 } 
 .P2hand {
-  // @include cardsFan(13, 270deg);
   & > * {
-    margin-top : -50px;
+    margin-bottom : -80px; 
     transform: rotate(90deg)
   } 
 } 
 .P3hand{
-  @include cardsFan(13, 180deg);
+  & > * {
+    margin-right : -50px;
+  } 
 } 
 .P4hand {
-  @include cardsFan(13, 90deg);
+  & > * {
+    margin-bottom : -80px;
+    transform: rotate(90deg)
+  } 
 } 
 
-.P2hand img, .P3hand img, .P4hand img {
-  // transform-origin: center 140%;
-  // position:absolute;
-}
-
-.P1hand img{
+.P1hand img,.P2hand img,.P3hand img,.P4hand img{
   position: relative;
-  // padding: -10px;
 }
 
 
@@ -69,8 +56,8 @@
 }
 
 .topBox{
-  top: -27%;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  top: 2%
 }
 
 .rightBox, .leftBox{
@@ -80,11 +67,11 @@
 }
  
 .leftBox{
-  left: 0%;
+  left: 2%;
 }
 .rightBox{
   flex-direction: row-reverse;
-  right: 0%;
+  right: 2%;
 }
 
 
