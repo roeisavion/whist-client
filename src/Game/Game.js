@@ -155,11 +155,11 @@ export const Game = (props) => {
       <div className="bottomBox">
         {isMyTurn ? <div>current turn</div> : null}
         {props.suitBet ? <div>currnt bet:{myBet}</div> : null}
+        {myWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={myWinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
         <button onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting} />
-        {myWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={myWinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
       </div>
 
       <div className="topBox">

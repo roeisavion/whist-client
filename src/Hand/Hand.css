@@ -16,6 +16,10 @@
   margin-left: -50px;
 }
 
+.P2hand {
+  margin-left: 30px;
+}
+
 .P2hand > * {
   margin-bottom: -80px;
   -webkit-transform: rotate(90deg);
@@ -24,6 +28,10 @@
 
 .P3hand > * {
   margin-right: -50px;
+}
+
+.P4hand {
+  margin-right: 30px;
 }
 
 .P4hand > * {
@@ -65,7 +73,6 @@
 }
 
 .rightBox, .leftBox {
-  width: 20vh;
   height: 100vh;
 }
 
