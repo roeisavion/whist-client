@@ -15,11 +15,12 @@ export const WaitingRoom = (props) => {
     const data = createData();
     console.log("aaa")
     return <div className="waitingRoom">
-        <h3>players in room:</h3>
+        <h3>players in room :</h3>
         <table>
             <tbody>
                 {data}
             </tbody>
         </table>
+        <p>GameID: {props.game.id}</p>
     </div>
 }

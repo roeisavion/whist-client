@@ -35,7 +35,7 @@ export const Login = (props) => {
 
 
     return <div className="login" >
-        <h1> {"Welcome!" + finelNickName}</h1>
+        <h1> {"Welcome " + finelNickName}</h1>
         <div className="loginBox">
             <div>
                 <Input 
@@ -43,7 +43,9 @@ export const Login = (props) => {
                 error={nicknameError} 
                 helperText={nicknameError ? 'Must enter a nickname' : ' '} 
                 label="Choose a nickname" 
-                onChange={handelNicknameChange} 
+                onChange={handelNicknameChange}
+                onPaste={handelNicknameChange}
+                onCut={handelNicknameChange} 
                 />
             </div>
         </div>
@@ -62,7 +64,9 @@ export const Login = (props) => {
             label="Enter gameId" 
             error={gameIdError}
             helperText={gameIdError ? 'Must enter a gameId' : ' '} 
-            onChange={handelGameIdChange} 
+            onChange={handelGameIdChange}
+            onPaste={handelGameIdChange}
+            onCut={handelGameIdChange} 
             />
             <button 
             id='joinButton' 

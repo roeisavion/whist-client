@@ -107,11 +107,11 @@ export const Game = (props) => {
       i === 5 ? i = 1 : i = i;
     })
 
-    // if (props.turn === props.playerNum) {
-    //   setMyTurn(true)
-    // } else {
-    //   setMyTurn(false)
-    // }
+    if (props.turn === props.playerNum) {
+      setMyTurn(true)
+    } else {
+      setMyTurn(false)
+    }
 
     Object.keys(setTurnPointer).forEach(sp => {
       setTurnPointer[sp](false);

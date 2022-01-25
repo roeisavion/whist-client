@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/login'
-import { createGame, joinGame } from '../login/loginFunctions.js'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -61,10 +60,10 @@ const App = () => {
 
     if (response.method === "playerJoined") {
       gameId = response.game.id;
+      setGame(response.game);
       if (response.clientId === clientId) {
         playerNum = response.playerNum;
         nickname = response.nickname;
-        setGame(response.game);
         setInGame(true);
       }
     }
@@ -114,14 +113,14 @@ const App = () => {
           // cardsMap={mock.cardsMap}
           winnedCards={winnedCardsState}
           // winnedCards
-          turn
-          isSuitBetting
-          isNumBetting
-          suitBet
-          numBets
-          sliceingSuit
-          minBet
-          scoreMap/>}
+          turn={turnState}
+          isSuitBetting= {isSuitBetting}
+          isNumBetting = {isNumBetting}
+          suitBet={suitBetState}
+          numBets={numBetState}
+          sliceingSuit = {sliceingSuitState}
+          minBet = {minBetState}
+          scoreMap={scoreMapState}/>}
     </div>
   );
 }
