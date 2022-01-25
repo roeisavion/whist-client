@@ -104,25 +104,24 @@ const App = () => {
 
   return (
     <div className="App" >
-      {/* {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/> */}
-        {/* : <Game */}
-        <Game
+      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/>
+         : <Game
           client={client}
           clientId={clientId}
-          // playerNum={playerNum}
-          playerNum={mock.playerNum}
-          // cardsMap={cardsMapState}
-          cardsMap={mock.cardsMap}
-          // winnedCards={winnedCardsState}
-          winnedCards={mock.winnedCards}
-          turn={mock.turn}
-          isSuitBetting={mock.isSuitBetting}
-          isNumBetting={mock.isNumBetting}
-          suitBet={mock.suitBet}
-          numBets={mock.numBet}
-          sliceingSuit={mock.sliceingSuit}
-          minBet={mock.minBet}
-          scoreMap={mock.scoreMap}/>
+          playerNum={playerNum}
+          // playerNum={mock.playerNum}
+          cardsMap={cardsMapState}
+          // cardsMap={mock.cardsMap}
+          winnedCards={winnedCardsState}
+          // winnedCards
+          turn
+          isSuitBetting
+          isNumBetting
+          suitBet
+          numBets
+          sliceingSuit
+          minBet
+          scoreMap/>}
     </div>
   );
 }
