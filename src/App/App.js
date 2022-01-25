@@ -6,15 +6,15 @@ import { createGame, joinGame } from '../login/loginFunctions.js'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
-const client = new W3CWebSocket('ws://127.0.0.1:9091');
-// let client;
-// try {
-//   client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
-// } catch (error) {
-//   setTimeout(() => {
-//     client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
-//   }, 1500);
-// }
+// const client = new W3CWebSocket('ws://127.0.0.1:9091');
+let client;
+try {
+  client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+} catch (error) {
+  setTimeout(() => {
+    client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+  }, 1500);
+}
 let response, gameId, playerNum, nickname;
 const App = () => {
 
