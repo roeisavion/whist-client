@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Bets.css'
 import { sendSuitBet, sendPass } from './suitBetsFunctions.js'
+import './smallButton.css'
+
 
 
 export const SuitBets = (props) => {
@@ -19,15 +21,15 @@ export const SuitBets = (props) => {
         <div>
         <input type="number" placeholder="write your bet" id="betNum" name="betNum" min="3" max="13" onChange={handelNumChange} />
             <select id="suit" onChange={handelSuitChange}>
-                <option value="H">Heart</option>
-                <option value="C">Club</option>
-                <option value="D">Diamond</option>
-                <option value="S">Spade</option>
+                <option value="H">Heart ❤</option>
+                <option value="C">Club ♣</option>
+                <option value="D">Diamond ♦</option>
+                <option value="S">Spade ♠</option>
             </select>
-            <button onClick={() => sendSuitBet(client,clientId,suitBetNum,betSuit,props.suitBet)} disabled={!props.isMyTurn}>submit</button>
+            <button className='smallButton' onClick={() => sendSuitBet(client,clientId,suitBetNum,betSuit,props.suitBet)} disabled={!props.isMyTurn}>submit</button>
         </div>
         <div>
-            <button onClick={() => sendPass(client,clientId)} disabled={!props.isMyTurn}>Pass</button>
+            <button className='smallButton' onClick={() => sendPass(client,clientId)} disabled={!props.isMyTurn}>Pass</button>
         </div>
     </div>
 }

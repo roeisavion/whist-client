@@ -12,10 +12,6 @@
           flex-direction: column;
 }
 
-.P1hand > * {
-  margin-left: -50px;
-}
-
 .P2hand {
   margin-left: 30px;
 }
