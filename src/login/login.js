@@ -7,7 +7,8 @@ import TextField from '@mui/material/TextField'
 import Input from '@mui/material/TextField'
 import { Button } from '@mui/material';
 import _ from 'lodash';
-import {WaitingRoom} from './WatingRoom';
+import { WaitingRoom } from './WatingRoom';
+import { GameCreatedModal } from '../Modals/GameCreatedModal';
 
 export const Login = (props) => {
     let client = props.client;
@@ -15,7 +16,7 @@ export const Login = (props) => {
     const [gameId, setGameId] = useState("")
     const [nickname, setNickname] = useState(null)
     const [finelNickName, setFinelNickName] = useState("")
-    
+
     const [gameIdError, setGameIdError] = useState(false)
     const handelGameIdChange = (event) => {
         setGameId(event.target.value)
@@ -35,56 +36,62 @@ export const Login = (props) => {
 
 
     return <div className="login" >
-        <h1> {"Welcome " + finelNickName}</h1>
         <div className="loginBox">
+            {props.isGameCreatedModal ? <GameCreatedModal 
+            setisGameCreatedModal={props.setisGameCreatedModal} 
+            gameId={props.gameId} /> : null}
+            <h1> {"Welcome " + finelNickName}</h1>
             <div>
-                <Input 
-                placeholder="Choose a nickname" 
-                error={nicknameError} 
-                helperText={nicknameError ? 'Must enter a nickname' : ' '} 
-                label="Choose a nickname" 
-                onChange={handelNicknameChange}
-                onPaste={handelNicknameChange}
-                onCut={handelNicknameChange} 
+                <Input
+                    placeholder="Choose a nickname"
+                    error={nicknameError}
+                    helperText={nicknameError ? 'Must enter a nickname' : ' '}
+                    label="Choose a nickname"
+                    onChange={handelNicknameChange}
+                    onPaste={handelNicknameChange}
+                    onCut={handelNicknameChange}
+                    onLoad={handelNicknameChange}
+
                 />
             </div>
         </div>
-        <button 
-        id='createButton' 
-        onClick={() => createGame(client, clientId, nickname,setNicknameError,setFinelNickName)} 
-        className='button' 
-        disabled={props.inGame}>
-            Create Game
-            </button>
-        <div 
-        className='smallContainer'>
-            <Input 
-            id="gameIdInput" 
-            placeholder="Enter gameId" 
-            label="Enter gameId" 
-            error={gameIdError}
-            helperText={gameIdError ? 'Must enter a gameId' : ' '} 
-            onChange={handelGameIdChange}
-            onPaste={handelGameIdChange}
-            onCut={handelGameIdChange} 
-            />
-            <button 
-            id='joinButton' 
-            onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setGameIdError,setFinelNickName)} 
-            className='button' 
+        <button
+            id='createButton'
+            onClick={() => createGame(client, clientId, nickname, setNicknameError, setFinelNickName)}
+            className='button'
             disabled={props.inGame}>
+            Create Game
+        </button>
+        <div
+            className='smallContainer'>
+            <Input
+                id="gameIdInput"
+                placeholder="Enter gameId"
+                label="Enter gameId"
+                error={gameIdError}
+                helperText={gameIdError ? 'Must enter a gameId' : ' '}
+                onChange={handelGameIdChange}
+                onPaste={handelGameIdChange}
+                onCut={handelGameIdChange}
+                onLoad={handelGameIdChange}
+            />
+            <button
+                id='joinButton'
+                onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setGameIdError, setFinelNickName)}
+                className='button'
+                disabled={props.inGame}>
                 Join Game
-                </button>
+            </button>
         </div>
-        {props.game ? <WaitingRoom game={props.game}/>: null }
+        {props.game ? <WaitingRoom game={props.game} /> : null}
         <div className="leaveButton">
-            <button 
-            id='leaveButton' 
-            onClick={() => leaveGame(client, clientId)} 
-            className='button' 
-            disabled={!props.inGame}>
+            <button
+                id='leaveButton'
+                onClick={() => leaveGame(client, clientId)}
+                className='button'
+                disabled={!props.inGame}>
                 Leave Game
-                </button>
+            </button>
         </div>
     </div>
 }

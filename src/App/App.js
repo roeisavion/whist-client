@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/login'
+import { GameCreatedModal } from '../Modals/GameCreatedModal'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -31,6 +32,7 @@ const App = () => {
   const [inGame, setInGame] = useState(false);
   const [clientId, setClientId] = useState(false);
   const [game, setGame] = useState(null);
+  const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -48,7 +50,8 @@ const App = () => {
       playerNum = response.playerNum;
       setGame(response.games[gameId]);
       setInGame(true);
-      alert("Game was created Set successfully " + gameId)
+      // alert("Game was created Set successfully " + gameId)
+      setisGameCreatedModal(true)      
     }
 
     if (response.method === "leftGame") {
@@ -103,7 +106,14 @@ const App = () => {
 
   return (
     <div className="App" >
-      {isGameStarted === false ? <Login client={client} clientId={clientId} inGame={inGame} game={game}/>
+      {isGameStarted === false ? <Login 
+      client={client} 
+      clientId={clientId} 
+      inGame={inGame} 
+      game={game}
+      gameId={gameId}
+      isGameCreatedModal={isGameCreatedModal}
+      setisGameCreatedModal={setisGameCreatedModal}/>
          : <Game
           client={client}
           clientId={clientId}
