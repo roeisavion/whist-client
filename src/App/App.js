@@ -5,6 +5,8 @@ import { Login } from '../login/login'
 import { GameCreatedModal } from '../Modals/GameCreatedModal'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { WaitingRoom } from '../login/WatingRoom'
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
 // let client;
@@ -37,8 +39,10 @@ const App = () => {
 
   const showLeftGameModal = () => {
     setIsLeftGameModal(true);
-    setTimeout( ()=> setIsLeftGameModal(false),2000)
+    setTimeout(() => setIsLeftGameModal(false), 2000)
   }
+
+  // let navigate = useNavigate();
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -56,8 +60,9 @@ const App = () => {
       playerNum = response.playerNum;
       setGame(response.games[gameId]);
       setInGame(true);
+      // navigate("/WaitingRoom");
       // alert("Game was created Set successfully " + gameId)
-      setisGameCreatedModal(true)      
+      setisGameCreatedModal(true)
     }
 
     if (response.method === "leftGame") {
@@ -74,6 +79,7 @@ const App = () => {
         playerNum = response.playerNum;
         nickname = response.nickname;
         setInGame(true);
+        // navigate("/WaitingRoom");
       }
     }
     if (response.method === "updateCards") {
@@ -88,6 +94,7 @@ const App = () => {
       nickname = response.nickname;
       setIsSuitBetting(true);
       setsuitBet(response.suitBet)
+      // navigate("/Game");
     }
     if (response.method === "error") {
       alert(response.massage)
@@ -99,7 +106,7 @@ const App = () => {
       setNumBets(response.numBets)
       response.finishBetting ? setIsNumBetting(false) : setIsNumBetting(true);
       if (response.minBet) {
-        setminBet([response.minBet,response.betWinner]);
+        setminBet([response.minBet, response.betWinner]);
         setSliceingSuit(response.sliceingSuit);
       }
     }
@@ -111,35 +118,40 @@ const App = () => {
 
 
   return (
-    <div className="App" >
-      {isGameStarted === false ? <Login 
-      client={client} 
-      clientId={clientId} 
-      inGame={inGame} 
-      game={game}
-      gameId={gameId}
-      isGameCreatedModal={isGameCreatedModal}
-      setisGameCreatedModal={setisGameCreatedModal}
-      isLeftGameModal={isLeftGameModal}
-      setIsLeftGameModal={setIsLeftGameModal}/>
-         : <Game
-          client={client}
-          clientId={clientId}
-          playerNum={playerNum}
-          // playerNum={mock.playerNum}
-          cardsMap={cardsMapState}
-          // cardsMap={mock.cardsMap}
-          winnedCards={winnedCardsState}
-          // winnedCards
-          turn={turnState}
-          isSuitBetting= {isSuitBetting}
-          isNumBetting = {isNumBetting}
-          suitBet={suitBetState}
-          numBets={numBetState}
-          sliceingSuit = {sliceingSuitState}
-          minBet = {minBetState}
-          scoreMap={scoreMapState}/>}
-    </div>
+      <div className="App" >
+        <Routes>
+          <Route path="/" element={<Login
+            client={client}
+            clientId={clientId}
+            inGame={inGame}
+            game={game}
+            gameId={gameId}
+            isGameCreatedModal={isGameCreatedModal}
+            setisGameCreatedModal={setisGameCreatedModal}
+            isLeftGameModal={isLeftGameModal}
+            setIsLeftGameModal={setIsLeftGameModal} />}/>
+              {/* <Route path="/waitingRoom" element={<WaitingRoom game={props.game} />}/> */}
+              <Route path="/waitingRoom" element={<WaitingRoom />}/>
+            <Route path="/Game" element={<Game
+                client={client}
+                clientId={clientId}
+                playerNum={playerNum}
+                // playerNum={mock.playerNum}
+                cardsMap={cardsMapState}
+                // cardsMap={mock.cardsMap}
+                winnedCards={winnedCardsState}
+                // winnedCards
+                turn={turnState}
+                isSuitBetting={isSuitBetting}
+                isNumBetting={isNumBetting}
+                suitBet={suitBetState}
+                numBets={numBetState}
+                sliceingSuit={sliceingSuitState}
+                minBet={minBetState}
+                scoreMap={scoreMapState} />
+            } />
+        </Routes>
+      </div>
   );
 }
 

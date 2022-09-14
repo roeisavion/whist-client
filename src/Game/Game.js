@@ -12,6 +12,7 @@ import { getSuit } from '../helpers/helpersFunctions';
 import { SuitBets } from '../Bets/SuitBets';
 import { NumBets } from '../Bets/NumBets';
 import { keepSorted, handelSort } from '../Hand/handFunctions'
+import {useParams} from 'react-router-dom'
 
 let isSuitBetting, isNumBetting, rightBet, topBet, leftBet;
 export const Game = (props) => {
@@ -35,6 +36,7 @@ export const Game = (props) => {
   const [isLeftTurn, setLeftTurn] = useState(false);
 
   let myBet = "haven't betted yet"
+  let { gameId } = useParams();
 
   if (props.isSuitBetting) {
     if (props.suitBet[props.playerNum]) {
