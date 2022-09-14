@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './button.css'
 import './login.css'
@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 import _ from 'lodash';
 import { WaitingRoom } from './WatingRoom';
 import { GameCreatedModal } from '../Modals/GameCreatedModal';
+import { LeftGameModal } from '../Modals/LeftGameModal';
 
 export const Login = (props) => {
     let client = props.client;
@@ -24,10 +25,14 @@ export const Login = (props) => {
     }
 
     const [nicknameError, setNicknameError] = useState(false)
+    
     const handelNicknameChange = (event) => {
         setNickname(event.target.value)
         setNicknameError(_.isEmpty(nickname) ? true : false)
-    }
+    } // check on next render
+    
+    useEffect( () =>{setNicknameError(_.isEmpty(nickname) ? true : false)}
+    ,[nickname])
 
     const handelNicknameSubmit = () => {
         setFinelNickName(nickname);
@@ -37,9 +42,12 @@ export const Login = (props) => {
 
     return <div className="login" >
         <div className="loginBox">
-            {props.isGameCreatedModal ? <GameCreatedModal 
-            setisGameCreatedModal={props.setisGameCreatedModal} 
-            gameId={props.gameId} /> : null}
+            {props.isGameCreatedModal ? <GameCreatedModal
+                setisGameCreatedModal={props.setisGameCreatedModal}
+                gameId={props.gameId} /> : null}
+            {props.isLeftGameModal ? <LeftGameModal
+                setIsLeftGameModal={props.setIsLeftGameModal}
+                nickname={nickname} /> : null}
             <h1> {"Welcome " + finelNickName}</h1>
             <div>
                 <Input
@@ -47,7 +55,11 @@ export const Login = (props) => {
                     error={nicknameError}
                     helperText={nicknameError ? 'Must enter a nickname' : ' '}
                     label="Choose a nickname"
-                    onChange={handelNicknameChange}
+                    onChange={(event)=> {
+                        event.persist()
+                        console.log(event)
+                        handelNicknameChange(event)
+                    }}
                     onPaste={handelNicknameChange}
                     onCut={handelNicknameChange}
                     onLoad={handelNicknameChange}

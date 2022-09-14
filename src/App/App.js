@@ -6,15 +6,15 @@ import { GameCreatedModal } from '../Modals/GameCreatedModal'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
-// const client = new W3CWebSocket('ws://127.0.0.1:9091');
-let client;
-try {
-  client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
-} catch (error) {
-  setTimeout(() => {
-    client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
-  }, 1500);
-}
+const client = new W3CWebSocket('ws://127.0.0.1:9091');
+// let client;
+// try {
+//   client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+// } catch (error) {
+//   setTimeout(() => {
+//     client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
+//   }, 1500);
+// }
 let response, gameId, playerNum, nickname;
 const App = () => {
 
@@ -33,6 +33,12 @@ const App = () => {
   const [clientId, setClientId] = useState(false);
   const [game, setGame] = useState(null);
   const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
+  const [isLeftGameModal, setIsLeftGameModal] = useState(false);
+
+  const showLeftGameModal = () => {
+    setIsLeftGameModal(true);
+    setTimeout( ()=> setIsLeftGameModal(false),2000)
+  }
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -58,7 +64,7 @@ const App = () => {
       if (response.clientId === clientId) {
         setInGame(false);
       }
-      alert(response.nickname + " has left the game")
+      showLeftGameModal()
     }
 
     if (response.method === "playerJoined") {
@@ -113,7 +119,9 @@ const App = () => {
       game={game}
       gameId={gameId}
       isGameCreatedModal={isGameCreatedModal}
-      setisGameCreatedModal={setisGameCreatedModal}/>
+      setisGameCreatedModal={setisGameCreatedModal}
+      isLeftGameModal={isLeftGameModal}
+      setIsLeftGameModal={setIsLeftGameModal}/>
          : <Game
           client={client}
           clientId={clientId}

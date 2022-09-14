@@ -3,8 +3,7 @@
 .modalBackground {
     width: 100vw;
     height: 100vh;
-    /* background-color: rgba(200, 200, 200); */
-    background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(61, 89, 252));
+    background-color: rgba(200, 200, 200);
     position: fixed;
     display: flex;
     justify-content: center;
@@ -12,9 +11,9 @@
     z-index: 1;
   }
   
-  .modalContainer {
-    width: 500px;
-    height: 500px;
+  .smallModalContainer {
+    width: 200px;
+    height: 150px;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -23,6 +22,8 @@
     padding: 25px;
     position: fixed;
     z-index: 2;
+    left: 5%;
+    bottom: 5%;
   }
   
   .modalContainer .title {
