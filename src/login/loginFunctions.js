@@ -1,29 +1,6 @@
-// export const createGame = (client,clientId) => {
-//     let payLoad = {
-//       "method": "create",
-//       "clientId": clientId
-//     }
-//     client.send(JSON.stringify(payLoad));
-//   }
-// export const joinGame = (client,clientId) => {
-//     let gameId = document.getElementById("gameIdInput").value;
-//     let payLoad = {
-//       "method": "join",
-//       "clientId": clientId,
-//       "gameId": gameId
-//     }
-//     client.send(JSON.stringify(payLoad));
-//   }
-
-//   export const leaveGame = (client,clientId) => {
-//     let payLoad = {
-//       "method": "leaveGame",
-//       "clientId": clientId
-//     }
-//     client.send(JSON.stringify(payLoad));
-//   }
-
 import _ from 'lodash';
+import { useNavigate } from "react-router-dom";
+
 
 export const createGame = (client, clientId, nickname, setNicknameError,setFinelNickName) => {
   if (nickname) {
@@ -42,8 +19,6 @@ export const createGame = (client, clientId, nickname, setNicknameError,setFinel
   }
 }
 export const joinGame = (client, clientId, gameId, nickname, setNicknameError, setGameIdError,setFinelNickName) => {
-  // gameId = document.getElementById("gameIdInput").value;
-  // nickname = document.getElementById("nicknameInput").value;
   if (!!nickname && !!gameId) {
     let payLoad = {
       "method": "join",
@@ -64,10 +39,11 @@ export const joinGame = (client, clientId, gameId, nickname, setNicknameError, s
   }
 }
 
-export const leaveGame = (client, clientId) => {
+export const leaveGame = (client, clientId, navigate) => {
   let payLoad = {
     "method": "leaveGame",
     clientId
   }
   client.send(JSON.stringify(payLoad));
+  navigate('/')
 }

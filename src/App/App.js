@@ -6,8 +6,8 @@ import { GameCreatedModal } from '../Modals/GameCreatedModal'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "react-router-dom";
-import { WaitingRoom } from '../login/WatingRoom'
-import { WaitingRoomPage } from '../pages/WatingRoomPage';
+// import { WaitingRoom } from '../login/WatingRoom'
+import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
 // let client;
@@ -119,40 +119,44 @@ const App = () => {
 
 
   return (
-      <div className="App" >
-        <Routes>
-          <Route path="/" element={<Login
-            client={client}
-            clientId={clientId}
-            inGame={inGame}
-            game={game}
-            gameId={gameId}
-            isGameCreatedModal={isGameCreatedModal}
-            setisGameCreatedModal={setisGameCreatedModal}
-            isLeftGameModal={isLeftGameModal}
-            setIsLeftGameModal={setIsLeftGameModal} />}/>
-              <Route path="/:gameId/waitingRoom" element={<WaitingRoomPage game={game} />}/>
-              {/* <Route path="/:gameId/waitingRoom" element={<WaitingRoom />}/> */}
-            <Route path="/:gameId/game" element={<Game
-                client={client}
-                clientId={clientId}
-                playerNum={playerNum}
-                // playerNum={mock.playerNum}
-                cardsMap={cardsMapState}
-                // cardsMap={mock.cardsMap}
-                winnedCards={winnedCardsState}
-                // winnedCards
-                turn={turnState}
-                isSuitBetting={isSuitBetting}
-                isNumBetting={isNumBetting}
-                suitBet={suitBetState}
-                numBets={numBetState}
-                sliceingSuit={sliceingSuitState}
-                minBet={minBetState}
-                scoreMap={scoreMapState} />
-            } />
-        </Routes>
-      </div>
+    <div className="App" >
+      <Routes>
+        <Route path="/" element={<Login
+          client={client}
+          clientId={clientId}
+          inGame={inGame}
+          game={game}
+          gameId={gameId}
+          isGameCreatedModal={isGameCreatedModal}
+          setisGameCreatedModal={setisGameCreatedModal}
+        />} />
+        <Route path="/:gameId/waitingRoom" element={<WaitingRoomPage
+          game={game}
+          client={client}
+          clientId={clientId}
+          nickname={nickname}
+          isLeftGameModal={isLeftGameModal}
+          setIsLeftGameModal={setIsLeftGameModal} />} />
+        <Route path="/:gameId/game" element={<Game
+          client={client}
+          clientId={clientId}
+          playerNum={playerNum}
+          // playerNum={mock.playerNum}
+          cardsMap={cardsMapState}
+          // cardsMap={mock.cardsMap}
+          winnedCards={winnedCardsState}
+          // winnedCards
+          turn={turnState}
+          isSuitBetting={isSuitBetting}
+          isNumBetting={isNumBetting}
+          suitBet={suitBetState}
+          numBets={numBetState}
+          sliceingSuit={sliceingSuitState}
+          minBet={minBetState}
+          scoreMap={scoreMapState} />
+        } />
+      </Routes>
+    </div>
   );
 }
 

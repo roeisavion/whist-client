@@ -1,10 +1,7 @@
-import '../login/waitingRoom.css'
-import {useParams} from 'react-router-dom'
+import './WaitingRoom.css'
 
-
-export const WaitingRoomPage = (props) => {
+export const WaitingRoom = (props) => {
     const clients = props.game.clients;
-    let { gameId } = useParams();
     const createData = () =>{
         return Object.values(clients).map(c => {
             const {playerNum,nickname} = c

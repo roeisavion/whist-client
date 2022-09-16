@@ -7,9 +7,8 @@ import TextField from '@mui/material/TextField'
 import Input from '@mui/material/TextField'
 import { Button } from '@mui/material';
 import _ from 'lodash';
-import { WaitingRoom } from './WatingRoom';
+// import { WaitingRoom } from './WatingRoom';
 import { GameCreatedModal } from '../Modals/GameCreatedModal';
-import { LeftGameModal } from '../Modals/LeftGameModal';
 
 export const Login = (props) => {
     let client = props.client;
@@ -42,12 +41,12 @@ export const Login = (props) => {
 
     return <div className="login" >
         <div className="loginBox">
-            {props.isGameCreatedModal ? <GameCreatedModal
+            {/* {props.isGameCreatedModal ? <GameCreatedModal
                 setisGameCreatedModal={props.setisGameCreatedModal}
-                gameId={props.gameId} /> : null}
-            {props.isLeftGameModal ? <LeftGameModal
+                gameId={props.gameId} /> : null} */}
+            {/* {props.isLeftGameModal ? <LeftGameModal
                 setIsLeftGameModal={props.setIsLeftGameModal}
-                nickname={nickname} /> : null}
+                nickname={nickname} /> : null} */}
             <h1> {"Welcome " + finelNickName}</h1>
             <div>
                 <Input
@@ -95,8 +94,8 @@ export const Login = (props) => {
                 Join Game
             </button>
         </div>
-        {props.game ? <WaitingRoom game={props.game} /> : null}
-        <div className="leaveButton">
+        {/* {props.game ? <WaitingRoom game={props.game} /> : null} */}
+        {/* <div className="leaveButton">
             <button
                 id='leaveButton'
                 onClick={() => leaveGame(client, clientId)}
@@ -104,7 +103,7 @@ export const Login = (props) => {
                 disabled={!props.inGame}>
                 Leave Game
             </button>
-        </div>
+        </div> */}
     </div>
 }
 
