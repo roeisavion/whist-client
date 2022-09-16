@@ -7,6 +7,7 @@ import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { WaitingRoom } from '../login/WatingRoom'
+import { WaitingRoomPage } from '../pages/WatingRoomPage';
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
 // let client;
@@ -42,7 +43,7 @@ const App = () => {
     setTimeout(() => setIsLeftGameModal(false), 2000)
   }
 
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   client.onopen = () => {
     console.log('WebSocket Client Connected');
@@ -60,7 +61,7 @@ const App = () => {
       playerNum = response.playerNum;
       setGame(response.games[gameId]);
       setInGame(true);
-      // navigate("/WaitingRoom");
+      navigate(`/${gameId}/waitingRoom`);
       // alert("Game was created Set successfully " + gameId)
       setisGameCreatedModal(true)
     }
@@ -79,7 +80,7 @@ const App = () => {
         playerNum = response.playerNum;
         nickname = response.nickname;
         setInGame(true);
-        // navigate("/WaitingRoom");
+        navigate(`/${gameId}/waitingRoom`);
       }
     }
     if (response.method === "updateCards") {
@@ -94,7 +95,7 @@ const App = () => {
       nickname = response.nickname;
       setIsSuitBetting(true);
       setsuitBet(response.suitBet)
-      // navigate("/Game");
+      navigate(`/${gameId}/game`);
     }
     if (response.method === "error") {
       alert(response.massage)
@@ -130,9 +131,9 @@ const App = () => {
             setisGameCreatedModal={setisGameCreatedModal}
             isLeftGameModal={isLeftGameModal}
             setIsLeftGameModal={setIsLeftGameModal} />}/>
-              {/* <Route path="/waitingRoom" element={<WaitingRoom game={props.game} />}/> */}
-              <Route path="/waitingRoom" element={<WaitingRoom />}/>
-            <Route path="/Game" element={<Game
+              <Route path="/:gameId/waitingRoom" element={<WaitingRoomPage game={game} />}/>
+              {/* <Route path="/:gameId/waitingRoom" element={<WaitingRoom />}/> */}
+            <Route path="/:gameId/game" element={<Game
                 client={client}
                 clientId={clientId}
                 playerNum={playerNum}
