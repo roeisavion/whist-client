@@ -33,6 +33,9 @@ export const Login = (props) => {
     useEffect( () =>{setNicknameError(_.isEmpty(nickname) ? true : false)}
     ,[nickname])
 
+    useEffect( () =>{setGameIdError(_.isEmpty(gameId) ? true : false)}
+    ,[gameId])
+
     const handelNicknameSubmit = () => {
         setFinelNickName(nickname);
     }

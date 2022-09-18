@@ -36,7 +36,7 @@ export const Game = (props) => {
   const [isLeftTurn, setLeftTurn] = useState(false);
 
   let myBet = "haven't betted yet"
-  let { gameId } = useParams();
+  // let { gameId } = useParams();
 
   if (props.isSuitBetting) {
     if (props.suitBet[props.playerNum]) {
@@ -152,7 +152,7 @@ export const Game = (props) => {
   return (
     <div className="game">
 
-      {centerCards !== null ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
+      {centerCards.length === 0 ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
       {props.sliceingSuit !== null ? <div>Sliceing Suit: {props.sliceingSuit} </div> : null}
 
       <div className="bottomBox">

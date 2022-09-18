@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/login'
@@ -21,11 +21,21 @@ const client = new W3CWebSocket('ws://127.0.0.1:9091');
 let response, gameId, playerNum, nickname;
 const App = () => {
 
+  const isMock = false;
+
   const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState({})
   const [scoreMapState, setScoreMap] = useState({})
-  const [suitBetState, setsuitBet] = useState(undefined)
-  const [numBetState, setNumBets] = useState(undefined)
+  const [suitBetState, setsuitBet] = useState(
+  {'P1':undefined,
+  'P2':undefined,
+  'P3':undefined,
+  'P4':undefined})
+  const [numBetState, setNumBets] = useState(
+  {'P1':undefined,
+  'P2':undefined,
+  'P3':undefined,
+  'P4':undefined})
   const [winnedCardsState, setWinnedCards] = useState({})
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isSuitBetting, setIsSuitBetting] = useState(false);
@@ -59,11 +69,10 @@ const App = () => {
     if (response.method === "create") {
       gameId = response.gameId;
       playerNum = response.playerNum;
-      setGame(response.games[gameId]);
+      setGame(response.game);
       setInGame(true);
       navigate(`/${gameId}/waitingRoom`);
-      // alert("Game was created Set successfully " + gameId)
-      setisGameCreatedModal(true)
+      // setisGameCreatedModal(true)
     }
 
     if (response.method === "leftGame") {
@@ -140,17 +149,19 @@ const App = () => {
         <Route path="/:gameId/game" element={<Game
           client={client}
           clientId={clientId}
-          playerNum={playerNum}
-          // playerNum={mock.playerNum}
-          cardsMap={cardsMapState}
-          // cardsMap={mock.cardsMap}
-          winnedCards={winnedCardsState}
-          // winnedCards
+          // playerNum={playerNum}
+          playerNum={isMock ? mock.playerNum : playerNum}
+          // cardsMap={cardsMapState}
+          cardsMap={isMock ? mock.cardsMap : cardsMapState}
+          // winnedCards={winnedCardsState}
+          winnedCards ={isMock ? mock.winnedCards : winnedCardsState }
           turn={turnState}
           isSuitBetting={isSuitBetting}
           isNumBetting={isNumBetting}
-          suitBet={suitBetState}
-          numBets={numBetState}
+          // suitBet={suitBetState}
+          suitBet={isMock ? mock.suitBet : suitBetState }
+          // numBets={numBetState}
+          numBets={isMock ? mock.numBets : numBetState}
           sliceingSuit={sliceingSuitState}
           minBet={minBetState}
           scoreMap={scoreMapState} />
