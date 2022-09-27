@@ -1,8 +1,6 @@
 import _ from 'lodash';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Bets.css'
-// import { sendSuitBet, sendPass } from './suitBetsFunctions.js'
-
 
 export const NumBets = (props) => {
     let client = props.client;
@@ -15,19 +13,23 @@ export const NumBets = (props) => {
     return <div className = "bets">
         <div>
         <input type="number" placeholder="write your bet" id="betNum" name="betNum" min={props.minBet[1]===props.playerNum ? props.minBet[0] : 0}  max={13} onChange={handelNumChange} />
-            <button onClick={() => sendNumBet(client,clientId, myBetNum, props.numBets)} disabled={!props.isMyTurn}>submit</button>
+            <button onClick={() => sendNumBet(client,clientId, myBetNum, props.numBets, props.minBet, props.playerNum)} disabled={!props.isMyTurn}>submit</button>
         </div>
     </div>
 }
 
 
-const sendNumBet = (client, clientId, myBetNum, numBets) => {
+const sendNumBet = (client, clientId, myBetNum, numBets, minBet, playerNum ) => {
     let realBets;
     let payLoad = {
         "method": "numBet",
         clientId,
         myBetNum
       }
+    if (myBetNum < minBet && minBet[1] === playerNum){
+        alert("can not but a number under your ")
+        return
+    }
     try {
         realBets = Object.values(numBets);
         realBets = realBets.filter(nb => nb)

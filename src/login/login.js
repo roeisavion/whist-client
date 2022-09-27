@@ -24,17 +24,17 @@ export const Login = (props) => {
     }
 
     const [nicknameError, setNicknameError] = useState(false)
-    
+
     const handelNicknameChange = (event) => {
         setNickname(event.target.value)
         setNicknameError(_.isEmpty(nickname) ? true : false)
     } // check on next render
-    
-    useEffect( () =>{setNicknameError(_.isEmpty(nickname) ? true : false)}
-    ,[nickname])
 
-    useEffect( () =>{setGameIdError(_.isEmpty(gameId) ? true : false)}
-    ,[gameId])
+    useEffect(() => { setNicknameError(_.isEmpty(nickname) ? true : false) }
+        , [nickname])
+
+    useEffect(() => { setGameIdError(_.isEmpty(gameId) ? true : false) }
+        , [gameId])
 
     const handelNicknameSubmit = () => {
         setFinelNickName(nickname);
@@ -50,14 +50,16 @@ export const Login = (props) => {
             {/* {props.isLeftGameModal ? <LeftGameModal
                 setIsLeftGameModal={props.setIsLeftGameModal}
                 nickname={nickname} /> : null} */}
+                
             <h1> {"Welcome " + finelNickName}</h1>
+            {/* <img className='cardsPic' src={`./PNG/aces.png`} /> */}
             <div>
                 <Input
                     placeholder="Choose a nickname"
                     error={nicknameError}
                     helperText={nicknameError ? 'Must enter a nickname' : ' '}
                     label="Choose a nickname"
-                    onChange={(event)=> {
+                    onChange={(event) => {
                         event.persist()
                         console.log(event)
                         handelNicknameChange(event)

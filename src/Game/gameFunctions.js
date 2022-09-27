@@ -21,12 +21,26 @@ export const nextTurn = {
     P4: 'P1'
 }
 
+// export const playerShower = {
+//     P1: ['P1','P2','P3','P4'],
+//     P2: ['P2','P3','P4','P1'],
+//     P3: ['P3','P4','P1','P2'],
+//     P4: ['P4','P1','P2','P3']
+// }
 export const playerShower = {
-    P1: ['P1','P2','P3','P4'],
-    P2: ['P2','P3','P4','P1'],
-    P3: ['P3','P4','P1','P2'],
-    P4: ['P4','P1','P2','P3']
+    P1: ['bottom', 'left', 'top', 'right'],
+    P2: ['right', 'bottom', 'left', 'top'],
+    P3: ['top', 'right', 'bottom', 'left'],
+    P4: ['left', 'top', 'right', 'bottom']
 }
+
+export const shapePointer = {
+    H: "Heart ❤",
+    C: "Club ♣",
+    D: ">Diamond ♦",
+    S: "Spade ♠"
+}
+
 
 export const caculateRoundWinner = (centerCards) => {
     let firstCard = centerCards[0];
@@ -58,7 +72,7 @@ export const compareCards = (cardA, cardB) => {
         let c = suitOrder.indexOf(cardASuit)
         let d = suitOrder.indexOf(cardBSuit)
         return c - d
-        
+
     }
 }
 
@@ -80,7 +94,7 @@ export const compareCards = (cardA, cardB) => {
 //       "method": "updateCards",
 //       "playerPlayed": props.playerNum,
 //       "cardPlayed": clickedCard,
-//       "clientId" : props.clientId 
+//       "clientId" : props.clientId
 //     }
 //     props.client.send(JSON.stringify(payLoad));
 

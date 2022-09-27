@@ -21,10 +21,15 @@ const client = new W3CWebSocket('ws://127.0.0.1:9091');
 let response, gameId, playerNum, nickname;
 const App = () => {
 
-  const isMock = false;
+  const isMock = true;
 
   const [turnState, setTurn] = useState('P1')
-  const [cardsMapState, setCardsMap] = useState({})
+  const [cardsMapState, setCardsMap] = useState(
+    {'P1':[],
+    'P2':[],    
+    'P3':[],    
+    'P4':[],    
+    'center':[]})
   const [scoreMapState, setScoreMap] = useState({})
   const [suitBetState, setsuitBet] = useState(
   {'P1':undefined,
@@ -97,6 +102,7 @@ const App = () => {
       setWinnedCards(response.winnedCards);
       setTurn(response.turn);
       setIsGameStarted(true)
+      navigate(`/${gameId}/game`);
     }
 
     if (response.method === "suitBet") {
@@ -104,7 +110,6 @@ const App = () => {
       nickname = response.nickname;
       setIsSuitBetting(true);
       setsuitBet(response.suitBet)
-      navigate(`/${gameId}/game`);
     }
     if (response.method === "error") {
       alert(response.massage)

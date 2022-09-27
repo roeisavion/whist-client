@@ -24,3 +24,8 @@ h1{
     margin: 0;
     display: inline;
 }
+
+.cardsPic{
+    height: 20%;
+    width: 20%;
+}

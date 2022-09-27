@@ -16,7 +16,7 @@ export const mock = {
             "JC",
             "AD"
         ],
-        "center": [],
+        "center": [["8S"],["7S"]],
         "P2": 13,
         "P3": 13,
         "P4": 13
