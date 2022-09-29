@@ -14,6 +14,7 @@
   
   .bottomContainer,.topContainer{
     flex-direction: column;
+    align-items: center;
   } 
 
   .topContainer{

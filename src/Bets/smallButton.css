@@ -1,5 +1,6 @@
 .smallButton {
-    display: inline-block;
+    width: 5vw;
+    /* display: inline-block; */
     font-size: 10px;
     cursor: pointer;
     text-align: center;
@@ -11,7 +12,7 @@
     border-radius: 10px;
     box-shadow: 0 3px rgba(250, 1, 175, 0.301);
     margin: 5px;
-    padding: 5px 10px
+    padding: 5px 10px 
 }
 
 .smallButton:hover {
