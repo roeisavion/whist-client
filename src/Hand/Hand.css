@@ -3,6 +3,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .P2hand, .P4hand {
@@ -12,28 +15,12 @@
           flex-direction: column;
 }
 
-.P2hand {
-  margin-left: 30px;
-}
-
-.P2hand > * {
-  margin-bottom: -80px;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+.P2hand > *, .P4hand > * {
+  margin-bottom: -6vw;
 }
 
 .P3hand > * {
-  margin-right: -50px;
-}
-
-.P4hand {
-  margin-right: 30px;
-}
-
-.P4hand > * {
-  margin-bottom: -80px;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  margin-right: -3vw;
 }
 
 .P1hand img, .P2hand img, .P3hand img, .P4hand img {
@@ -41,7 +28,6 @@
 }
 
 .bottomBox, .rightBox, .topBox, .leftBox {
-  position: absolute;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   display: -webkit-box;
@@ -53,7 +39,6 @@
 }
 
 .bottomBox {
-  bottom: 2%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -65,15 +50,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  top: 2%;
-}
-
-.rightBox, .leftBox {
-  height: 100vh;
-}
-
-.leftBox {
-  left: 2%;
 }
 
 .rightBox {
@@ -81,6 +57,5 @@
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
-  right: 2%;
 }
 /*# sourceMappingURL=hand.css.map */

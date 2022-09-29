@@ -8,4 +8,10 @@ export const CompetitorsHand = (props) => {
   return <div className={props.className}>{cards}</div>;
 }
 
+export const CompetitorsHandRotated = (props) => {
+  let cards = new Array(props.numOfCards)
+  cards.fill(<UnClickableCard cardName="blue_back_rotate" className={props.cardClassName}/>)
+  return <div className={props.className}>{cards}</div>;
+}
+
 {/* <div  width= "90" height= "60"></div> */}

@@ -9,36 +9,30 @@
 .P1hand,.P2hand,.P3hand,.P4hand {
   position:relative;
   display: flex;
+  justify-content: center
 }
 
 .P2hand, .P4hand {
   flex-direction: column;
 }
 
-// .P1hand {
-//   // & > * {
-//   //   margin-left: -50px
-//   // } 
-// } 
-.P2hand {
+.P2hand, .P4hand  {
   & > * {
-    margin-bottom : -80px; 
-    transform: rotate(90deg)
+    margin-bottom : -6vw; 
   } 
-  margin-left: 30px;
+  // margin-left: 30px;
 } 
 .P3hand{
   & > * {
-    margin-right : -50px;
+    margin-right : -3vw;
   } 
 } 
-.P4hand {
-  & > * {
-    margin-bottom : -80px;
-    transform: rotate(90deg)
-  } 
-  margin-right: 30px;
-} 
+// .P4hand {
+//   & > * {
+//     margin-bottom : -6vw;
+//   } 
+//   // margin-right: 30px;
+// } 
 
 .P1hand img,.P2hand img,.P3hand img,.P4hand img{
   position: relative;
@@ -46,34 +40,21 @@
 
 
 .bottomBox,.rightBox,.topBox,.leftBox{
-  position:absolute;
   justify-content: space-around; 
   display: flex;
   align-items: center;
 }
 
 .bottomBox{
-  bottom: 2%;
   flex-direction: column;
 }
 
 .topBox{
   flex-direction: column;
-  top: 2%
 }
 
-.rightBox, .leftBox{
-  // flex-direction: column;
-  // width: 20vh;
-  height: 100vh;
-}
- 
-.leftBox{
-  left: 2%;
-}
 .rightBox{
   flex-direction: row-reverse;
-  right: 2%;
 }
 
 

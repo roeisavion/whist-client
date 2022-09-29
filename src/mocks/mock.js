@@ -21,7 +21,7 @@ export const mock = {
         "P3": 13,
         "P4": 13
     },
-    winnedCards: { P1: ["8S","7S"], P2: [], P3: [], P4: [] },
+    winnedCards: { P1: ["8S","7S"], P2: ["8S","7S"], P3: ["8S","7S"], P4: ["8S","7S"] },
     turn: "P1",
     isSuitBetting: true,
     isNumBetting: false,

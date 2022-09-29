@@ -4,10 +4,10 @@ import '../Hand/Hand.css';
 import '../WinnerCards/WinnerCards.css';
 import './Game.css';
 import { Hand } from '../Hand/Hand'
-import { CompetitorsHand } from '../Hand/CompetitorsHand'
-import { WinnerCards } from '../WinnerCards/WinnerCards'
+import { CompetitorsHand, CompetitorsHandRotated } from '../Hand/CompetitorsHand'
+import { WinnerCards, WinnerCardsRotated } from '../WinnerCards/WinnerCards'
 import { Center } from '../Center/Center'
-import { playerShower,shapePointer } from './gameFunctions'
+import { playerShower, shapePointer } from './gameFunctions'
 import { getSuit } from '../helpers/helpersFunctions';
 import { SuitBets } from '../Bets/SuitBets';
 import { NumBets } from '../Bets/NumBets';
@@ -69,7 +69,7 @@ export const Game = (props) => {
     top: setTopHand,
     left: setLeftHand
   }
-  
+
   // const setTurnPointer = {
   //   P1: setMyTurn,
   //   P2: setRightTurn,
@@ -145,12 +145,12 @@ export const Game = (props) => {
       i === 5 ? i = 1 : i = i;
     })
 
-    
+
     // Object.keys(setTurnPointer).forEach(sp => {
     //   setTurnPointer[sp](false);
     // })
     // setTurnPointer[props.turn](true);
-    
+
     // if (props.turn === props.playerNum) {
     //   setMyTurn(true)
     // } else {
@@ -188,11 +188,39 @@ export const Game = (props) => {
 
   return (
     <div className="game">
+      <div className='topContainer'>
+        <div className="topBox">
+          <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' />
+          {topWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={topWinnerCards} className='P3winnerCards' cardClassName='card' /> : null}
+          {props.suitBet ? <div>currnt bet: {topBet}</div> : null}
+          {isTopTurn ? <div>current turn</div> : null}
+        </div>
+      </div>
 
-      {centerCards.length !== 0 ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
-      {props.sliceingSuit !== null ? <div>Sliceing Suit: {shapePointer[props.sliceingSuit]} </div> : null}
+      <div className='centerContiener'>
+        <div className="leftBox">
+          <CompetitorsHandRotated numOfCards={leftHand} className="P4hand" cardClassName='sideCard' />
+          {leftWinnerCards.length !== 0 ? <WinnerCardsRotated arrayOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='sideCard' /> : null}
+          <div>
+            {props.suitBet ? <div>currnt bet: {leftBet}</div> : null}
+            {isLeftTurn ? <div>current turn</div> : null}
+          </div>
+        </div>
+        <div className='centerBox'>
+          {props.sliceingSuit !== null ? <div>Sliceing Suit: {shapePointer[props.sliceingSuit]} </div> : null}
+          {centerCards.length !== 0 ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
+        </div>
+        <div className="rightBox">
+          <CompetitorsHandRotated numOfCards={rightHand} className="P2hand" cardClassName='sideCard' />
+          {rightWinnerCards.length !== 0 ? <WinnerCardsRotated arrayOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='sideCard' /> : null}
+          <div>
+            {props.suitBet ? <div>currnt bet: {rightBet}</div> : null}
+            {isRightTurn ? <div>current turn</div> : null}
+          </div>
+        </div>
+      </div>
 
-      <div className="bottomBox">
+      <div className='bottomContainer'>
         {isMyTurn ? <div>current turn</div> : null}
         {/* {props.suitBet ? <div>currnt bet:{myBet}</div> : null} */}
         <div>currnt bet: {myBet}</div>
@@ -203,32 +231,10 @@ export const Game = (props) => {
         <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
       </div>
 
-      <div className="topBox">
-        <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' />
-        {topWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={topWinnerCards} className='P3winnerCards' cardClassName='card' /> : null}
-        {props.suitBet ? <div>currnt bet: {topBet}</div> : null}
-        {isTopTurn ? <div>current turn</div> : null}
-      </div>
+
 
       {/* <div className="middleBox"> */}
-        <div className="rightBox">
-          <CompetitorsHand numOfCards={rightHand} className="P2hand" cardClassName='card' />
-          {rightWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='card' /> : null}
-          <div>
-            {props.suitBet ? <div>currnt bet: {rightBet}</div> : null}
-            {isRightTurn ? <div>current turn</div> : null}
-          </div>
-        </div>
 
-        <div className="leftBox">
-          <CompetitorsHand numOfCards={leftHand} className="P4hand" cardClassName='card' />
-          {leftWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='card' /> : null}
-          <div>
-            {props.suitBet ? <div>currnt bet: {leftBet}</div> : null}
-            {isLeftTurn ? <div>current turn</div> : null}
-          </div>
-        </div>
-        
       {/* </div> */}
 
     </div>

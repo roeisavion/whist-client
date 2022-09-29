@@ -1,30 +1,24 @@
-.card{
-  width: 60px;
-  height: 90px;
-    padding: 3px;
-    /* display: block; */
-    /* position:absolute */
-  }
-  
-.myCard{
-  width: 60px;
-  height: 90px;
+.card {
+  width: 4vw;
+  height: auto;
   padding: 3px;
-  display: block;
 }
 
-  /* .sideCard{
-    width: 60px;
-    height: 90px;
-    padding: 3px;
-    display: block;
-    transform: rotate(90deg)
-  } */
+.myCard {
+  width: 4.5vw;
+  height: auto;
+  padding: 3px;
+}
 
-  /* .sideCard{
-    width: 45px;
-    height: 70px;
+.sideCard {
+  width: auto;
+  height: 4vw;
+  padding: 3px;
+}
+
+/* .rotatedCard{
+    width: 4vw;
+    height: auto;
     padding: 1px;
-    display: block;
     transform: rotate(90deg);
   } */

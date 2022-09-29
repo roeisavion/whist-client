@@ -3,6 +3,30 @@
     height: 100vh;
     position: relative;
     display: flex;
-    justify-content: center; 
     align-items: center;
+    flex-direction: column;
+    justify-content: space-between
   }
+
+  .centerContiener,.bottomContainer,.topContainer{
+    display: flex;
+  }
+  
+  .bottomContainer,.topContainer{
+    flex-direction: column;
+  } 
+
+  .topContainer{
+    margin-top: 3px;
+  }
+
+  .centerContiener{
+    justify-content: space-between;
+    width: 100vw;
+  }
+
+  .centerBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+  } 
