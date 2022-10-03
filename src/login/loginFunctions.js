@@ -30,8 +30,8 @@ export const joinGame = (client, clientId, gameId, nickname, setNicknameError, s
     setFinelNickName(nickname)
   }
   if (!gameId) {
-    // alert("must send gameID")
-    setGameIdError(true)
+    alert("must send gameID")
+    // setGameIdError(true)
   }
   if (!nickname) {
     // alert("must send nickName")

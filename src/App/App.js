@@ -21,7 +21,7 @@ const client = new W3CWebSocket('ws://127.0.0.1:9091');
 let response, gameId, playerNum, nickname;
 const App = () => {
 
-  const isMock = true;
+  const isMock = false;
 
   const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState(
@@ -169,7 +169,8 @@ const App = () => {
           numBets={isMock ? mock.numBets : numBetState}
           sliceingSuit={sliceingSuitState}
           minBet={minBetState}
-          scoreMap={scoreMapState} />
+          scoreMap={scoreMapState}
+          clients = {game ? game.clients : null} />
         } />
       </Routes>
     </div>

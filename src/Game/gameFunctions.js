@@ -37,7 +37,7 @@ export const playerShower = {
 export const shapePointer = {
     H: "Heart ❤",
     C: "Club ♣",
-    D: ">Diamond ♦",
+    D: "Diamond ♦",
     S: "Spade ♠"
 }
 

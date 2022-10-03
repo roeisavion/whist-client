@@ -26,10 +26,18 @@ const sendNumBet = (client, clientId, myBetNum, numBets, minBet, playerNum ) => 
         clientId,
         myBetNum
       }
-    if (myBetNum < minBet && minBet[1] === playerNum){
-        alert("can not but a number under your ")
+    if (parseInt(myBetNum) < parseInt(minBet) && minBet[1] === playerNum){
+        alert("can not bet a number under your original bet") //gramer
         return
     }
+    // if(parseInt(myBetNum) < 0){
+    //     alert("f u");
+    //     return
+    // } 
+    if(myBetNum % 1 !== 0 || parseInt(myBetNum) < 0){
+        alert("f u");
+        return
+    } 
     try {
         realBets = Object.values(numBets);
         realBets = realBets.filter(nb => nb)

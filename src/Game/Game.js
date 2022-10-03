@@ -12,6 +12,7 @@ import { getSuit } from '../helpers/helpersFunctions';
 import { SuitBets } from '../Bets/SuitBets';
 import { NumBets } from '../Bets/NumBets';
 import { keepSorted, handelSort } from '../Hand/handFunctions'
+import { nicknameList } from '../WaitingRoom/waitingRoomFuctions'
 
 let isSuitBetting, isNumBetting;
 export const Game = (props) => {
@@ -36,18 +37,10 @@ export const Game = (props) => {
   const [rightBet, setRightBet] = useState();
   const [topBet, setTopBet] = useState();
   const [leftBet, setLeftBet] = useState();
-
-  // let myBet = "haven't betted yet"
-  // let myBet ;
-  // let { gameId } = useParams();
-
-  // if (props.isSuitBetting) {
-  //   if (props.suitBet[props.playerNum]) {
-  //     serMyBet(props.suitBet[props.playerNum]);
-  //   } // need to fix after finish suit betting
-  // } if (props.numBets) {
-  //   serMyBet(props.numBets[props.playerNum]);
-  // }
+  const [myNickname, setMyNickname] = useState();
+  const [rightNickname, setRightNickname] = useState();
+  const [topNickname, setTopNickname] = useState();
+  const [leftNickname, setLeftNickname] = useState();
 
   const handPointer = {
     P1hand: [myHand, setMyHand],
@@ -56,13 +49,6 @@ export const Game = (props) => {
     P4hand: [leftHand, setLeftHand]
   }
 
-  // const setHandPointer = {
-  //   P1: setMyHand,
-  //   P2: setRightHand,
-  //   P3: setTopHand,
-  //   P4: setLeftHand
-  // }
-
   const setHandPointer = {
     bottom: setMyHand,
     right: setRightHand,
@@ -70,12 +56,12 @@ export const Game = (props) => {
     left: setLeftHand
   }
 
-  // const setTurnPointer = {
-  //   P1: setMyTurn,
-  //   P2: setRightTurn,
-  //   P3: setTopTurn,
-  //   P4: setLeftTurn
-  // }
+  const setNicknamePointer = {
+    bottom: setMyNickname,
+    right: setRightNickname,
+    top: setTopNickname,
+    left: setLeftNickname
+  }
 
   const setTurnPointer = {
     bottom: setMyTurn,
@@ -91,20 +77,6 @@ export const Game = (props) => {
     P4: false
   }
 
-  // const betsPointer = {
-  //   P1: myBet,
-  //   P2: rightBet,
-  //   P3: topBet,
-  //   P4: leftBet
-  // }
-
-  // const setBetsPointer = {
-  //   P1: setMyBet,
-  //   P2: setRightBet,
-  //   P3: setTopBet,
-  //   P4: setLeftBet
-  // }
-
   const setBetsPointer = {
     bottom: setMyBet,
     right: setRightBet,
@@ -119,12 +91,9 @@ export const Game = (props) => {
     left: setLeftWinnerCards,
   }
 
-  // const winnerCardsPointer = {
-  //   P1: setMyWinnerCards,
-  //   P2: setRightWinnerCards,
-  //   P3: setTopWinnerCards,
-  //   P4: setLeftWinnerCards,
-  // }
+
+  const nicknamesMap = nicknameList(props.clients)
+
 
   useEffect(() => {
     Object.keys(realTurnPointer).forEach(p => {
@@ -135,6 +104,7 @@ export const Game = (props) => {
     let i = 1;
     playerShower[props.playerNum].forEach((playerLocation) => {
       setHandPointer[playerLocation](props.cardsMap['P' + i]);
+      setNicknamePointer[playerLocation](nicknamesMap['P' + i]); //doesnt needs to be inside useEffect
       if (props.winnedCards) {
         winnerCardsPointer[playerLocation](props.winnedCards['P' + i]);
       }
@@ -145,17 +115,6 @@ export const Game = (props) => {
       i === 5 ? i = 1 : i = i;
     })
 
-
-    // Object.keys(setTurnPointer).forEach(sp => {
-    //   setTurnPointer[sp](false);
-    // })
-    // setTurnPointer[props.turn](true);
-
-    // if (props.turn === props.playerNum) {
-    //   setMyTurn(true)
-    // } else {
-    //   setMyTurn(false)
-    // }
 
     setCenter(props.cardsMap['center']);
   }, [props]);
@@ -192,6 +151,7 @@ export const Game = (props) => {
         <div className="topBox">
           <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' />
           {topWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={topWinnerCards} className='P3winnerCards' cardClassName='card' /> : null}
+          <div>{topNickname}</div>
           {props.suitBet ? <div>currnt bet: {topBet}</div> : null}
           {isTopTurn ? <div>current turn</div> : null}
         </div>
@@ -202,6 +162,7 @@ export const Game = (props) => {
           <CompetitorsHandRotated numOfCards={leftHand} className="P4hand" cardClassName='sideCard' />
           {leftWinnerCards.length !== 0 ? <WinnerCardsRotated arrayOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='sideCard' /> : null}
           <div>
+            <div>{leftNickname}</div>
             {props.suitBet ? <div>currnt bet: {leftBet}</div> : null}
             {isLeftTurn ? <div>current turn</div> : null}
           </div>
@@ -214,6 +175,7 @@ export const Game = (props) => {
           <CompetitorsHandRotated numOfCards={rightHand} className="P2hand" cardClassName='sideCard' />
           {rightWinnerCards.length !== 0 ? <WinnerCardsRotated arrayOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='sideCard' /> : null}
           <div>
+            <div>{rightNickname}</div>
             {props.suitBet ? <div>currnt bet: {rightBet}</div> : null}
             {isRightTurn ? <div>current turn</div> : null}
           </div>
@@ -222,21 +184,14 @@ export const Game = (props) => {
 
       <div className='bottomContainer'>
         {isMyTurn ? <div>current turn</div> : null}
-        {/* {props.suitBet ? <div>currnt bet:{myBet}</div> : null} */}
         <div>currnt bet: {myBet}</div>
+        <div>{myNickname}</div>
         {myWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={myWinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting} />
         <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
       </div>
-
-
-
-      {/* <div className="middleBox"> */}
-
-      {/* </div> */}
-
     </div>
   )
 }

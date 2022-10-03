@@ -14,6 +14,9 @@ export const sendSuitBet = (client, clientId, betNum, betSuit, suitBet) => {
   if(betNum < 3){
     alert("can't bet below 3");
   }
+  if(betNum % 1 !== 0){
+    alert("f u");
+  }
   else if (previousBet) {
     if (isBiggerBet(betNum.toString() + betSuit, previousBet)) {
       client.send(JSON.stringify(payLoad));

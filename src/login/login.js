@@ -11,6 +11,7 @@ import _ from 'lodash';
 import { GameCreatedModal } from '../Modals/GameCreatedModal';
 
 export const Login = (props) => {
+    let newNickname;
     let client = props.client;
     let clientId = props.clientId;
     const [gameId, setGameId] = useState("")
@@ -20,21 +21,26 @@ export const Login = (props) => {
     const [gameIdError, setGameIdError] = useState(false)
     const handelGameIdChange = (event) => {
         setGameId(event.target.value)
-        setGameIdError(_.isEmpty(gameId) ? true : false)
+        // setGameIdError(_.isEmpty(gameId) ? true : false)
     }
 
     const [nicknameError, setNicknameError] = useState(false)
 
     const handelNicknameChange = (event) => {
-        setNickname(event.target.value)
-        setNicknameError(_.isEmpty(nickname) ? true : false)
+        newNickname = event.target.value
+        setNickname(newNickname)
+        // setNickname(event.target.value)
+        console.log(nickname)
+        console.log(newNickname)
+        setNicknameError(_.isEmpty(newNickname))
+        // setNicknameError(_.isEmpty(nickname))
     } // check on next render
 
-    useEffect(() => { setNicknameError(_.isEmpty(nickname) ? true : false) }
-        , [nickname])
+    // useEffect(() => { setNicknameError(_.isEmpty(nickname) ? true : false) }
+    //     , [nickname])
 
-    useEffect(() => { setGameIdError(_.isEmpty(gameId) ? true : false) }
-        , [gameId])
+    // useEffect(() => { setGameIdError(_.isEmpty(gameId) ? true : false) }
+    //     , [gameId])
 
     const handelNicknameSubmit = () => {
         setFinelNickName(nickname);
@@ -59,14 +65,15 @@ export const Login = (props) => {
                     error={nicknameError}
                     helperText={nicknameError ? 'Must enter a nickname' : ' '}
                     label="Choose a nickname"
-                    onChange={(event) => {
-                        event.persist()
-                        console.log(event)
-                        handelNicknameChange(event)
-                    }}
+                    // onChange={(event) => {
+                    //     event.persist()
+                    //     console.log(event)
+                    //     handelNicknameChange(event)
+                    // }}
+                    onChange={handelNicknameChange}
                     onPaste={handelNicknameChange}
                     onCut={handelNicknameChange}
-                    onLoad={handelNicknameChange}
+                    // onLoad={handelNicknameChange}
 
                 />
             </div>
@@ -84,8 +91,8 @@ export const Login = (props) => {
                 id="gameIdInput"
                 placeholder="Enter gameId"
                 label="Enter gameId"
-                error={gameIdError}
-                helperText={gameIdError ? 'Must enter a gameId' : ' '}
+                // error={gameIdError}
+                // helperText={gameIdError ? 'Must enter a gameId' : ' '}
                 onChange={handelGameIdChange}
                 onPaste={handelGameIdChange}
                 onCut={handelGameIdChange}
@@ -94,6 +101,7 @@ export const Login = (props) => {
             <button
                 id='joinButton'
                 onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setGameIdError, setFinelNickName)}
+                // onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setFinelNickName)}
                 className='button'
                 disabled={props.inGame}>
                 Join Game
