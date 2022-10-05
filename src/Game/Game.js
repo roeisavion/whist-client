@@ -24,10 +24,10 @@ export const Game = (props) => {
   const [TopHand, setTopHand] = useState(13);
   const [leftHand, setLeftHand] = useState(13);
   const [centerCards, setCenter] = useState([]);
-  const [myWinnerCards, setMyWinnerCards] = useState([]);
-  const [rightWinnerCards, setRightWinnerCards] = useState([]);
-  const [topWinnerCards, setTopWinnerCards] = useState([]);
-  const [leftWinnerCards, setLeftWinnerCards] = useState([]);
+  const [myWinnerCards, setMyWinnerCards] = useState(0);
+  const [rightWinnerCards, setRightWinnerCards] = useState(0);
+  const [topWinnerCards, setTopWinnerCards] = useState(0);
+  const [leftWinnerCards, setLeftWinnerCards] = useState(0);
   const [IsSorted, setIsSorted] = useState(false);
   const [isMyTurn, setMyTurn] = useState(props.turn === props.playerNum ? true : false);
   const [isRightTurn, setRightTurn] = useState(false);
@@ -150,7 +150,7 @@ export const Game = (props) => {
       <div className='topContainer'>
         <div className="topBox">
           <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' />
-          {topWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={topWinnerCards} className='P3winnerCards' cardClassName='card' /> : null}
+          {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='card' /> : null}
           <div>{topNickname}</div>
           {props.suitBet ? <div>currnt bet: {topBet}</div> : null}
           {isTopTurn ? <div>current turn</div> : null}
@@ -160,7 +160,7 @@ export const Game = (props) => {
       <div className='centerContiener'>
         <div className="leftBox">
           <CompetitorsHandRotated numOfCards={leftHand} className="P4hand" cardClassName='sideCard' />
-          {leftWinnerCards.length !== 0 ? <WinnerCardsRotated arrayOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='sideCard' /> : null}
+          {leftWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='sideCard' /> : null}
           <div>
             <div>{leftNickname}</div>
             {props.suitBet ? <div>currnt bet: {leftBet}</div> : null}
@@ -173,7 +173,7 @@ export const Game = (props) => {
         </div>
         <div className="rightBox">
           <CompetitorsHandRotated numOfCards={rightHand} className="P2hand" cardClassName='sideCard' />
-          {rightWinnerCards.length !== 0 ? <WinnerCardsRotated arrayOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='sideCard' /> : null}
+          {rightWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='sideCard' /> : null}
           <div>
             <div>{rightNickname}</div>
             {props.suitBet ? <div>currnt bet: {rightBet}</div> : null}
@@ -186,7 +186,7 @@ export const Game = (props) => {
         {isMyTurn ? <div>current turn</div> : null}
         <div>currnt bet: {myBet}</div>
         <div>{myNickname}</div>
-        {myWinnerCards.length !== 0 ? <WinnerCards arrayOfCards={myWinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
+        {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting} />

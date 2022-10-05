@@ -16,12 +16,12 @@ export const mock = {
             "JC",
             "AD"
         ],
-        "center": [["8S"],["7S"],["7S"]],
+        "center": [["8S"],["7S"],["KD"]],
         "P2": 13,
         "P3": 13,
-        "P4": 13
+        "P4": 12
     },
-    winnedCards: { P1: ["8S","7S"], P2: ["8S","7S"], P3: ["8S","7S"], P4: ["8S","7S"] },
+    winnedCards: { P1: 2, P2: 4, P3: 6, P4: 6 },
     turn: "P1",
     isSuitBetting: true,
     isNumBetting: false,
@@ -39,5 +39,23 @@ export const mock = {
     },
     sliceingSuit: null,
     minBet: null,
-    scoreMap: null
+    scoreMap: null,
+    clients : {
+        "a-123" : {
+            playerNum : "P1",
+            nickname : "aaa"
+        },
+        "b-123" : {
+            playerNum : "P2",
+            nickname : "bbb"
+        },
+        "c-123" : {
+            playerNum : "P3",
+            nickname : "ccc"
+        },
+        "d-123" : {
+            playerNum : "P4",
+            nickname : "ddd"
+        }
+    }
 }

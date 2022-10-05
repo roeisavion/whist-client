@@ -1,0 +1,23 @@
+.P1winnerCards, .P2winnerCards, .P3winnerCards ,.P4winnerCards {
+    position:relative;
+    display: flex;
+    justify-content: center
+  }
+
+
+.P3winnerCards, .P1winnerCards{
+    & > * {
+      margin-right : -3vw;
+    } 
+  } 
+
+  
+  .P2winnerCards ,.P4winnerCards{
+    flex-direction: column;
+    margin: 5px;
+    // top: -6vw
+    & > * {
+      margin-bottom : -6vw; 
+    } 
+    // margin-left: 30px;
+  } 

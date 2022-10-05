@@ -1,32 +1,26 @@
-.P1winnerCards, .P2winnerCards, .P3winnerCards ,.P4winnerCards {
-    display: flex;
-    justify-content: center; 
-  }
-  
+.P1winnerCards, .P2winnerCards, .P3winnerCards, .P4winnerCards {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
 
-  .P2winnerCards,.P4winnerCards{
-    flex-direction: column;
-    margin: 1vw;
-  }
+.P3winnerCards > *, .P1winnerCards > * {
+  margin-right: -3vw;
+}
 
+.P2winnerCards, .P4winnerCards {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 5px;
+}
 
-
-  .P1winnerCards {
-    /* bottom: 115px; */
-    /* left : 50%; */
-  }
-  
-  .P2winnerCards {
-    /* right: 90px; */
-    /* top: 50%; */
-  }
-  
-  .P3winnerCards {
-    /* top: 115px; */
-    /* left : 50%; */
-  }
-  
-  .P4winnerCards {
-    /* left : 90px; */
-    /* top: 50%; */
-  }
+.P2winnerCards > *, .P4winnerCards > * {
+  margin-bottom: -6vw;
+}
+/*# sourceMappingURL=WinnerCards.css.map */
