@@ -6,7 +6,13 @@
   }
 }
 
-// .P1winnerCards, .P2winnerCards, .P3winnerCards ,.P4winnerCards
+@mixin cardsFan($numOfCards, $angle) {
+  @for $i from 1 through $numOfCards {
+    img:nth-child(#{$i}) {
+      transform: rotate(10*$i - 10*$numOfCards/2 + $angle);
+    }
+  }
+}
 
 .P1hand,.P2hand,.P3hand,.P4hand {
   position:relative;
@@ -61,3 +67,12 @@
 }
 
 
+// .P2hand {
+//   @include cardsFan(13, 270deg);
+// } 
+// .P3hand{
+//   @include cardsFan(13, 180deg);
+// } 
+// .P4hand {
+//   @include cardsFan(13, 90deg);
+// } 
