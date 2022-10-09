@@ -21,7 +21,7 @@ const client = new W3CWebSocket('ws://127.0.0.1:9091');
 let response, gameId, playerNum, nickname;
 const App = () => {
 
-  const isMock = true;
+  const isMock = false;
 
   const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState(
@@ -42,7 +42,7 @@ const App = () => {
   'P3':undefined,
   'P4':undefined})
   const [winnedCardsState, setWinnedCards] = useState({})
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  // const [isGameStarted, setIsGameStarted] = useState(false);
   const [isSuitBetting, setIsSuitBetting] = useState(false);
   const [isNumBetting, setIsNumBetting] = useState(false);
   const [minBetState, setminBet] = useState([]);
@@ -101,7 +101,7 @@ const App = () => {
       setCardsMap(response.cardsMap);
       setWinnedCards(response.winnedCards);
       setTurn(response.turn);
-      setIsGameStarted(true)
+      // setIsGameStarted(true)
       navigate(`/${gameId}/game`);
     }
 

@@ -68,7 +68,7 @@ export const biggestBetSoFar = (suitBet) => {
     return null
   }
   realBets = realBets.filter(sb => sb)
-  realBets = realBets.filter(sb => sb != 'PASS')
+  realBets = realBets.filter(sb => sb !== 'PASS')
   let bigBet = realBets[0];
   if(realBets.length > 1){
     for (let i = 1; i < realBets.length; i++) {
