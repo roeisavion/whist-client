@@ -9,7 +9,8 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "
 // import { WaitingRoom } from '../login/WatingRoom'
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 
-const client = new W3CWebSocket('ws://127.0.0.1:9091');
+const localClient = 'ws://127.0.0.1:9091' ;
+const client = new W3CWebSocket(process.env.serverAdress || localClient);
 // let client;
 // try {
 //   client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
