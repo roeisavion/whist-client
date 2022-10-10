@@ -10,9 +10,9 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 
 const localClient = 'ws://127.0.0.1:9091' ;
-const client = new W3CWebSocket(process.env.serverAdress || localClient);
+const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
 
-console.log("client started at " + process.env.serverAdress || localClient)
+console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
 // let client;
 // try {
 //   client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
