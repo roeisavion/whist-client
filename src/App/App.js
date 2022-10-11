@@ -9,8 +9,10 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "
 // import { WaitingRoom } from '../login/WatingRoom'
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 
-const localClient = 'ws://127.0.0.1:9091' ;
-const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
+// const localClient = 'ws://127.0.0.1:9091' ;
+// const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
+const renderClient = 'wss://whist-server.onrender.com' ;
+const client = new W3CWebSocket(renderClient);
 
 console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
 // let client;
