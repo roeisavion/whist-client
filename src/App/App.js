@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
 import { Login } from '../login/login'
-import { GameCreatedModal } from '../Modals/GameCreatedModal'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from "react-router-dom";
-// import { WaitingRoom } from '../login/WatingRoom'
+import {  Routes, Route, useNavigate } from "react-router-dom";
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 
 // const localClient = 'ws://127.0.0.1:9091' ;
@@ -47,7 +45,6 @@ const App = () => {
   'P3':undefined,
   'P4':undefined})
   const [winnedCardsState, setWinnedCards] = useState({})
-  // const [isGameStarted, setIsGameStarted] = useState(false);
   const [isSuitBetting, setIsSuitBetting] = useState(false);
   const [isNumBetting, setIsNumBetting] = useState(false);
   const [minBetState, setminBet] = useState([]);

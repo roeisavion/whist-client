@@ -1,5 +1,4 @@
-import { getSuit, getNumber } from '../../src/helpers/helpersFunctions'
-import { cardsNumberOrder, suitOrder } from '../deck.jsx'
+import { getSuit, getNumber, cardsNumberOrder, suitOrder } from '../../src/helpers/helpersFunctions'
 
 
 export const notYourTurnCardClick = () => {
@@ -21,12 +20,6 @@ export const nextTurn = {
     P4: 'P1'
 }
 
-// export const playerShower = {
-//     P1: ['P1','P2','P3','P4'],
-//     P2: ['P2','P3','P4','P1'],
-//     P3: ['P3','P4','P1','P2'],
-//     P4: ['P4','P1','P2','P3']
-// }
 export const playerShower = {
     P1: ['bottom', 'left', 'top', 'right'],
     P2: ['right', 'bottom', 'left', 'top'],
@@ -75,27 +68,3 @@ export const compareCards = (cardA, cardB) => {
 
     }
 }
-
-// export const handleCardClick = (clickedCard, originHand, props) => {
-//     let cardsInHand = handPointer[originHand][0]
-//     if (centerCards.length > 0) {
-//       let firstCard = centerCards[0];
-//       let firstSuit = getSuit(firstCard[0]);
-//       if (getSuit(clickedCard) !== firstSuit) {
-//         let shapeArray = cardsInHand.map(c => getSuit(c))
-//         if (shapeArray.includes(firstSuit)) {
-//           alert('not good shape');
-//           return
-//         }
-//       }
-//     }
-
-//     let payLoad = {
-//       "method": "updateCards",
-//       "playerPlayed": props.playerNum,
-//       "cardPlayed": clickedCard,
-//       "clientId" : props.clientId
-//     }
-//     props.client.send(JSON.stringify(payLoad));
-
-//   }
