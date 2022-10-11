@@ -7,10 +7,10 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 import {  Routes, Route, useNavigate } from "react-router-dom";
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 
-// const localClient = 'ws://127.0.0.1:9091' ;
-// const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
-const renderClient = 'wss://whist-server.onrender.com' ;
-const client = new W3CWebSocket(renderClient);
+const localClient = 'ws://127.0.0.1:9091' ;
+const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
+// const renderClient = 'wss://whist-server.onrender.com' ;
+// const client = new W3CWebSocket(renderClient);
 
 console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
 // let client;
