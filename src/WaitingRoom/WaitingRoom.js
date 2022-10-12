@@ -6,7 +6,7 @@ export const WaitingRoom = (props) => {
         return Object.values(clients).map(c => {
             const {playerNum,nickname} = c
             return <tr>
-                <td>{playerNum + ":"}</td>
+                <td>{fullName[playerNum] + ":"}</td>
                 <td>{nickname}</td>
             </tr>
         })
@@ -22,4 +22,11 @@ export const WaitingRoom = (props) => {
         </table>
         <p>GameID: {props.game.id}</p>
     </div>
+}
+
+const fullName = {
+    P1 : "player 1",
+    P2 : "player 2",
+    P3 : "player 3",
+    P4 : "player 4"
 }

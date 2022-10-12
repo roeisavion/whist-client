@@ -96,8 +96,8 @@ export const Game = (props) => {
 
   const nicknamesMap = nicknameList(props.clients);
   useEffect(() => {
+    let i = 1;
     playerShower[props.playerNum].forEach((playerLocation) => {
-        let i = 1;
         setNicknamePointer[playerLocation](nicknamesMap['P' + i]);
         i++;
         i === 5 ? i = 1 : i = i;
