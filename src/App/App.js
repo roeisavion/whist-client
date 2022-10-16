@@ -26,7 +26,7 @@ const App = () => {
 
   const isMock = true;
 
-  const [turnState, setTurn] = useState('P1')
+  const [turnState, setTurn] = useState('P2')
   const [cardsMapState, setCardsMap] = useState(
     {'P1':[],
     'P2':[],    

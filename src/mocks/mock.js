@@ -16,12 +16,12 @@ export const mock = {
             "JC",
             "AD"
         ],
-        "center": [["8S"],["7S"],["KD"]],
-        "P2": 13,
+        "center": [],
+        "P2": 4,
         "P3": 13,
-        "P4": 12
+        "P4": 13
     },
-    winnedCards: { P1: 3, P2: 0, P3: 6, P4: 6 },
+    winnedCards: { P1: 0, P2: 6, P3: 0, P4: 0 },
     turn: "P1",
     isSuitBetting: true,
     isNumBetting: false,

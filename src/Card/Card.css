@@ -19,23 +19,11 @@
 .sideCard {
   width: auto;
   height: 4vw;
-  /* padding: 3px; */
 }
-
-/* .rotatedCard{
-    width: 4vw;
-    height: auto;
-    padding: 1px;
-    transform: rotate(90deg);
-  } */
 
 .sideCard-container {
   flex: 1 0 0;
   overflow-y: hidden;
-}
-
-.sideCard-container:last-child {
-  flex: 0 0 auto;
 }
 
 .card-container {
@@ -43,6 +31,21 @@
   overflow-x: hidden;
 }
 
-.card-container:last-child {
+.sideCard-container:last-child, .card-container:last-child {
   flex: 0 0 auto;
+}
+
+.winnedSideCard {
+  width: auto;
+  height: 3vw;
+}
+
+.winnedCard {
+  width: 3vw;
+  height: auto;
+}
+
+.myWinnedCard{
+  width: 4vw;
+  height: auto;
 }

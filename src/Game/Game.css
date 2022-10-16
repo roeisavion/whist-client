@@ -26,6 +26,7 @@
 
 .centerContiener {
   justify-content: space-between;
+  align-items: center;
   width: 100vw;
 }
 
@@ -35,10 +36,11 @@
   justify-content: center;
   border-style:solid ;
   border-color: black;
-  /* left: 50%;
+  height: 10vw;
+  left: 50%;
   top: 50%;
   position: absolute;
-  transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%);
 }
 
 .isTurn {
@@ -48,4 +50,17 @@
 
 .leftBox, .rightBox {
   width: 20 vw;
+}
+
+.leftBox{
+  margin-left: 5px;
+}
+.rightBox{
+  margin-right: 5px;
+}
+.topBox{
+  margin-top: 5px;
+}
+.bottomContainer{
+  margin-bottom: 5px;
 }

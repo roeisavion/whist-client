@@ -8,19 +8,12 @@
           justify-content: center;
 }
 
-.P3winnerCards > *, .P1winnerCards > * {
-  margin-right: -3vw;
-}
-
 .P2winnerCards, .P4winnerCards {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 5px;
-}
-
-.P2winnerCards > *, .P4winnerCards > * {
-  margin-bottom: -6vw;
+  height: 20vh;
 }
 /*# sourceMappingURL=WinnerCards.css.map */
