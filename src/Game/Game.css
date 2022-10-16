@@ -40,3 +40,12 @@
   position: absolute;
   transform: translate(-50%, -50%); */
 }
+
+.isTurn {
+  border-style:solid ;
+  border-color: black;
+}
+
+.leftBox, .rightBox {
+  width: 20 vw;
+}

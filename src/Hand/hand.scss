@@ -23,25 +23,12 @@
 .P2hand, .P4hand {
   flex-direction: column;
   margin: 5px;
+  height: 40vh;
 }
 
-.P2hand, .P4hand  {
-  & > * {
-    margin-bottom : -6vw; 
-  } 
-  // margin-left: 30px;
-} 
 .P3hand{
-  & > * {
-    margin-right : -3vw;
-  } 
-} 
-// .P4hand {
-//   & > * {
-//     margin-bottom : -6vw;
-//   } 
-//   // margin-right: 30px;
-// } 
+  width: 40vh;
+}
 
 .P1hand img,.P2hand img,.P3hand img,.P4hand img{
   position: relative;

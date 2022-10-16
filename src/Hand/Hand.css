@@ -14,14 +14,11 @@
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 5px;
+  height: 40vh;
 }
 
-.P2hand > *, .P4hand > * {
-  margin-bottom: -6vw;
-}
-
-.P3hand > * {
-  margin-right: -3vw;
+.P3hand {
+  width: 40vh;
 }
 
 .P1hand img, .P2hand img, .P3hand img, .P4hand img {

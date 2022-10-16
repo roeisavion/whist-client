@@ -177,7 +177,7 @@ export const Game = (props) => {
   return (
     <div className="game">
       <div className='topContainer'>
-        <div className="topBox">
+        <div className={isTopTurn ? 'topBox isTurn' : 'topBox'}>
           <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' />
           {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='card' /> : null}
           <div>{topNickname}</div>
@@ -187,7 +187,7 @@ export const Game = (props) => {
       </div>
 
       <div className='centerContiener'>
-        <div className="leftBox">
+        <div className={isLeftTurn ? 'leftBox isTurn' : 'leftBox'}>
           <CompetitorsHandRotated numOfCards={leftHand} className="P4hand" cardClassName='sideCard' />
           {leftWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='sideCard' /> : null}
           <div>
@@ -200,7 +200,7 @@ export const Game = (props) => {
           {props.sliceingSuit !== null ? <div>Sliceing Suit: {shapePointer[props.sliceingSuit]} </div> : null}
           {centerCards.length !== 0 ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
         </div>
-        <div className="rightBox">
+        <div className={isRightTurn ? 'rightBox isTurn' : 'rightBox'}  >
           <CompetitorsHandRotated numOfCards={rightHand} className="P2hand" cardClassName='sideCard' />
           {rightWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='sideCard' /> : null}
           <div>
@@ -211,15 +211,17 @@ export const Game = (props) => {
         </div>
       </div>
 
-      <div className='bottomContainer'>
+      <div className={isMyTurn ? 'bottomContainer isTurn' : 'bottomContainer'}>
         {isMyTurn ? <div>current turn</div> : null}
-        <div>currnt bet: {myBet}</div>
-        <div>{myNickname}</div>
+        <div>
+        <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
+          currnt bet: {myBet}
+          </div>
+        {/* <div>{myNickname}</div> */}
         {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='card' /> : null}
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting || isDisabled} />
-        <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
       </div>
     </div>
   )

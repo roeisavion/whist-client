@@ -1,6 +1,12 @@
 .card {
   width: 4vw;
   height: auto;
+  /* padding: 3px; */
+}
+
+.centerCard {
+  width: 4vw;
+  height: auto;
   padding: 3px;
 }
 
@@ -22,3 +28,21 @@
     padding: 1px;
     transform: rotate(90deg);
   } */
+
+.sideCard-container {
+  flex: 1 0 0;
+  overflow-y: hidden;
+}
+
+.sideCard-container:last-child {
+  flex: 0 0 auto;
+}
+
+.card-container {
+  flex: 1 0 0;
+  overflow-x: hidden;
+}
+
+.card-container:last-child {
+  flex: 0 0 auto;
+}
