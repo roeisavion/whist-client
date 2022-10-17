@@ -56,8 +56,10 @@ export const Game = (props) => {
   const heightStyle = (height) => {
     return { height }
   }
+  const widthStyle = (width) => {
+    return { width }
+  }
 
-  const tryHeight = {height: 100}
   const setHandPointer = {
     bottom: setMyHand,
     right: setRightHand,
@@ -185,11 +187,9 @@ export const Game = (props) => {
     <div className="game">
       <div className='topContainer'>
         <div className={isTopTurn ? 'topBox isTurn' : 'topBox'}>
-          <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' />
-          {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='winnedCard' /> : null}
-          <div>{topNickname}</div>
-          {props.suitBet ? <div>currnt bet: {topBet}</div> : null}
-          {/* {isTopTurn ? <div>current turn</div> : null} */}
+          <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' style={widthStyle(sizeCalc(TopHand))}/>
+          {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='winnedCard' style={widthStyle(sizeCalc(topWinnerCards))} /> : null}
+          <div>{topNickname}  currnt bet: {topBet}</div>
         </div>
       </div>
 
@@ -226,7 +226,7 @@ export const Game = (props) => {
           currnt bet: {myBet}
         </div>
         {/* <div>{myNickname}</div> */}
-        {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='myWinnedCard' /> : null}
+        {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='myWinnedCard' style={widthStyle(sizeCalc(myWinnerCards))}/> : null}
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting || isDisabled} />

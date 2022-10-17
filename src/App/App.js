@@ -24,9 +24,9 @@ console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
 let response, gameId, playerNum, nickname;
 const App = () => {
 
-  const isMock = true;
+  const isMock = false;
 
-  const [turnState, setTurn] = useState('P2')
+  const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState(
     {'P1':[],
     'P2':[],    
