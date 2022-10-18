@@ -34,35 +34,50 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-style:solid ;
+  border-style: solid;
   border-color: black;
   height: 10vw;
   left: 50%;
-  top: 50%;
+  /* top: 50%; */
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
 }
 
 .isTurn {
-  border-style:solid ;
+  border-style: solid;
   border-color: black;
 }
 
-.leftBox, .rightBox {
+.leftBox,
+.rightBox {
   width: 20 vw;
 }
 
-.leftBox{
+.leftBox {
   margin-left: 5px;
 }
-.rightBox{
+
+.rightBox {
   margin-right: 5px;
 }
-.topBox{
+
+.topBox {
   margin-top: 5px;
 }
-.bottomContainer{
+
+.bottomContainer {
   margin-bottom: 5px;
   position: relative;
-  bottom: 3vw;
+  bottom: 1vw;
+}
+
+.winAndSortAndBet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.sortAndBet {
+  margin-left: 5px;
 }

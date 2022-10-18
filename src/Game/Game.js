@@ -51,8 +51,7 @@ export const Game = (props) => {
     P4hand: [leftHand, setLeftHand]
   }
 
-  const sizeCalc = (hand) => (4 + hand) + 'vw' ;
-  // const heightCalc = (hand) => (3 + hand - 1);
+  const sizeCalc = (hand) => (4 + hand) + 'vw';
   const heightStyle = (height) => {
     return { height }
   }
@@ -187,7 +186,7 @@ export const Game = (props) => {
     <div className="game">
       <div className='topContainer'>
         <div className={isTopTurn ? 'topBox isTurn' : 'topBox'}>
-          <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' style={widthStyle(sizeCalc(TopHand))}/>
+          <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' style={widthStyle(sizeCalc(TopHand))} />
           {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='winnedCard' style={widthStyle(sizeCalc(topWinnerCards))} /> : null}
           <div>{topNickname}  currnt bet: {topBet}</div>
         </div>
@@ -209,7 +208,6 @@ export const Game = (props) => {
         </div>
         <div className={isRightTurn ? 'rightBox isTurn' : 'rightBox'}  >
           <CompetitorsHandRotated numOfCards={rightHand} className="P2hand" cardClassName='sideCard' style={heightStyle(sizeCalc(rightHand))} />
-          {/* <CompetitorsHandRotated numOfCards={rightHand} className="P2hand" cardClassName='sideCard' style={{height: "40vh"}} /> */}
           {rightWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='winnedSideCard' /> : null}
           <div>
             <div>{rightNickname}</div>
@@ -220,13 +218,13 @@ export const Game = (props) => {
       </div>
 
       <div className={isMyTurn ? 'bottomContainer isTurn' : 'bottomContainer'}>
-        {/* {isMyTurn ? <div>current turn</div> : null} */}
-        <div>
-          <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
-          currnt bet: {myBet}
+        <div className='winAndSortAndBet'>
+          <div className='sortAndBet'>
+            <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
+            <div>currnt bet: {myBet}</div>
+          </div>
+          {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='myWinnedCard' style={widthStyle(sizeCalc(myWinnerCards))} /> : null}
         </div>
-        {/* <div>{myNickname}</div> */}
-        {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='myWinnedCard' style={widthStyle(sizeCalc(myWinnerCards))}/> : null}
         {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
         {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting || isDisabled} />
