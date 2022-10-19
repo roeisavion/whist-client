@@ -80,4 +80,9 @@
 
 .sortAndBet {
   margin-left: 5px;
+  justify-self: flex-end;
+}
+
+.currntBet{
+  margin: 3px;
 }
