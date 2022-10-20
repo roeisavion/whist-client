@@ -49,3 +49,10 @@
   width: 4vw;
   height: auto;
 }
+
+.logoCard{
+  width: 4.5vw;
+  height: auto;
+  position: absolute;
+  transition: transform 1s ease-out;
+}

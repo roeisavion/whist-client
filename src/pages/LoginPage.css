@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Luckiest+Guy);
+
+.LoginPage{
+    /* display: flex;
+    height: 100vh;
+    justify-content: center;
+    flex-direction: column; */
+}
+
+.welcomeAndLogo{
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    position: relative;
+    top: 6vh;
+    color: #fff;
+    font-size: 6vw;
+    text-shadow: #444 1px 1px 2px;
+    font-family: 'Luckiest Guy'
+}

@@ -6,61 +6,85 @@
   }
 }
 
-@mixin cardsFan($numOfCards, $angle) {
+@mixin cardsFan($numOfCards, $angle, $playersAngle) {
   @for $i from 1 through $numOfCards {
     img:nth-child(#{$i}) {
-      transform: rotate(10*$i - 10*$numOfCards/2 + $angle);
+      transform: rotate($angle*$i - $angle*$numOfCards/2 + $playersAngle);
+      transform-origin: center 120%
     }
   }
 }
 
-.P1hand,.P2hand,.P3hand,.P4hand {
-  position:relative;
+.P1hand,
+.P2hand,
+.P3hand,
+.P4hand {
+  position: relative;
   display: flex;
   justify-content: center
 }
 
-.P2hand, .P4hand {
+.P2hand,
+.P4hand {
   flex-direction: column;
   margin: 5px;
   // height: 40vh;
   // height: calc();
 }
 
-.P3hand{
+.P3hand {
   width: 40vh;
+  margin: 3px;
 }
 
-.P1hand img,.P2hand img,.P3hand img,.P4hand img{
+.P1hand img,
+.P2hand img,
+.P3hand img,
+.P4hand img {
   position: relative;
 }
 
 
-.bottomBox,.rightBox,.topBox,.leftBox{
-  justify-content: space-around; 
+.bottomBox,
+.rightBox,
+.topBox,
+.leftBox {
+  justify-content: space-around;
   display: flex;
   align-items: center;
 }
 
-.bottomBox{
+.bottomBox {
   flex-direction: column;
 }
 
-.topBox{
+.topBox {
   flex-direction: column;
 }
 
-.rightBox{
+.rightBox {
   flex-direction: row-reverse;
 }
 
+.LogoCards {
+  position: relative;
+  top: 5vh;
+  height: 7vw;
+  width: 7vw;
+  @include cardsFan(4, 10deg, 0deg);
 
-// .P2hand {
-//   @include cardsFan(13, 270deg);
-// } 
-// .P3hand{
-//   @include cardsFan(13, 180deg);
-// } 
-// .P4hand {
-//   @include cardsFan(13, 90deg);
-// } 
+  &:hover {
+    @include cardsFan(4, 20deg, 0deg);
+  }
+}
+
+
+  // .P2hand {
+  //   @include cardsFan(13, 270deg);
+  // } 
+  // .P3hand{
+  //   @include cardsFan(13, 180deg);
+  // } 
+  // .P4hand {
+  //   @include cardsFan(13, 90deg);
+  // } 

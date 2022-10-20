@@ -21,7 +21,7 @@ export const mock = {
         "P3": 13,
         "P4": 13
     },
-    winnedCards: { P1: 2, P2: 6, P3: 5, P4: 0 },
+    // winnedCards: { P1: 2, P2: 6, P3: 5, P4: 0 },
     turn: "P1",
     isSuitBetting: true,
     isNumBetting: false,

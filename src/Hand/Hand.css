@@ -1,4 +1,7 @@
-.P1hand, .P2hand, .P3hand, .P4hand {
+.P1hand,
+.P2hand,
+.P3hand,
+.P4hand {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8,7 +11,8 @@
           justify-content: center;
 }
 
-.P2hand, .P4hand {
+.P2hand,
+.P4hand {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -18,13 +22,20 @@
 
 .P3hand {
   width: 40vh;
+  margin: 3px;
 }
 
-.P1hand img, .P2hand img, .P3hand img, .P4hand img {
+.P1hand img,
+.P2hand img,
+.P3hand img,
+.P4hand img {
   position: relative;
 }
 
-.bottomBox, .rightBox, .topBox, .leftBox {
+.bottomBox,
+.rightBox,
+.topBox,
+.leftBox {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   display: -webkit-box;
@@ -54,5 +65,68 @@
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
+}
+
+.LogoCards {
+  position: relative;
+  top: 5vh;
+  height: 7vw;
+  width: 7vw;
+}
+
+.LogoCards img:nth-child(1) {
+  -webkit-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards img:nth-child(2) {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards img:nth-child(3) {
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards img:nth-child(4) {
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards:hover img:nth-child(1) {
+  -webkit-transform: rotate(-20deg);
+          transform: rotate(-20deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards:hover img:nth-child(2) {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards:hover img:nth-child(3) {
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
+}
+
+.LogoCards:hover img:nth-child(4) {
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+  -webkit-transform-origin: center 120%;
+          transform-origin: center 120%;
 }
 /*# sourceMappingURL=hand.css.map */

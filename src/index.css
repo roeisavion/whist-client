@@ -16,7 +16,7 @@ code {
 html {
   height: 100%;
   margin: 0;
-  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(61, 89, 252));
+  background-image: linear-gradient(to bottom right, rgb(52, 41, 253), rgb(202, 194, 244));
 }
 
 #root {

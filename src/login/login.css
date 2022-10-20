@@ -1,6 +1,6 @@
 .login{
-    /* height: 100vh; */
-    /* display: flex; */
+    position: relative;
+    top: 10vh;
 }
 
 .loginBox{
@@ -29,3 +29,7 @@ h1{
     height: 20%;
     width: 20%;
 }
+
+/* .MuiOutlinedInput-notchedOutline{
+    border: 4px dotted blue
+} */

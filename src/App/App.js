@@ -6,6 +6,7 @@ import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import {  Routes, Route, useNavigate } from "react-router-dom";
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
+import { LoginPage } from '../pages/LoginPage';
 
 const localClient = 'ws://127.0.0.1:9091' ;
 const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
@@ -24,9 +25,9 @@ console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
 let response, gameId, playerNum, nickname;
 const App = () => {
 
-  const isMock = process.env.REACT_APP_IS_MOCK || false;
+  const isMock = process.env.REACT_APP_IS_MOCK || true;
 
-  const [turnState, setTurn] = useState('P1')
+  const [turnState, setTurn] = useState('P3')
   const [cardsMapState, setCardsMap] = useState(
     {'P1':[],
     'P2':[],    
@@ -137,14 +138,14 @@ const App = () => {
   return (
     <div className="App" >
       <Routes>
-        <Route path="/" element={<Login
+        <Route path="/" element={<LoginPage
           client={client}
           clientId={clientId}
           inGame={inGame}
           game={game}
           gameId={gameId}
-          isGameCreatedModal={isGameCreatedModal}
-          setisGameCreatedModal={setisGameCreatedModal}
+          // isGameCreatedModal={isGameCreatedModal}
+          // setisGameCreatedModal={setisGameCreatedModal}
         />} />
         <Route path="/:gameId/waitingRoom" element={<WaitingRoomPage
           game={game}

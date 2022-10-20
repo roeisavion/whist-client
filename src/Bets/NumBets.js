@@ -13,7 +13,7 @@ export const NumBets = (props) => {
     return <div className = "bets">
         <div>
         <input type="number" placeholder="write your bet" id="betNum" name="betNum" min={props.minBet[1]===props.playerNum ? props.minBet[0] : 0}  max={13} onChange={handelNumChange} />
-            <button onClick={() => sendNumBet(client,clientId, myBetNum, props.numBets, props.minBet, props.playerNum)} disabled={!props.isMyTurn}>submit</button>
+            <button className='smallButton' onClick={() => sendNumBet(client,clientId, myBetNum, props.numBets, props.minBet, props.playerNum)} disabled={!props.isMyTurn}>submit</button>
         </div>
     </div>
 }
