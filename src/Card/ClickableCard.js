@@ -4,7 +4,7 @@ export const ClickableCard = (props) =>{
     alt='something went wrong'
     className={props.className}
     //className="card"
-    originHand = {props.originHand}
+    // originHand = {props.originHand}
     id={props.cardName}
     onClick={props.shouldDisable ? null : () => props.onClick(props.cardName, props.originHand)} >
     {/* onClick={props.shouldDisable ? alert("cannotClick") : () => props.onClick(props.cardName, props.originHand)} > */}

@@ -4,7 +4,7 @@ export const UnClickableCard = (props) =>
     src={`./PNG/${props.cardName}.png`}
     alt='something went wrong'
     className={props.className}
-    originHand = {props.originHand}
+    // originHand = {props.originHand}
     id={props.cardName}>
   </img>
 )

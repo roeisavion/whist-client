@@ -4,7 +4,7 @@ import './button.css'
 import './login.css'
 import { joinGame, createGame } from './loginFunctions';
 import Input from '@mui/material/TextField'
-import { Button, colors } from '@mui/material';
+// import { Button, colors } from '@mui/material';
 import _ from 'lodash';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -39,8 +39,8 @@ export const Login = (props) => {
         newNickname = event.target.value
         setNickname(newNickname)
         // setNickname(event.target.value)
-        console.log(nickname)
-        console.log(newNickname)
+        // console.log(nickname)
+        // console.log(newNickname)
         setNicknameError(_.isEmpty(newNickname))
         // setNicknameError(_.isEmpty(nickname))
     } // check on next render
@@ -51,9 +51,9 @@ export const Login = (props) => {
     // useEffect(() => { setGameIdError(_.isEmpty(gameId) ? true : false) }
     //     , [gameId])
 
-    const handelNicknameSubmit = () => {
-        setFinelNickName(nickname);
-    }
+    // const handelNicknameSubmit = () => {
+    //     setFinelNickName(nickname);
+    // }
 
 
 
@@ -75,15 +75,9 @@ export const Login = (props) => {
                         error={nicknameError}
                         helperText={nicknameError ? 'Must enter a nickname' : ' '}
                         label="Choose a nickname"
-                        // onChange={(event) => {
-                        //     event.persist()
-                        //     console.log(event)
-                        //     handelNicknameChange(event)
-                        // }}
                         onChange={handelNicknameChange}
                         onPaste={handelNicknameChange}
                         onCut={handelNicknameChange}
-                        disableUnderline
                         sx={{ ".MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline": { "& > fieldset": { border: '1px solid green' } } }}
 
                     // onLoad={handelNicknameChange}

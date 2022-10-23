@@ -1,5 +1,4 @@
 import { getNumber, getSuit, cardsNumberOrder, suitOrder } from "../helpers/helpersFunctions";
-import _ from 'lodash';
 
 export const sendSuitBet = (client, clientId, betNum, betSuit, suitBet) => {
 

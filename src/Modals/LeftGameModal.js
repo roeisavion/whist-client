@@ -1,6 +1,6 @@
 // import useCopy from 'use-copy';
 import './LeftGameModal.css'
-import { Button } from "@mui/material"
+// import { Button } from "@mui/material"
 
 export const LeftGameModal = (props) => {
     const closeModal = props.setIsLeftGameModal;

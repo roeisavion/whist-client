@@ -11,5 +11,3 @@ export const Hand = (props) => {
   shouldDisable = {props.shouldDisable}/>);
   return <div className={props.className}>{cards}</div>;
 }
-
-{/* <div  width= "90" height= "60"></div> */}

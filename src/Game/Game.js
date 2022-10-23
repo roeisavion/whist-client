@@ -14,9 +14,11 @@ import { SuitBets } from '../Bets/SuitBets';
 import { NumBets } from '../Bets/NumBets';
 import { keepSorted, handelSort } from '../Hand/handFunctions'
 import { nicknameList } from '../WaitingRoom/waitingRoomFuctions'
+import {widthStyle, heightStyle, sizeCalc} from './gameFunctions'
 
 let isSuitBetting, isNumBetting;
 export const Game = (props) => {
+  console.log('game component renderd')
   isSuitBetting = props.isSuitBetting;
   isNumBetting = props.isNumBetting;
 
@@ -49,14 +51,6 @@ export const Game = (props) => {
     P2hand: [rightHand, setRightHand],
     P3hand: [TopHand, setTopHand],
     P4hand: [leftHand, setLeftHand]
-  }
-
-  const sizeCalc = (hand) => (4 + hand) + 'vw';
-  const heightStyle = (height) => {
-    return { height }
-  }
-  const widthStyle = (width) => {
-    return { width }
   }
 
   const setHandPointer = {
@@ -108,12 +102,13 @@ export const Game = (props) => {
     playerShower[props.playerNum].forEach((playerLocation) => {
       setNicknamePointer[playerLocation](nicknamesMap['P' + i]);
       i++;
-      i === 5 ? i = 1 : i = i;
+      if (i === 5) i = 1;
     })
   })
 
 
   useEffect(() => {
+    console.log('useEffect ran')
     setIsDisabled(false);
     Object.keys(realTurnPointer).forEach(p => {
       realTurnPointer[p] = false;
@@ -123,12 +118,11 @@ export const Game = (props) => {
     let i = 1;
     playerShower[props.playerNum].forEach((playerLocation) => {
       setHandPointer[playerLocation](props.cardsMap['P' + i]);
-      // setNicknamePointer[playerLocation](nicknamesMap['P' + i]); //doesnt needs to be inside useEffect
       realTurnPointer['P' + i] ? setTurnPointer[playerLocation](true) : setTurnPointer[playerLocation](false);
       setBetsPointer[playerLocation](isSuitBetting ? props.suitBet['P' + i] : props.numBets['P' + i]);
 
       i++;
-      i === 5 ? i = 1 : i = i;
+      if (i === 5) i = 1;
     })
 
     let timeoutId;
@@ -141,7 +135,7 @@ export const Game = (props) => {
           playerShower[props.playerNum].forEach((playerLocation) => {
             winnerCardsPointer[playerLocation](props.winnedCards['P' + i]);
             i++;
-            i === 5 ? i = 1 : i = i;
+            if (i === 5) i = 1;
           })
         }
       }, 1500)
@@ -150,7 +144,7 @@ export const Game = (props) => {
       setCenter(props.cardsMap['center']);
     }
     return () => clearTimeout(timeoutId);
-    // }, [props.cardsMap, props.turn]);
+  // }, [props.cardsMap, props.turn, props.bet]);
   }, [props]);
 
 
@@ -224,8 +218,8 @@ export const Game = (props) => {
             <div>currnt bet: {myBet}</div>
           </div>
           {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='myWinnedCard' style={widthStyle(sizeCalc(myWinnerCards))} /> : null}
-        {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
-        {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
+          {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}
+          {isNumBetting ? < NumBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} numBets={props.numBets} minBet={props.minBet} playerNum={props.playerNum} /> : null}
         </div>
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting || isDisabled} />
       </div>

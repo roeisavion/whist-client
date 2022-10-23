@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Bets.css'
 import { sendSuitBet, sendPass } from './suitBetsFunctions.js'
 import './smallButton.css'

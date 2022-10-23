@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Game } from '../Game/Game'
-import { Login } from '../login/login'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import {  Routes, Route, useNavigate } from "react-router-dom";
@@ -24,10 +23,11 @@ console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
 // }
 let response, gameId, playerNum, nickname;
 const App = () => {
+  console.log('app component renderd')
 
-  const isMock = process.env.REACT_APP_IS_MOCK || true;
+  const isMock = process.env.REACT_APP_IS_MOCK || false;
 
-  const [turnState, setTurn] = useState('P3')
+  const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState(
     {'P1':[],
     'P2':[],    
@@ -53,7 +53,7 @@ const App = () => {
   const [inGame, setInGame] = useState(false);
   const [clientId, setClientId] = useState(false);
   const [game, setGame] = useState(null);
-  const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
+  // const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
   const [isLeftGameModal, setIsLeftGameModal] = useState(false);
 
   const showLeftGameModal = () => {
@@ -71,7 +71,6 @@ const App = () => {
     response = JSON.parse(message.data);
     if (response.method === "connect") {
       setClientId(response.clientId);
-      console.log("Client id Set successfully " + clientId)
     }
     // created game
     if (response.method === "create") {
@@ -84,6 +83,7 @@ const App = () => {
     }
 
     if (response.method === "leftGame") {
+      setGame(response.game);
       if (response.clientId === clientId) {
         setInGame(false);
       }

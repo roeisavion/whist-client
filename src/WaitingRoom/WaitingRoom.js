@@ -5,7 +5,7 @@ export const WaitingRoom = (props) => {
     const createData = () =>{
         return Object.values(clients).map(c => {
             const {playerNum,nickname} = c
-            return <tr>
+            return <tr key={playerNum}>
                 <td>{fullName[playerNum] + ":"}</td>
                 <td>{nickname}</td>
             </tr>

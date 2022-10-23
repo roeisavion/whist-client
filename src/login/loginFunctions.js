@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import { useNavigate } from "react-router-dom";
-
 
 export const createGame = (client, clientId, nickname, setNicknameError,setFinelNickName) => {
   if (nickname) {

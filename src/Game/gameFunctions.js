@@ -68,3 +68,11 @@ export const compareCards = (cardA, cardB) => {
 
     }
 }
+
+export const sizeCalc = (hand) => (4 + hand) + 'vw';
+export const heightStyle = (height) => {
+  return { height }
+}
+export const widthStyle = (width) => {
+  return { width }
+}
