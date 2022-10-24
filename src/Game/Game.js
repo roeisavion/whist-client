@@ -14,7 +14,7 @@ import { SuitBets } from '../Bets/SuitBets';
 import { NumBets } from '../Bets/NumBets';
 import { keepSorted, handelSort } from '../Hand/handFunctions'
 import { nicknameList } from '../WaitingRoom/waitingRoomFuctions'
-import {widthStyle, heightStyle, sizeCalc} from './gameFunctions'
+import { widthStyle, heightStyle, sizeCalc } from './gameFunctions'
 
 let isSuitBetting, isNumBetting;
 export const Game = (props) => {
@@ -144,7 +144,7 @@ export const Game = (props) => {
       setCenter(props.cardsMap['center']);
     }
     return () => clearTimeout(timeoutId);
-  // }, [props.cardsMap, props.turn, props.bet]);
+    // }, [props.cardsMap, props.turn, props.bet]);
   }, [props]);
 
 
@@ -181,8 +181,13 @@ export const Game = (props) => {
       <div className='topContainer'>
         <div className={isTopTurn ? 'topBox isTurn' : 'topBox'}>
           <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' style={widthStyle(sizeCalc(TopHand))} />
-          {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='winnedCard' style={widthStyle(sizeCalc(topWinnerCards))} /> : null}
-          <div className='currntBet'>{topNickname}  currnt bet: {topBet}</div>
+          <div className='topBetAndWins'>
+            {topWinnerCards !== 0 ? <WinnerCards numOfCards={topWinnerCards} className='P3winnerCards' cardClassName='winnedCard' style={widthStyle(sizeCalc(topWinnerCards))} /> : null}
+            <div>
+              <div className='currntBet'>{topNickname} </div>
+              <div className='currntBet'> bet: {topBet}</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -192,12 +197,12 @@ export const Game = (props) => {
           {leftWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={leftWinnerCards} className='P4winnerCards' cardClassName='winnedSideCard' /> : null}
           <div>
             <div>{leftNickname}</div>
-            {props.suitBet ? <div className='currntBet'>currnt bet: {leftBet}</div> : null}
+            {props.suitBet ? <div className='currntBet'>bet: {leftBet}</div> : null}
             {/* {isLeftTurn ? <div>current turn</div> : null} */}
           </div>
         </div>
         <div className='centerBox'>
-          {props.sliceingSuit !== null ? <div>Sliceing Suit: {shapePointer[props.sliceingSuit]} </div> : null}
+          {props.sliceingSuit !== null ? <div className='slicingSuit'>Sliceing Suit: {shapePointer[props.sliceingSuit]} </div> : null}
           {centerCards.length !== 0 ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
         </div>
         <div className={isRightTurn ? 'rightBox isTurn' : 'rightBox'}  >
@@ -205,7 +210,7 @@ export const Game = (props) => {
           {rightWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={rightWinnerCards} className='P2winnerCards' cardClassName='winnedSideCard' /> : null}
           <div>
             <div>{rightNickname}</div>
-            {props.suitBet ? <div className='currntBet'>currnt bet: {rightBet}</div> : null}
+            {props.suitBet ? <div className='currntBet'>bet: {rightBet}</div> : null}
             {/* {isRightTurn ? <div>current turn</div> : null} */}
           </div>
         </div>
@@ -215,7 +220,7 @@ export const Game = (props) => {
         <div className='winAndSortAndBet'>
           <div className='sortAndBet'>
             <button className='smallButton' onClick={() => handelSort(setMyHand, myHand, setIsSorted)} disabled={IsSorted} >sort</button>
-            <div>currnt bet: {myBet}</div>
+            <div>bet: {myBet}</div>
           </div>
           {myWinnerCards !== 0 ? <WinnerCards numOfCards={myWinnerCards} className='P1winnerCards' cardClassName='myWinnedCard' style={widthStyle(sizeCalc(myWinnerCards))} /> : null}
           {isSuitBetting ? <SuitBets client={props.client} clientId={props.clientId} isMyTurn={isMyTurn} suitBet={props.suitBet} /> : null}

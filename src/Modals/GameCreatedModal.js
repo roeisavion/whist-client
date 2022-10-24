@@ -5,22 +5,22 @@ import { Button } from "@mui/material"
 export const GameCreatedModal = (props) => {
     const setOpenGameCreatedModal = props.setisGameCreatedModal;
     return <div>
-        <div class="modalBackground">
-            <div class="modalContainer">
+        <div className="modalBackground">
+            <div className="modalContainer">
                 <div className="titleCloseBtn"><button  
                 onClick={()=> setOpenGameCreatedModal(false)}>X
                 </button>
                 </div>
-                <div class="title"></div>
-                <div class="body">
-                    <div class="text-right cross"> <i class="fa fa-times"></i> </div>
-                    <div class="card-body text-center"> <img src="https://img.icons8.com/stickers/100/000000/cards.png" />
+                <div className="title"></div>
+                <div className="body">
+                    <div className="text-right cross"> <i className="fa fa-times"></i> </div>
+                    <div className="card-body text-center"> <img src="https://img.icons8.com/stickers/100/000000/cards.png" />
                         <h4>GAME CREATED SUCCSSFULY</h4>
                         <h3>GameId: {props.gameId}</h3>
                     </div>
-                    <div class="footer">
-                        <button onClick={()=> setOpenGameCreatedModal(false)} class="btn btn-out btn-square continue">CONTINUE</button>
-                        <button class="btn btn-out btn-square continue">COPY GAME ID</button>
+                    <div className="footer">
+                        <button onClick={()=> setOpenGameCreatedModal(false)} className="btn btn-out btn-square continue">CONTINUE</button>
+                        <button className="btn btn-out btn-square continue">COPY GAME ID</button>
                     </div>
                 </div>
             </div>

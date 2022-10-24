@@ -33,19 +33,23 @@
 .centerBox {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   border-style: solid;
-  border-color: black;
-  height: 10vw;
+  border-color: wheat;
+  height: 9.5vw;
   left: 50%;
   /* top: 50%; */
   position: absolute;
   transform: translate(-50%);
+  border-radius: 7px;
+  padding: 4px;
 }
 
 .isTurn {
   border-style: solid;
-  border-color: black;
+  border-color: wheat;
+  border-radius: 7px;
+  padding: 5px;
 }
 
 .leftBox,
@@ -83,6 +87,16 @@
   justify-self: flex-end;
 }
 
-.currntBet{
+.currntBet {
   margin: 3px;
+}
+
+.slicingSuit {
+  margin: 6px;
+}
+
+.topBetAndWins {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

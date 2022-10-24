@@ -6,7 +6,7 @@ import LeaveButton from '../Buttons/LeaveButton';
 
 export const WaitingRoomPage = (props) => {
     // const clients = props.game.clients;
-    return <div>
+    return <div className='waitingRoomContainer'>
         {props.isLeftGameModal ? <LeftGameModal
             setIsLeftGameModal={props.setIsLeftGameModal}
             nickname={props.nickname} /> : null}

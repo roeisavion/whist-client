@@ -1,8 +1,10 @@
 .waitingRoom{
-    /* position:absolute;
-    right: 5%;
-    top: 30%; */
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.waitingRoomContainer{
+    display: flex;
+    align-items: center;
 }

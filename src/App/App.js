@@ -55,6 +55,7 @@ const App = () => {
   const [game, setGame] = useState(null);
   // const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
   const [isLeftGameModal, setIsLeftGameModal] = useState(false);
+  const [isScore, setIsScore] = useState(false);
 
   const showLeftGameModal = () => {
     setIsLeftGameModal(true);
@@ -68,6 +69,7 @@ const App = () => {
   };
 
   client.onmessage = (message) => {
+    // @ts-ignore
     response = JSON.parse(message.data);
     if (response.method === "connect") {
       setClientId(response.clientId);
@@ -129,8 +131,9 @@ const App = () => {
       }
     }
     if (response.method === "score") {
-      setScoreMap(response.scoreMap)
-      alert("your score is: " + response.scoreMap[playerNum])
+      setScoreMap(response.scoreMap);
+      setIsScore(true);
+      alert("your score is: " + response.scoreMap[playerNum]);
     }
   };
 
@@ -168,7 +171,9 @@ const App = () => {
           sliceingSuit={sliceingSuitState}
           minBet={minBetState}
           scoreMap={scoreMapState}
-          clients = {isMock ? mock.clients : (game ? game.clients : null)} />
+          clients = {isMock ? mock.clients : (game ? game.clients : null)}
+          setIsScore = {setIsScore}
+          isScore = {isMock ? mock.isScore : isScore} />
         } />
       </Routes>
     </div>

@@ -1,11 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Luckiest+Guy);
 
-.LoginPage{
-    /* display: flex;
+/* .LoginPage{
+    display: flex;
     height: 100vh;
     justify-content: center;
-    flex-direction: column; */
-}
+    flex-direction: column;
+} */
 
 .welcomeAndLogo{
     display: flex;
