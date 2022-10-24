@@ -1,6 +1,10 @@
 .login{
     position: relative;
-    top: 10vh;
+    top: 12vh;
+    background-color: white;
+    padding: 15px;
+    width: fit-content;
+    border-radius: 5px;
 }
 
 .loginBox{

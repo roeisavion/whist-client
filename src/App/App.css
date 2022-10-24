@@ -3,6 +3,8 @@
   height: 100%;
   margin: 0;
   max-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
@@ -35,6 +37,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

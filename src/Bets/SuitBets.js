@@ -21,10 +21,10 @@ export const SuitBets = (props) => {
         <div>
         <input type="number" placeholder="write your bet" id="betNum" name="betNum" min="3" max="13" onChange={handelNumChange} />
             <select id="suit" onChange={handelSuitChange}>
-                <option value="H">Heart ❤</option>
-                <option value="C">Club ♣</option>
-                <option value="D">Diamond ♦</option>
+                <option className='redFont' value="H">Heart ❤</option>
                 <option value="S">Spade ♠</option>
+                <option className='redFont' value="D">Diamond ♦</option>
+                <option value="C">Club ♣</option>
             </select>
             <button className='smallButton' onClick={() => sendSuitBet(client,clientId,suitBetNum,betSuit,props.suitBet)} disabled={!props.isMyTurn}>submit</button>
         </div>

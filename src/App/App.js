@@ -157,18 +157,13 @@ const App = () => {
         <Route path="/:gameId/game" element={<Game
           client={client}
           clientId={clientId}
-          // playerNum={playerNum}
           playerNum={isMock ? mock.playerNum : playerNum}
-          // cardsMap={cardsMapState}
           cardsMap={isMock ? mock.cardsMap : cardsMapState}
-          // winnedCards={winnedCardsState}
           winnedCards ={isMock ? mock.winnedCards : winnedCardsState }
           turn={turnState}
           isSuitBetting={isSuitBetting}
           isNumBetting={isNumBetting}
-          // suitBet={suitBetState}
           suitBet={isMock ? mock.suitBet : suitBetState }
-          // numBets={numBetState}
           numBets={isMock ? mock.numBets : numBetState}
           sliceingSuit={sliceingSuitState}
           minBet={minBetState}
