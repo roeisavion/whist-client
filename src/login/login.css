@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Fuzzy+Bubbles);
+
 .login{
     position: relative;
     top: 12vh;
@@ -5,6 +8,11 @@
     padding: 15px;
     width: fit-content;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    /* font-family: 'Source Sans Pro'; */
+    font-family: 'Fuzzy Bubbles';
+
 }
 
 .loginBox{
@@ -34,6 +42,14 @@ h1{
     width: 20%;
 }
 
-/* .MuiOutlinedInput-notchedOutline{
-    border: 4px dotted blue
-} */
+.blackText{
+    color: black;
+    /* display: inline */
+}
+
+.link{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+    /* display: inline */
+}

@@ -5,17 +5,17 @@
   }
 
 
-.P3winnerCards, .P1winnerCards{
-    // & > * {
-    //   margin-right : -3vw;
-    // } 
-  } 
+// .P3winnerCards, .P1winnerCards{
+//     & > * {
+//       margin-right : -3vw;
+//     } 
+//   } 
 
   
   .P2winnerCards ,.P4winnerCards{
     flex-direction: column;
     margin: 5px;
-    height:20vh
+    // height:20vh
   } 
 
   .P1winnerCards{

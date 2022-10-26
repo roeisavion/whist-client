@@ -164,12 +164,12 @@ const App = () => {
           cardsMap={isMock ? mock.cardsMap : cardsMapState}
           winnedCards ={isMock ? mock.winnedCards : winnedCardsState }
           turn={turnState}
-          isSuitBetting={isSuitBetting}
-          isNumBetting={isNumBetting}
+          isSuitBetting={isMock ? mock.isSuitBetting : isSuitBetting}
+          isNumBetting={isMock ? mock.isNumBetting : isNumBetting}
           suitBet={isMock ? mock.suitBet : suitBetState }
           numBets={isMock ? mock.numBets : numBetState}
           sliceingSuit={sliceingSuitState}
-          minBet={minBetState}
+          minBet={isMock ? mock.minBet : minBetState}
           scoreMap={scoreMapState}
           clients = {isMock ? mock.clients : (game ? game.clients : null)}
           setIsScore = {setIsScore}

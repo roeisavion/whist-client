@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Bets.css'
 import { sendSuitBet, sendPass } from './suitBetsFunctions.js'
 import './smallButton.css'
+import { NumberInput } from './NumberInput';
 
 
 
@@ -20,6 +21,7 @@ export const SuitBets = (props) => {
     return <div className = "bets">
         <div>
         <input type="number" placeholder="write your bet" id="betNum" name="betNum" min="3" max="13" onChange={handelNumChange} />
+        {/* <NumberInput min={3} max={13} setMyBetNum={setSuitBetNum} myBetNum={suitBetNum} /> */}
             <select id="suit" onChange={handelSuitChange}>
                 <option className='redFont' value="H">Heart ❤</option>
                 <option value="S">Spade ♠</option>

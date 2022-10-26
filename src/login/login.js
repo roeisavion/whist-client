@@ -17,19 +17,29 @@ const theme = createTheme({
             main: '#ff0000',
         }
     },
+    typography: {
+        fontFamily: 'Fuzzy Bubbles'
+    }
 });
+
+const labelText = {
+    join: `Doesn't have a game ID yet ? Create one `,
+    create: `Already have a game ID ? Join the game `
+}
 
 export const Login = (props) => {
     let newNickname;
     let client = props.client;
     let clientId = props.clientId;
-    const [gameId, setGameId] = useState("")
-    const [nickname, setNickname] = useState(null)
-    const [finelNickName, setFinelNickName] = useState("")
+    const [gameId, setGameId] = useState("");
+    const [nickname, setNickname] = useState(null);
+    const [finelNickName, setFinelNickName] = useState("");
+    const [isJoin, setIsJoin] = useState(true);
+
 
     const [gameIdError, setGameIdError] = useState(false)
     const handelGameIdChange = (event) => {
-        setGameId(event.target.value)
+        setGameId(event.target.value);
         // setGameIdError(_.isEmpty(gameId) ? true : false)
     }
 
@@ -38,97 +48,59 @@ export const Login = (props) => {
     const handelNicknameChange = (event) => {
         newNickname = event.target.value
         setNickname(newNickname)
-        // setNickname(event.target.value)
-        // console.log(nickname)
-        // console.log(newNickname)
         setNicknameError(_.isEmpty(newNickname))
-        // setNicknameError(_.isEmpty(nickname))
     } // check on next render
-
-    // useEffect(() => { setNicknameError(_.isEmpty(nickname) ? true : false) }
-    //     , [nickname])
-
-    // useEffect(() => { setGameIdError(_.isEmpty(gameId) ? true : false) }
-    //     , [gameId])
-
-    // const handelNicknameSubmit = () => {
-    //     setFinelNickName(nickname);
-    // }
-
 
 
     return <ThemeProvider theme={theme}>
         <div className="login" >
-            <div className="loginBox">
-                {/* {props.isGameCreatedModal ? <GameCreatedModal
-                setisGameCreatedModal={props.setisGameCreatedModal}
-                gameId={props.gameId} /> : null} */}
-                {/* {props.isLeftGameModal ? <LeftGameModal
-                setIsLeftGameModal={props.setIsLeftGameModal}
-                nickname={nickname} /> : null} */}
-
-                {/* <h1> {"Welcome " + finelNickName}</h1> */}
-                {/* <img className='cardsPic' src={`./PNG/aces.png`} /> */}
-                <div>
-                    <Input
-                        placeholder="Choose a nickname"
-                        error={nicknameError}
-                        helperText={nicknameError ? 'Must enter a nickname' : ' '}
-                        label="Choose a nickname"
-                        onChange={handelNicknameChange}
-                        onPaste={handelNicknameChange}
-                        onCut={handelNicknameChange}
-                        sx={{ ".MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline": { "& > fieldset": { border: '1px solid green' } } }}
-
-                    // onLoad={handelNicknameChange}
-
-                    />
-                </div>
-            </div>
-            <button
-                id='createButton'
-                onClick={() => createGame(client, clientId, nickname, setNicknameError, setFinelNickName)}
-                className='button'
-                disabled={props.inGame}>
-                Create Game
-            </button>
-            <div
-                className='smallContainer'>
-                <Input
-                    // disableUnderline
-                    id="gameIdInput"
-                    placeholder="Enter gameId"
-                    label="Enter gameId"
-                    // error={gameIdError}
-                    // helperText={gameIdError ? 'Must enter a gameId' : ' '}
-                    onChange={handelGameIdChange}
-                    onPaste={handelGameIdChange}
-                    onCut={handelGameIdChange}
-                    onLoad={handelGameIdChange}
-                />
-                <button
+            {/* <div className="loginBox"> */}
+            {/* <div> */}
+            <Input
+                placeholder="Choose a nickname"
+                error={nicknameError}
+                helperText={nicknameError ? 'Must enter a nickname' : ' '}
+                label="Choose a nickname"
+                onChange={handelNicknameChange}
+                onPaste={handelNicknameChange}
+                onCut={handelNicknameChange}
+            />
+            {/* </div> */}
+            {/* </div> */}
+            { }
+            {/* <div className='smallContainer'> */}
+            {isJoin ? <><Input
+                id="gameIdInput"
+                placeholder="Enter gameId"
+                label="Enter gameId"
+                // error={gameIdError}
+                // helperText={gameIdError ? 'Must enter a gameId' : ' '}
+                onChange={handelGameIdChange}
+                onPaste={handelGameIdChange}
+                onCut={handelGameIdChange}
+                onLoad={handelGameIdChange} /><button
                     id='joinButton'
                     onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setGameIdError, setFinelNickName)}
-                    // onClick={() => joinGame(client, clientId, gameId, nickname, setNicknameError, setFinelNickName)}
                     className='button'
                     disabled={props.inGame}>
                     Join Game
-                </button>
+                </button></>
+                : <button
+                    id='createButton'
+                    onClick={() => createGame(client, clientId, nickname, setNicknameError, setFinelNickName)}
+                    className='button'
+                    disabled={props.inGame}>
+                    Create Game
+                </button>}
+
+            {/* </div> */}
+            <div>
+                <span className='blackText'>{isJoin ? labelText['join'] : labelText['create']}</span>
+                <span className='link' onClick={() => setIsJoin(!isJoin)}>here</span>
             </div>
-            {/* {props.game ? <WaitingRoom game={props.game} /> : null} */}
-            {/* <div className="leaveButton">
-            <button
-                id='leaveButton'
-                onClick={() => leaveGame(client, clientId)}
-                className='button'
-                disabled={!props.inGame}>
-                Leave Game
-            </button>
-        </div> */}
         </div>
     </ThemeProvider>
 }
-
 
 
 

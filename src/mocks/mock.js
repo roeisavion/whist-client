@@ -21,7 +21,7 @@ export const mock = {
         "P3": 5,
         "P4": 6
     },
-    winnedCards: { P1: 2, P2: 6, P3: 5, P4: 0 },
+    winnedCards: { P1: 0, P2: 0, P3: 0, P4: 0 },
     turn: "P1",
     isSuitBetting: true,
     isNumBetting: false,
@@ -38,7 +38,7 @@ export const mock = {
         "P4": null
     },
     sliceingSuit: null,
-    minBet: null,
+    minBet: [4,'P1'],
     scoreMap: null,
     clients : {
         "a-123" : {
