@@ -10,3 +10,7 @@
 .numBets{
     display: flex;
 }
+
+.upperWrapper{
+    display: flex;
+}

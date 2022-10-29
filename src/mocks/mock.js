@@ -40,6 +40,33 @@ export const mock = {
     sliceingSuit: null,
     minBet: [4,'P1'],
     scoreMap: null,
+    isScore: true,
+    game:{
+        scoreMap:{
+            "P1": 12,
+            "P2": -10,
+            "P3": 34,
+            "P4": 55
+        },
+        clients : {
+            "a-123" : {
+                playerNum : "P1",
+                nickname : "aaa"
+            },
+            "b-123" : {
+                playerNum : "P2",
+                nickname : "bbb"
+            },
+            "c-123" : {
+                playerNum : "P3",
+                nickname : "ccc"
+            },
+            "d-123" : {
+                playerNum : "P4",
+                nickname : "ddd"
+            }
+        }
+    },
     clients : {
         "a-123" : {
             playerNum : "P1",

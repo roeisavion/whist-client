@@ -15,6 +15,7 @@ import { NumBets } from '../Bets/NumBets';
 import { keepSorted, handelSort } from '../Hand/handFunctions'
 import { nicknameList } from '../WaitingRoom/waitingRoomFuctions'
 import { widthStyle, heightStyle, sizeCalc } from './gameFunctions'
+import { ScorModal } from 'Modals/ScoreModal';
 
 let isSuitBetting, isNumBetting;
 export const Game = (props) => {
@@ -175,9 +176,12 @@ export const Game = (props) => {
 
   }
 
+  // useEffect(() => {
+  // })
 
   return (
     <div className="game">
+      {props.isScore ? <ScorModal game={props.game} setIsScore={props.setIsScore} isScore={props.isScore}/>:null }
       <div className='topContainer'>
         <div className={isTopTurn ? 'topBox isTurn' : 'topBox'}>
           <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' style={widthStyle(sizeCalc(TopHand))} />

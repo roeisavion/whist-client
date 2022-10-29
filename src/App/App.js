@@ -55,7 +55,7 @@ const App = () => {
   const [game, setGame] = useState(null);
   // const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
   const [isLeftGameModal, setIsLeftGameModal] = useState(false);
-  const [isScore, setIsScore] = useState(false);
+  const [isScore, setIsScore] = useState(isMock ? mock.isScore : false);
 
   const showLeftGameModal = () => {
     setIsLeftGameModal(true);
@@ -147,8 +147,6 @@ const App = () => {
           inGame={inGame}
           game={game}
           gameId={gameId}
-          // isGameCreatedModal={isGameCreatedModal}
-          // setisGameCreatedModal={setisGameCreatedModal}
         />} />
         <Route path="/:gameId/waitingRoom" element={<WaitingRoomPage
           game={game}
@@ -158,6 +156,7 @@ const App = () => {
           isLeftGameModal={isLeftGameModal}
           setIsLeftGameModal={setIsLeftGameModal} />} />
         <Route path="/:gameId/game" element={<Game
+          game={isMock ? mock.game : game}
           client={client}
           clientId={clientId}
           playerNum={isMock ? mock.playerNum : playerNum}
@@ -173,7 +172,7 @@ const App = () => {
           scoreMap={scoreMapState}
           clients = {isMock ? mock.clients : (game ? game.clients : null)}
           setIsScore = {setIsScore}
-          isScore = {isMock ? mock.isScore : isScore} />
+          isScore = {isScore} />
         } />
       </Routes>
     </div>

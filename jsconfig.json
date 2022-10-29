@@ -4,7 +4,7 @@
     "target": "ES6",
     "jsx": "preserve",
     "baseUrl": "./src",
-    "checkJs": true
+    "checkJs": false
     },
     "exclude": [
     "node_modules",
