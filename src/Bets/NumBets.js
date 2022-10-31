@@ -3,11 +3,12 @@ import { useState } from 'react';
 import './Bets.css'
 import './NumberInput.css'
 import { NumberInput } from './NumberInput';
+import { removeNullValues } from 'helpers/helpersFunctions';
 
 export const NumBets = (props) => {
     let client = props.client;
     let clientId = props.clientId;
-    const [myBetNum, setMyBetNum] = useState(0)
+    const [myBetNum, setMyBetNum] = useState(props.minBet[1] === props.playerNum ? props.minBet[0] : 0)
     const handelNumChange = (event) => {
         setMyBetNum(event.target.value)
     }
@@ -46,7 +47,9 @@ const sendNumBet = (client, clientId, myBetNum, numBets, minBet, playerNum) => {
     }
     try {
         realBets = Object.values(numBets);
-        realBets = realBets.filter(nb => nb)
+        // realBets = realBets.map(nb => nb.toString())
+        // realBets = realBets.filter(nb => nb)
+        removeNullValues(realBets);
         let realBets1 = realBets.map(nb => parseInt(nb))
         if (realBets.length === 3 && (_.sum(realBets1) + parseInt(myBetNum)) === 13) {
             alert("the sum of bets can't be 13")

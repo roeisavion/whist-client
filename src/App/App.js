@@ -7,25 +7,14 @@ import {  Routes, Route, useNavigate } from "react-router-dom";
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 import { LoginPage } from '../pages/LoginPage';
 
-const localClient = 'ws://127.0.0.1:9091' ;
-const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS || localClient);
-// const renderClient = 'wss://whist-server.onrender.com' ;
-// const client = new W3CWebSocket(renderClient);
+const client = new W3CWebSocket(process.env.REACT_APP_SERVER_ADRESS);
 
-console.log("server adress is " + process.env.REACT_APP_SERVER_ADRESS)
-// let client;
-// try {
-//   client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
-// } catch (error) {
-//   setTimeout(() => {
-//     client = new W3CWebSocket('wss://powerful-plains-99715.herokuapp.com');
-//   }, 1500);
-// }
 let response, gameId, playerNum, nickname;
 const App = () => {
   console.log('app component renderd')
 
-  const isMock = process.env.REACT_APP_IS_MOCK || false;
+  // const isMock = process.env.REACT_APP_IS_MOCK;
+  const isMock = false;
 
   const [turnState, setTurn] = useState('P1')
   const [cardsMapState, setCardsMap] = useState(
@@ -53,9 +42,9 @@ const App = () => {
   const [inGame, setInGame] = useState(false);
   const [clientId, setClientId] = useState(false);
   const [game, setGame] = useState(null);
-  // const [isGameCreatedModal, setisGameCreatedModal] = useState(false);
   const [isLeftGameModal, setIsLeftGameModal] = useState(false);
-  const [isScore, setIsScore] = useState(isMock ? mock.isScore : false);
+  // const [isScore, setIsScore] = useState(isMock ? mock.isScore : false);
+  const [isScore, setIsScore] = useState(false);
 
   const showLeftGameModal = () => {
     setIsLeftGameModal(true);
@@ -81,7 +70,6 @@ const App = () => {
       setGame(response.game);
       setInGame(true);
       navigate(`/${gameId}/waitingRoom`);
-      // setisGameCreatedModal(true)
     }
 
     if (response.method === "leftGame") {
@@ -106,7 +94,6 @@ const App = () => {
       setCardsMap(response.cardsMap);
       setWinnedCards(response.winnedCards);
       setTurn(response.turn);
-      // setIsGameStarted(true)
       navigate(`/${gameId}/game`);
     }
 
