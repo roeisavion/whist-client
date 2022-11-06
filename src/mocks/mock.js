@@ -42,6 +42,7 @@ export const mock = {
     scoreMap: null,
     isScore: true,
     game:{
+        id:'gm-1234',
         scoreMap:{
             "P1": 12,
             "P2": -10,

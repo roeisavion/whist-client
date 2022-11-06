@@ -34,3 +34,9 @@
     background-color: #7f817f;
     box-shadow: 0 5px #666;
 }
+
+.copyButton{
+    width: auto;
+    height: auto;
+    font-size: small;
+}

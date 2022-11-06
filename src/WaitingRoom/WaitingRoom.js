@@ -1,7 +1,10 @@
+import { useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import './WaitingRoom.css'
 
 export const WaitingRoom = (props) => {
     const clients = props.game.clients;
+    const [isCopied, setIsCopied] = useState(false)
     const createData = () =>{
         return Object.values(clients).map(c => {
             const {playerNum,nickname} = c
@@ -20,7 +23,11 @@ export const WaitingRoom = (props) => {
                 {data}
             </tbody>
         </table>
-        <p>GameID: {props.game.id}</p>
+        <div className='gameIdBox'>GameID: {props.game.id}         
+        <CopyToClipboard text={props.game.id}
+          onCopy={() => setIsCopied(true)}>
+              <button className='button copyButton' disabled={isCopied}>{isCopied ? "copied" :'Copy'}</button>
+        </CopyToClipboard></div>
     </div>
 }
 
