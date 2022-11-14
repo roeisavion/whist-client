@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import _ from 'lodash';
 import '../index.css';
 import '../Hand/Hand.css';
@@ -105,7 +105,7 @@ export const Game = (props) => {
       i++;
       if (i === 5) i = 1;
     })
-  })
+  }, [])
 
 
   useEffect(() => {
@@ -150,12 +150,10 @@ export const Game = (props) => {
 
 
 
-
-
-  const handleCardClick = (clickedCard, originHand) => {
-    let cardsInHand = handPointer[originHand][0]
+  const handleCardClick = useCallback((clickedCard, originHand) => {
+    const cardsInHand = handPointer[originHand][0]
     if (centerCards.length > 0) {
-      let firstCard = centerCards[0];
+      const firstCard = centerCards[0];
       let firstSuit = getSuit(firstCard[0]);
       if (getSuit(clickedCard) !== firstSuit) {
         let shapeArray = cardsInHand.map(c => getSuit(c))
@@ -173,24 +171,20 @@ export const Game = (props) => {
       "clientId": props.clientId
     }
     props.client.send(JSON.stringify(payLoad));
-
-  }
-
-  // useEffect(() => {
-  // })
+  }, [handPointer, centerCards])
 
   return (
     <div className="game">
-      {props.isScore ? <ScorModal game={props.game} setIsScore={props.setIsScore} isScore={props.isScore}/>:null }
+      {props.isScore ? <ScorModal game={props.game} setIsScore={props.setIsScore} isScore={props.isScore} /> : null}
       <div className='topContainer'>
         <div className={isTopTurn ? 'topBox isTurn' : 'topBox'}>
           <CompetitorsHand numOfCards={TopHand} className="P3hand" cardClassName='card' style={widthStyle(sizeCalc(TopHand))} />
           <div className='topBetAndWins'>
-            {topWinnerCards !== 0 ? <WinnerCards 
-            numOfCards={topWinnerCards} 
-            className='P3winnerCards' 
-            cardClassName='winnedCard' 
-            style={widthStyle(sizeCalc(topWinnerCards))} /> : null}
+            {topWinnerCards !== 0 ? <WinnerCards
+              numOfCards={topWinnerCards}
+              className='P3winnerCards'
+              cardClassName='winnedCard'
+              style={widthStyle(sizeCalc(topWinnerCards))} /> : null}
             <div>
               <div className='currntBet'>{topNickname} </div>
               <div className='currntBet'> bet: {topBet}</div>
@@ -202,10 +196,10 @@ export const Game = (props) => {
       <div className='centerContiener'>
         <div className={isLeftTurn ? 'leftBox isTurn' : 'leftBox'}>
           <CompetitorsHandRotated numOfCards={leftHand} className="P4hand" cardClassName='sideCard' style={heightStyle(sizeCalc(leftHand))} />
-          {leftWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={leftWinnerCards} 
-          className='P4winnerCards' 
-          cardClassName='winnedSideCard' 
-          style={heightStyle(sizeCalc(leftWinnerCards))} /> : null}
+          {leftWinnerCards !== 0 ? <WinnerCardsRotated numOfCards={leftWinnerCards}
+            className='P4winnerCards'
+            cardClassName='winnedSideCard'
+            style={heightStyle(sizeCalc(leftWinnerCards))} /> : null}
           <div>
             <div>{leftNickname}</div>
             {props.suitBet ? <div className='currntBet'>bet: {leftBet}</div> : null}
@@ -217,15 +211,15 @@ export const Game = (props) => {
           {centerCards.length !== 0 ? <Center arrayOfCards={centerCards.map(c => c[0])} className="center" /> : null}
         </div>
         <div className={isRightTurn ? 'rightBox isTurn' : 'rightBox'}  >
-          <CompetitorsHandRotated 
-          numOfCards={rightHand} 
-          className="P2hand" cardClassName='sideCard' 
-          style={heightStyle(sizeCalc(rightHand))} />
-          {rightWinnerCards !== 0 ? <WinnerCardsRotated 
-          numOfCards={rightWinnerCards} 
-          className='P2winnerCards' 
-          cardClassName='winnedSideCard' 
-          style={heightStyle(sizeCalc(rightWinnerCards))}/> : null}
+          <CompetitorsHandRotated
+            numOfCards={rightHand}
+            className="P2hand" cardClassName='sideCard'
+            style={heightStyle(sizeCalc(rightHand))} />
+          {rightWinnerCards !== 0 ? <WinnerCardsRotated
+            numOfCards={rightWinnerCards}
+            className='P2winnerCards'
+            cardClassName='winnedSideCard'
+            style={heightStyle(sizeCalc(rightWinnerCards))} /> : null}
           <div>
             <div>{rightNickname}</div>
             {props.suitBet ? <div className='currntBet'>bet: {rightBet}</div> : null}
@@ -236,31 +230,31 @@ export const Game = (props) => {
       <div className={isMyTurn ? 'bottomContainer isTurn' : 'bottomContainer'}>
         <div className='winAndSortAndBet'>
           <div className='sortAndBet'>
-            <button 
-            className='smallButton' 
-            onClick={() => handelSort(setMyHand, myHand, setIsSorted)} 
-            disabled={IsSorted} >sort</button>
+            <button
+              className='smallButton'
+              onClick={() => handelSort(setMyHand, myHand, setIsSorted)}
+              disabled={IsSorted} >sort</button>
             <div>bet: {myBet}</div>
           </div>
-          {myWinnerCards !== 0 ? 
-          <WinnerCards 
-          numOfCards={myWinnerCards} 
-          className='P1winnerCards' 
-          cardClassName='myWinnedCard' 
-          style={widthStyle(sizeCalc(myWinnerCards))} /> : null}
-          {isSuitBetting ? 
-          <SuitBets 
-          client={props.client} 
-          clientId={props.clientId} 
-          isMyTurn={isMyTurn} 
-          suitBet={props.suitBet} /> : null}
-          {isNumBetting ? 
-          < NumBets 
-          client={props.client} 
-          clientId={props.clientId} 
-          isMyTurn={isMyTurn} numBets={props.numBets} 
-          minBet={props.minBet} 
-          playerNum={props.playerNum} /> : null}
+          {myWinnerCards !== 0 ?
+            <WinnerCards
+              numOfCards={myWinnerCards}
+              className='P1winnerCards'
+              cardClassName='myWinnedCard'
+              style={widthStyle(sizeCalc(myWinnerCards))} /> : null}
+          {isSuitBetting ?
+            <SuitBets
+              client={props.client}
+              clientId={props.clientId}
+              isMyTurn={isMyTurn}
+              suitBet={props.suitBet} /> : null}
+          {isNumBetting ?
+            < NumBets
+              client={props.client}
+              clientId={props.clientId}
+              isMyTurn={isMyTurn} numBets={props.numBets}
+              minBet={props.minBet}
+              playerNum={props.playerNum} /> : null}
         </div>
         <Hand arrayOfCards={IsSorted ? keepSorted(myHand) : myHand} onClick={handleCardClick} className="P1hand" cardClassName='myCard' shouldDisable={!isMyTurn || isSuitBetting || isNumBetting || isDisabled} />
       </div>
