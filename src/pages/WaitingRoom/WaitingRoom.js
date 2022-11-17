@@ -1,9 +1,12 @@
 import { useState, useMemo, useCallback } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import './WaitingRoom.css'
+import { useParams } from "react-router-dom";
+
 
 export const WaitingRoom = (props) => {
     const clients = props.game.clients;
+
     const [isCopied, setIsCopied] = useState(false)
     const createData = useCallback(() => (
         Object.values(clients).map(c => {
@@ -23,7 +26,7 @@ export const WaitingRoom = (props) => {
                 {data}
             </tbody>
         </table>
-        <div className='gameIdBox'>GameID: {props.game.id}
+        <div className='gameIdBox'>GameID: {props.game.gameId}
             <CopyToClipboard text={props.game.id}
                 onCopy={() => setIsCopied(true)}>
                 <button className='button copyButton' disabled={isCopied}>{isCopied ? "copied" : 'Copy'}</button>

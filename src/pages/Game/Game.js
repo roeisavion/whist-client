@@ -1,21 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import _ from 'lodash';
-import '../index.css';
-import '../Hand/Hand.css';
-import '../WinnerCards/WinnerCards.css';
+import '../../index.css';
+import '../../components/Hand/Hand.css';
+import '../../components/WinnerCards/WinnerCards.css';
 import './Game.css';
-import { Hand } from '../Hand/Hand'
-import { CompetitorsHand, CompetitorsHandRotated } from '../Hand/CompetitorsHand'
-import { WinnerCards, WinnerCardsRotated } from '../WinnerCards/WinnerCards'
-import { Center } from '../Center/Center'
+import { Hand } from '../../components/Hand/Hand'
+import { CompetitorsHand, CompetitorsHandRotated } from '../../components/Hand/CompetitorsHand'
+import { WinnerCards, WinnerCardsRotated } from '../../components/WinnerCards/WinnerCards'
+import { Center } from '../../components/Center/Center'
 import { playerShower, shapePointer } from './gameFunctions'
-import { getSuit } from '../helpers/helpersFunctions';
-import { SuitBets } from '../Bets/SuitBets';
-import { NumBets } from '../Bets/NumBets';
-import { keepSorted, handelSort } from '../Hand/handFunctions'
+import { getSuit } from '../../helpers/helpersFunctions';
+import { SuitBets } from '../../components/Bets/SuitBets';
+import { NumBets } from '../../components/Bets/NumBets';
+import { keepSorted, handelSort } from '../../components/Hand/handFunctions'
 import { nicknameList } from '../WaitingRoom/waitingRoomFuctions'
 import { widthStyle, heightStyle, sizeCalc } from './gameFunctions'
-import { ScorModal } from 'Modals/ScoreModal';
+import { ScorModal } from 'components/Modals/ScoreModal';
 
 let isSuitBetting, isNumBetting;
 export const Game = (props) => {

@@ -1,5 +1,6 @@
 import { ClickableCard } from '../Card/ClickableCard'
 import '../Card/Card.css';
+import './Hand.css';
 
 export const Hand = (props) => {
   const cards = props.arrayOfCards.map((card) => <ClickableCard 

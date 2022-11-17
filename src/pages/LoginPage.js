@@ -1,5 +1,5 @@
-import { Hand } from "../Hand/Hand"
-import { Login } from "../login/login"
+import { Hand } from "../components/Hand/Hand"
+import { Login } from "../components/login/login"
 import "./LoginPage.css"
 
 export const LoginPage = (props) => {

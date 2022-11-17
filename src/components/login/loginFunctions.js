@@ -9,6 +9,7 @@ export const createGame = (client, clientId, nickname, setNicknameError,setFinel
     }
     client.send(JSON.stringify(payLoad));
     setFinelNickName(nickname)
+    localStorage.setItem("nickname",nickname)
   }
   else {
     // alert("must send a nickName")
@@ -26,6 +27,7 @@ export const joinGame = (client, clientId, gameId, nickname, setNicknameError, s
     }
     client.send(JSON.stringify(payLoad));
     setFinelNickName(nickname)
+    localStorage.setItem("nickname",nickname)
   }
   if (!gameId) {
     alert("must send gameID")

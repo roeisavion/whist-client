@@ -1,4 +1,4 @@
-import { getNumber, getSuit, cardsNumberOrder, suitOrder } from "../helpers/helpersFunctions";
+import { getNumber, getSuit, cardsNumberOrder, suitOrder } from "../../helpers/helpersFunctions";
 
 export const sendSuitBet = (client, clientId, betNum, betSuit, suitBet) => {
 

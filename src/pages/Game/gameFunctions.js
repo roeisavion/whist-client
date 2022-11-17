@@ -1,4 +1,4 @@
-import { getSuit, getNumber, cardsNumberOrder, suitOrder } from '../../src/helpers/helpersFunctions'
+import { getSuit, getNumber, cardsNumberOrder, suitOrder } from '../../helpers/helpersFunctions'
 
 
 export const notYourTurnCardClick = () => {

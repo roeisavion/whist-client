@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Game } from '../Game/Game'
+import { Game } from '../pages/Game/Game'
 import { mock } from '../mocks/mock'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import {  Routes, Route, useNavigate } from "react-router-dom";
 import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 import { LoginPage } from '../pages/LoginPage';
+import {Loader} from '../components/Loader/loader'
+
+
+
+const saveToLocalStorage = (nickname) => {
+  localStorage.setItem('nickname',nickname)
+}
 
 
 const client = new W3CWebSocket('ws://127.0.0.1:9091');
 
 let response, gameId, playerNum, nickname;
 const App = () => {
-  console.log('app component renderd')
+  
+  // console.log('app component renderd')
 
   // const isMock = process.env.REACT_APP_IS_MOCK;
   const isMock = false;
@@ -41,7 +49,7 @@ const App = () => {
   const [minBetState, setminBet] = useState([]);
   const [sliceingSuitState, setSliceingSuit] = useState("");
   const [inGame, setInGame] = useState(false);
-  const [clientId, setClientId] = useState(false);
+  const [clientId, setClientId] = useState(null);
   const [game, setGame] = useState(null);
   const [isLeftGameModal, setIsLeftGameModal] = useState(false);
   // const [isScore, setIsScore] = useState(isMock ? mock.isScore : false);
@@ -54,10 +62,6 @@ const App = () => {
 
   let navigate = useNavigate();
 
-  client.onopen = () => {
-    console.log('WebSocket Client Connected');
-  };
-
   client.onmessage = (message) => {
     // @ts-ignore
     response = JSON.parse(message.data);
@@ -66,7 +70,7 @@ const App = () => {
     }
     // created game
     if (response.method === "create") {
-      gameId = response.gameId;
+      gameId = response.game.gameId;
       playerNum = response.playerNum;
       setGame(response.game);
       setInGame(true);
@@ -82,7 +86,7 @@ const App = () => {
     }
 
     if (response.method === "playerJoined") {
-      gameId = response.game.id;
+      gameId = response.game.gameId;
       setGame(response.game);
       if (response.clientId === clientId) {
         playerNum = response.playerNum;
@@ -136,14 +140,14 @@ const App = () => {
           game={game}
           gameId={gameId}
         />} />
-        <Route path="/:gameId/waitingRoom" element={<WaitingRoomPage
+        <Route path="/:gameId/waitingRoom" element={game ? <WaitingRoomPage
           game={game}
           client={client}
           clientId={clientId}
           nickname={nickname}
           isLeftGameModal={isLeftGameModal}
-          setIsLeftGameModal={setIsLeftGameModal} />} />
-        <Route path="/:gameId/game" element={<Game
+          setIsLeftGameModal={setIsLeftGameModal} /> : <Loader client={client} clientId={clientId}/>} />
+        <Route path="/:gameId/game" element={game ? <Game
           game={isMock ? mock.game : game}
           client={client}
           clientId={clientId}
@@ -161,7 +165,7 @@ const App = () => {
           clients = {isMock ? mock.clients : (game ? game.clients : null)}
           setIsScore = {setIsScore}
           isScore = {isScore} />
-        } />
+          : <Loader client={client} clientId={clientId}/>} />
       </Routes>
     </div>
   );

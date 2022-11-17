@@ -1,5 +1,7 @@
 import { UnClickableCard } from '../Card/UnClickableCard'
 import '../Card/Card.css';
+import './Hand.css';
+
 
 export const CompetitorsHand = (props) => {
   let cards = new Array(props.numOfCards)
