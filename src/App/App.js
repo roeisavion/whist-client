@@ -9,18 +9,11 @@ import { LoginPage } from '../pages/LoginPage';
 import {Loader} from '../components/Loader/loader'
 
 
-
-const saveToLocalStorage = (nickname) => {
-  localStorage.setItem('nickname',nickname)
-}
-
-
-const client = new W3CWebSocket('ws://127.0.0.1:9091');
+const serverURL = process.env.REACT_APP_SERVER_ADRESS ; 
+const client = new W3CWebSocket(serverURL);
 
 let response, gameId, playerNum, nickname;
 const App = () => {
-  
-  // console.log('app component renderd')
 
   // const isMock = process.env.REACT_APP_IS_MOCK;
   const isMock = false;
@@ -54,13 +47,68 @@ const App = () => {
   const [isLeftGameModal, setIsLeftGameModal] = useState(false);
   // const [isScore, setIsScore] = useState(isMock ? mock.isScore : false);
   const [isScore, setIsScore] = useState(false);
+  const [playerNum, setPlayerNum] = useState(null);
 
   const showLeftGameModal = () => {
     setIsLeftGameModal(true);
     setTimeout(() => setIsLeftGameModal(false), 2000)
   }
 
-  let navigate = useNavigate();
+  const connectPlayer = () => {
+    setClientId(response.clientId);
+  }
+  const createRoom = () => {
+    gameId = response.game.gameId;
+    playerNum = response.playerNum;
+    setGame(response.game);
+    setInGame(true);
+    navigate(`/${gameId}/waitingRoom`);
+  }
+  const playerJoined = () => {
+    gameId = response.game.gameId;
+      setGame(response.game);
+      if (response.clientId === clientId) {
+        playerNum = response.playerNum;
+        nickname = response.nickname;
+        setInGame(true);
+        navigate(`/${gameId}/waitingRoom`);
+      }
+  }
+  const playerleft = () => {
+    setGame(response.game);
+    if (response.clientId === clientId) {
+      setInGame(false);
+    }
+    showLeftGameModal()
+  }
+  const score = () => {
+    
+  }
+  const numBet = () => {
+    
+  }
+  const suitBet = () => {
+    
+  }
+  const updateCards = () => {
+    setCardsMap(response.cardsMap);
+    setWinnedCards(response.winnedCards);
+    setTurn(response.turn);
+    navigate(`/${gameId}/game`);
+  }
+
+  const massageHandler = {
+    connect: connectPlayer,
+    create: createRoom,
+    leftGame: playerleft,
+    playerJoined,
+    suitBet,
+    numBet,
+    updateCards,
+    score,
+  }
+  
+  const navigate = useNavigate();
 
   client.onmessage = (message) => {
     // @ts-ignore
@@ -88,6 +136,14 @@ const App = () => {
     if (response.method === "playerJoined") {
       gameId = response.game.gameId;
       setGame(response.game);
+      setCardsMap(response.game.cardsMap);
+      setWinnedCards(response.game.winnedCards);
+      setsuitBet(response.game.suitBet)
+      setNumBets(response.game.numBets)
+      setSliceingSuit(response.game.sliceingSuit);
+      setIsSuitBetting(response.game.isSuitBetting);
+      setIsNumBetting(response.game.isNumBetting);
+      response.game.turn ? setTurn(response.game.turn) : setTurn("P1") ;
       if (response.clientId === clientId) {
         playerNum = response.playerNum;
         nickname = response.nickname;
