@@ -8,7 +8,8 @@ import { WaitingRoomPage } from '../pages/WaitingRoomPage';
 import { LoginPage } from '../pages/LoginPage';
 
 
-const client = new W3CWebSocket('ws://127.0.0.1:9091');
+const serverURL = process.env.REACT_APP_SERVER_ADRESS ; 
+const client = new W3CWebSocket(serverURL);
 
 let response, gameId, playerNum, nickname;
 const App = () => {
